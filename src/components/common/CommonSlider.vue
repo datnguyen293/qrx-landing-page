@@ -1,0 +1,47 @@
+<script setup lang="ts">
+import {computed} from "vue";
+import {useScanQrcodeStore} from "@/store";
+import type {ITemplate} from "@/types";
+import {isEmpty} from "@/utitls";
+const store = useScanQrcodeStore();
+const product = computed(() => store.product);
+const colorSuccess = computed(() => {
+  const templateData: ITemplate = store.template;
+  if (templateData.data?.color_success) {
+    return templateData.data?.color_success || '#00994D';
+  }
+
+  return '#00994D';
+});
+</script>
+
+<template>
+  <div class="bg-white p-4 relative z-1000">
+    <el-carousel height="240px" :autoplay="false" trigger="click" class="product-item-slide z-[1] w-full m-auto">
+      <template v-if="!isEmpty(product.images)">
+        <el-carousel-item v-for="(item, index) in product.images" :key="index">
+          <img :src="item" :alt="product.name"/>
+        </el-carousel-item>
+      </template>
+      <template v-else>
+        <el-carousel-item>
+          <img src="@/assets/images/no-image.png" :alt="product?.name || ''"/>
+        </el-carousel-item>
+      </template>
+    </el-carousel>
+  </div>
+</template>
+<style lang="scss" scoped>
+:deep(.el-carousel__item) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+:deep(.el-carousel__button) {
+  background-color: v-bind(colorSuccess) !important;
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 100px !important;
+}
+</style>

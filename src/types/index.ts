@@ -1,0 +1,95 @@
+export enum VerifyStatus {
+    SUCCESS = 'success',
+    FAIL = 'fail',
+    WARNING = 'warring'
+}
+
+export type ICustomer = {
+    name: string,
+    phone: string,
+    zalo_id?: string,
+    user_id?: string,
+}
+
+export type IVerifyCode = {
+    stamp_verify?: string,
+    status?: VerifyStatus,
+    serial?: string,
+}
+
+export type ICommonField = {
+    id?: string,
+    name?: string
+}
+
+export type IProduct = {
+    code?: string;
+    price: number;
+    slug: string;
+    note?: string;
+    image: string;
+    images?: Array<string>;
+    unit?: string;
+    category?: string;
+    brand: string
+} & ICommonField;
+
+export type ICompany =  {
+    logo: string
+    address: string
+    email?: string
+    phone?: string
+    date_format?: string
+    time_format?: string
+    timezone?: string
+    social_networks?: Array<SocialNetwork>,
+    currency?: ICurrency,
+}
+
+export type ICurrency = {
+    code: string,
+    symbol: string,
+    name: string,
+}
+
+export type SocialNetwork = {
+    key: string,
+    value: string
+}
+
+export type IFormVerify = {
+    name: string;
+    phone: string;
+    stamp_verify: string;
+    serial?: string;
+}
+
+export type ITemplate = {
+    name: string,
+    code:  string,
+    data?: {
+        text_default: string,
+        color_warring: string,
+        color_success: string,
+        color_error: string
+    }
+}
+
+export type ISetting = {
+    company: ICompany,
+    template: ITemplate,
+    social_network: SocialNetwork
+}
+
+export type IScanQRCodeData = {
+    product: IProduct,
+    company: ICompany,
+    template: ITemplate,
+    customer?: ICustomer,
+    stamp_verify?: IVerifyCode,
+}
+
+export type APIResponse<T> = {
+    data: T,
+    message: string,
+}

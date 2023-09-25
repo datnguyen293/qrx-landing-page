@@ -1,0 +1,65 @@
+@tailwind components;
+@tailwind utilities;
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body,
+#app {
+  background: #f4f5f6;
+}
+
+* {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  line-height: 1.2;
+  user-select: none;
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.qrx-container {
+  max-width: 768px;
+  min-height: 100vh;
+}
+
+.el-card {
+  border: none;
+  .is-always-shadow {
+    box-shadow: none !important;
+  }
+}
+
+.qrx-card-bank {
+  .el-card__body {
+    padding: 0;
+  }
+}
+
+.el-button {
+  height: 48px;
+  border-radius: 8px;
+}
+
+.el-input__inner {
+  padding: 12px 0;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  height: 46px;
+}
+
+.el-form-item {
+  margin-bottom: 25px;
+  &__error {
+    padding-top: 5px;
+  }
+}
