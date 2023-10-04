@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import {useHead} from "unhead";
+import {useI18n} from "vue-i18n";
 useHead({
   title: 'Lỗi',
 });
 
+const {t: $t} = useI18n();
 </script>
 
 <template>
@@ -21,8 +23,8 @@ useHead({
     </div>
 
     <div class="m-auto text-center mt-6 px-4">
-      <div class="font-bold text-3xl mb-2 qrx-text--error">Cảnh báo</div>
-      <div class="text-[16px] qrx-text--error">Có lỗi đã xảy ra. Vui lòng kiểm tra lại mã xác thực hoặc liên hệ hotline để được tư vấn. Xin cảm ơn!</div>
+      <div class="font-bold text-3xl mb-2 qrx-text--error">{{$t('common.error')}}</div>
+      <div class="text-[16px] qrx-text--error">{{ $t('common.error_content') }}</div>
     </div>
   </div>
 </template>

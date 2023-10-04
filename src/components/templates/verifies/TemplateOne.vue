@@ -8,12 +8,13 @@ import CommonStatusVerify from "@/components/common/CommonStatusVerify.vue";
 import {useScanQrcodeStore} from "@/store";
 import {computed} from "vue";
 import CommonContact from "@/components/common/CommonContact.vue";
+import {useI18n} from "vue-i18n";
 
+const {t: $t} = useI18n();
 const {query} = useRoute();
 const router = useRouter();
 
-const serial = query?.serial || '';
-const verifyCode = query?.verify_code || '';
+const uuid = query?.uuid || '';
 
 const store = useScanQrcodeStore();
 const handleEventSubmit = async (event: any) => {
@@ -21,7 +22,7 @@ const handleEventSubmit = async (event: any) => {
 }
 
 const product = computed(() => store.product);
-const isSerialVerify = !!(serial && verifyCode);
+const isSerialVerify = !!uuid;
 </script>
 <template>
   <div>
@@ -31,14 +32,13 @@ const isSerialVerify = !!(serial && verifyCode);
           <CommonSlider/>
         </template>
         <div class="qrx-bg--success text-[16px] leading-5 p-4 text-white font-medium">
-          Xác thực sản phẩm
+          {{ $t('common.verification_product') }}
         </div>
 
 <!--        <CommonStatusVerify status="success"/>-->
         <div class="p-5">
           <h2 class="text-[20px] font-bold leading-6 text-[#233438] mb-[2px]">{{product?.name}}</h2>
-          <div class="text-[10px] mb-3"><span class="text-[#B61212]">Lưu ý:</span> Nhập chính xác thông tin họ tên, SĐT để đảm bảo các quyền lợi về tích điểm, đổi quà và các vấn đề xác thực, khiếu nại liên quan.
-          </div>
+          <div class="text-[10px] mb-3" v-html="$t('common.note_verification')"></div>
           <FormVerify :is_serial="isSerialVerify" @form-submit="handleEventSubmit"/>
         </div>
       </el-card>

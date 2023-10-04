@@ -11,8 +11,8 @@ export type ICustomer = {
     user_id?: string,
 }
 
-export type IVerifyCode = {
-    stamp_verify?: string,
+export type IStampCode = {
+    verification_code: string,
     status?: VerifyStatus,
     serial?: string,
 }
@@ -60,14 +60,14 @@ export type SocialNetwork = {
 export type IFormVerify = {
     name: string;
     phone: string;
-    stamp_verify: string;
+    verification_code: string;
     serial?: string;
 }
 
 export type ITemplate = {
     name: string,
     code:  string,
-    data?: {
+    data: {
         text_default: string,
         color_warring: string,
         color_success: string,
@@ -75,18 +75,12 @@ export type ITemplate = {
     }
 }
 
-export type ISetting = {
-    company: ICompany,
-    template: ITemplate,
-    social_network: SocialNetwork
-}
-
 export type IScanQRCodeData = {
     product: IProduct,
     company: ICompany,
     template: ITemplate,
     customer?: ICustomer,
-    stamp_verify?: IVerifyCode,
+    stamp_code?: IStampCode,
 }
 
 export type APIResponse<T> = {

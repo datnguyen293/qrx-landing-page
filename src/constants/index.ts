@@ -35,3 +35,7 @@ export const SOCIAL_NETWORK_LIST = {
     SHOPEE: 'shopee',
     SHOPIFY: 'shopify',
 }
+
+export const KEY_LOCAL_STORAGE = {
+    THEME_SETTING: 'THEME_SETTING',
+}

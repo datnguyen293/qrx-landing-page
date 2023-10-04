@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import {useHead} from "unhead";
+import {useI18n} from "vue-i18n";
 
 useHead({
   title: 'Page not found',
 });
+
+const {t: $t} = useI18n();
 </script>
 
 <template>
@@ -958,10 +961,9 @@ useHead({
       </svg>
     </div>
     <div class="m-auto text-center mt-6 px-4">
-      <div class="font-bold text-3xl mb-2 qrx-text--warning">Lỗi</div>
+      <div class="font-bold text-3xl mb-2 qrx-text--warning">{{$t('common.not_found')}}</div>
       <div class="text-[16px] text-app">
-        Không có trên dữ liệu trên hệ thống. Vui lòng kiểm tra lại mã xác thực hoặc liên hệ hotline
-        để được tư vấn. Xin cảm ơn!
+        {{ $t('common.not_found_content')}}
       </div>
 
 <!--      <el-button type="warning" class="w-full font-medium text-white mt-5">OK</el-button>-->
