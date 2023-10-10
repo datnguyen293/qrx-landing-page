@@ -27,7 +27,7 @@ export default {
     serial: 'Typing serial',
   },
 
-  validators: {
+  validator: {
     required: '{name} is required',
     max: '{name} is not allowed to exceed {number} characters',
     min: '{name} not allowed less than {number} characters',

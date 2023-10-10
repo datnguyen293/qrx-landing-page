@@ -3,6 +3,7 @@ import vi from 'element-plus/dist/locale/vi.mjs';
 import { ElConfigProvider } from 'element-plus';
 import {computed, ref} from "vue";
 import { useScanQrcodeStore } from './store';
+import {generateUUID} from "@/utitls";
 
 const locale = ref(vi);
 const store = useScanQrcodeStore();
@@ -11,6 +12,12 @@ const textDefault = computed(() => store.getKeyThemeData('color_default') || '#4
 const bgWarning = computed(() => store.getKeyThemeData('color_warring') || '#F38020');
 const colorError = computed(() => store.getKeyThemeData('color_error') || '#B61212');
 const colorSuccess = computed(() => store.getKeyThemeData('color_success') || '#00994D');
+
+// generate browser id
+const browserId = window.localStorage.getItem('browser_id');
+if (!browserId) {
+  window.localStorage.setItem('browser_id', generateUUID() as string);
+}
 </script>
 
 <template>

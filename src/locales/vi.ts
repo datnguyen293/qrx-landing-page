@@ -37,7 +37,7 @@ export default {
     serial: 'Nhập mã serial',
   },
 
-  validators: {
+  validator: {
     required: '{name} không được để trống',
     max: '{name} không được phép vượt quá {number} ký tự',
     min: '{name} không được phép ít hơn {number} ký tự',

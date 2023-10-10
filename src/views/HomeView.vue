@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {useHead} from "unhead";
 import {useI18n} from "vue-i18n";
 import {ElLoading} from "element-plus";
 import TemplateOne from "@/components/templates/verifies/TemplateOne.vue";
-import {scanQrcodeCodeAPI} from "@/api";
+import {apiScanQRCode, apiVerifyStampCode} from "@/api";
 import {useScanQrcodeStore} from "@/store";
 
 useHead({
@@ -13,37 +13,59 @@ useHead({
 });
 
 const {t: $t} = useI18n();
+const {query} = useRoute();
+const router = useRouter();
+const store = useScanQrcodeStore();
+const isLoading = ref(true);
 
 onMounted(async () => {
-  const {query} = useRoute();
-  const router = useRouter();
-
-  const store = useScanQrcodeStore();
-  const {uuid: serial} = query;
-  if (serial) {
+  const {xid, serial, type, user_uuid, lat, lon, factory_name, utm} = query;
+  const browser_id = window.localStorage.getItem('browser_id');
+  const scanType = type || 'landing_page';
+  if (serial && xid) {
     const bgLoading = ElLoading.service({
       lock: true,
       text: $t('common.loading'),
       background: '#f8f8ff',
-    })
+    });
+
     try {
-      const response = await scanQrcodeCodeAPI({serial});
+      let response;
+      if (scanType === 'zalo_app') {
+        response = await apiVerifyStampCode({
+          xid,
+          serial,
+          type: 'zalo_app',
+          browser_id,
+          user_uuid,
+          lat,
+          lon,
+          factory_name,
+          utm
+        });
+      } else {
+        response = await apiScanQRCode({xid, serial, type: scanType, browser_id});
+      }
+
       const {data: dataResponse} = response.data;
       store.setDataScanQrcode(dataResponse);
     } catch (e) {
-      router.push({name: 'not-found'});
+      await router.push({name: 'not-found'});
     } finally {
+      isLoading.value = false;
       setTimeout(() => {
         bgLoading.close()
       }, 1000);
     }
   }
+  isLoading.value = false;
 })
 
 </script>
 
 <template>
   <div class="qrx-container m-auto overflow-hidden">
-  <TemplateOne/>
+    <el-skeleton v-if="isLoading"/>
+    <TemplateOne v-else/>
   </div>
 </template>

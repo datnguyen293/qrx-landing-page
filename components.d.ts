@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     CommonContact: typeof import('./src/components/common/CommonContact.vue')['default']
+    CommonCustomerProfile: typeof import('./src/components/common/CommonCustomerProfile.vue')['default']
     CommonFooter: typeof import('./src/components/common/CommonFooter.vue')['default']
     CommonSlider: typeof import('./src/components/common/CommonSlider.vue')['default']
     CommonStatusVerify: typeof import('./src/components/common/CommonStatusVerify.vue')['default']

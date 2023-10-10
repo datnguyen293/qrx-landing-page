@@ -1,7 +1,8 @@
 export const STATUS_VERIFY = {
-    WARRING: 'warring',
+    VERIFIED: 'verified',
     FAIL: 'fail',
-    SUCCESS: 'success'
+    SUCCESS: 'success',
+    OVER_LIMITED: 'over_limited',
 }
 
 export const TEMPLATE_TYPES = {

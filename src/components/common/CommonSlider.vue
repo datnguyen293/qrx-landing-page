@@ -17,18 +17,26 @@ const colorSuccess = computed(() => {
 
 <template>
   <div class="bg-white p-4 relative z-1000">
-    <el-carousel height="240px" :autoplay="false" trigger="click" class="product-item-slide z-[1] w-full m-auto">
-      <template v-if="!isEmpty(product.images)">
-        <el-carousel-item v-for="(item, index) in product.images" :key="index">
-          <img :src="item" :alt="product.name"/>
-        </el-carousel-item>
-      </template>
-      <template v-else>
-        <el-carousel-item>
-          <img src="@/assets/images/no-image.png" :alt="product?.name || ''"/>
-        </el-carousel-item>
-      </template>
-    </el-carousel>
+    <template v-if="!isEmpty(product.images) && product.images.length > 1">
+      <el-carousel height="240px" :autoplay="false" trigger="click" class="product-item-slide z-[1] w-full m-auto">
+        <template v-if="!isEmpty(product.images)">
+          <el-carousel-item v-for="(item, index) in product.images" :key="index">
+            <img :src="item" :alt="product.name"/>
+          </el-carousel-item>
+        </template>
+      </el-carousel>
+    </template>
+
+    <template v-else>
+        <div class="h-[240px] flex justify-center items-center">
+          <template v-if="!isEmpty(product.images)">
+            <img :src="product.images[0]" :alt="product?.name || ''"/>
+          </template>
+          <template v-else>
+            <img src="@/assets/images/no-image.png" :alt="product?.name || ''"/>
+          </template>
+        </div>
+    </template>
   </div>
 </template>
 <style lang="scss" scoped>

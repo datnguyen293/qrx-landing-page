@@ -965,8 +965,6 @@ const {t: $t} = useI18n();
       <div class="text-[16px] text-app">
         {{ $t('common.not_found_content')}}
       </div>
-
-<!--      <el-button type="warning" class="w-full font-medium text-white mt-5">OK</el-button>-->
     </div>
   </div>
 </template>

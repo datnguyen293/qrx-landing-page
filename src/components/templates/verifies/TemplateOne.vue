@@ -9,39 +9,65 @@ import {useScanQrcodeStore} from "@/store";
 import {computed} from "vue";
 import CommonContact from "@/components/common/CommonContact.vue";
 import {useI18n} from "vue-i18n";
+import CommonCustomerProfile from "@/components/common/CommonCustomerProfile.vue";
+import {apiVerifyStampCode} from "@/api";
 
 const {t: $t} = useI18n();
 const {query} = useRoute();
 const router = useRouter();
 
-const uuid = query?.uuid || '';
+const {xid, serial} = query;
 
 const store = useScanQrcodeStore();
+const product = computed(() => store.product);
+let isSerialVerify = !!(xid && serial);
+
+const statusVerify = computed(() => store.getStampCodeStatusVerify);
+const browser_id = window.localStorage.getItem('browser_id');
+
 const handleEventSubmit = async (event: any) => {
-  console.log('event', event);
+  try {
+    const data = {
+      type: 'landing_page',
+      xid : isSerialVerify ? xid : event.serial,
+      serial,
+      ...event,
+      browser_id,
+      is_serial: isSerialVerify ? 1 : 0,
+    }
+    const response = await apiVerifyStampCode(data);
+    const {data: dataResponse} = response.data;
+    store.setDataScanQrcode(dataResponse);
+    isSerialVerify = true;
+  } catch (e) {
+    console.log('[QRX] error handle event submit', e);
+    await router.push({name: 'not-found'});
+  }
 }
 
-const product = computed(() => store.product);
-const isSerialVerify = !!uuid;
 </script>
 <template>
   <div>
+    isSerialVerify {{isSerialVerify}}
+    statusVerify {{statusVerify}}
     <div class="m-auto min-h-screen">
       <el-card class="qrx-card-bank mb-3" :class="!isSerialVerify ? 'mt-10' : ''">
         <template v-if="isSerialVerify">
           <CommonSlider/>
         </template>
-        <div class="qrx-bg--success text-[16px] leading-5 p-4 text-white font-medium">
+        <div class="qrx-bg--success text-[16px] leading-5 p-4 text-white font-medium" v-if="!statusVerify || statusVerify === 'blank'">
           {{ $t('common.verification_product') }}
         </div>
 
-<!--        <CommonStatusVerify status="success"/>-->
-        <div class="p-5">
-          <h2 class="text-[20px] font-bold leading-6 text-[#233438] mb-[2px]">{{product?.name}}</h2>
+        <CommonStatusVerify :status="statusVerify"/>
+        <div class="p-5" v-if="!statusVerify || statusVerify === 'blank'">
+          <h2 class="text-[20px] font-bold leading-6 text-[#233438] mb-[2px]">{{product?.name || ''}}</h2>
           <div class="text-[10px] mb-3" v-html="$t('common.note_verification')"></div>
           <FormVerify :is_serial="isSerialVerify" @form-submit="handleEventSubmit"/>
         </div>
       </el-card>
+
+      <CommonCustomerProfile v-if="isSerialVerify && (statusVerify && statusVerify !== 'blank')" class="mb-3"/>
 
       <template v-if="isSerialVerify">
         <ProductDetail class="mb-3"/>

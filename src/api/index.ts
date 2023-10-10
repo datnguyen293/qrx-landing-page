@@ -1,6 +1,10 @@
 import type {APIResponse, IScanQRCodeData} from "@/types";
 import axiosInstance from "@/utitls/request";
 
-export const scanQrcodeCodeAPI = (data: any) => {
-    return axiosInstance.get<APIResponse<IScanQRCodeData>>('/api/v1/verify/stamp-code', {params: data});
+export const apiScanQRCode = (data: any) => {
+    return axiosInstance.post<APIResponse<IScanQRCodeData>>('/api/v1/verify/scan-qrcode', data);
+}
+
+export const apiVerifyStampCode = (data: any) => {
+    return axiosInstance.post<APIResponse<IScanQRCodeData>>('/api/v1/verify/verify-code', data);
 }

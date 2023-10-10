@@ -16,8 +16,7 @@ const company = computed(() => store.company);
       </div>
     </template>
 
-    <div class="font-bold text-[#14272B]">Thông tin chi tiết</div>
-
+<!--    <div class="font-bold text-[#14272B]">Thông tin chi tiết</div>-->
     <div class="border-b border-[#D9E6E9] py-3">
       <dl>
         <div class="grid grid-cols-12 gap-4 mb-2">
@@ -32,7 +31,7 @@ const company = computed(() => store.company);
 
         <div class="grid grid-cols-12 gap-4 mb-2">
           <div class="col-span-5">Giá bán</div>
-          <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{formatAmountCurrency(product?.price, company?.currency)}}{{product.price}}/{{product.unit}}</div>
+          <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{formatAmountCurrency(product?.price, company?.currency)}}/ {{product.unit}}</div>
         </div>
       </dl>
     </div>

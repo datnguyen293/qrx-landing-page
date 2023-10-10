@@ -2,21 +2,53 @@ import { defineStore } from 'pinia';
 import type {IScanQRCodeData} from "@/types";
 import {DEFAULT_TEMPLATE_ONE, KEY_LOCAL_STORAGE, TEMPLATE_TYPES} from "@/constants";
 // Define a store
+const defaultTemplate = {
+    name: TEMPLATE_TYPES.TEMPLATE_ONE,
+    code: TEMPLATE_TYPES.TEMPLATE_ONE,
+    data: {...DEFAULT_TEMPLATE_ONE}
+}
+
+const defaultCustomer = {
+    name: '',
+    phone_number: '',
+}
+
+const defaultStampCode = {
+    verification_code: '',
+    status: '',
+    first_verification_at: '',
+    message: ''
+}
+
+const defaultProduct = {
+    code: '',
+    price: 0,
+    slug: '',
+    note: '',
+    image: '',
+    images: [],
+    unit:  '',
+    category: '',
+    brand:  '',
+    id: '',
+    name: ''
+}
+
+const defaultCompany = {
+    name: '',
+    address: '',
+    phone: '',
+    email: '',
+    website: '',
+    social_networks: [],
+}
 export const useScanQrcodeStore = defineStore('useScanQrcodeStore', {
     state: () => ({
-        product: {},
-        company: {},
-        template: {
-            name: TEMPLATE_TYPES.TEMPLATE_ONE,
-            code: TEMPLATE_TYPES.TEMPLATE_ONE,
-            data: {...DEFAULT_TEMPLATE_ONE}
-        },
-        customer: {},
-        stamp_code: {
-            verification_code: '',
-        },
-
-        isLoadingGlobal: false,
+        product: {...defaultProduct},
+        company: {...defaultCompany},
+        template: {...defaultTemplate},
+        customer: {...defaultCustomer},
+        stamp_code: {...defaultStampCode},
     }),
 
     getters: {
@@ -26,17 +58,28 @@ export const useScanQrcodeStore = defineStore('useScanQrcodeStore', {
 
         getStampCodeVerify(state) {
             return state.stamp_code.verification_code || '';
+        },
+
+        getStampCodeStatusVerify(state) {
+            return state.stamp_code.status || '';
+        },
+
+        getCustomer(state) {
+            return state.customer;
+        },
+
+        getStampCode(state) {
+            return state.stamp_code;
         }
     },
 
     actions: {
         setDataScanQrcode(data: IScanQRCodeData) {
-            console.log('data', data)
-            this.product = data?.product;
-            this.company = data?.company;
+            this.product = data?.product || {...defaultProduct};
+            this.company = data?.company || {...defaultCompany};
             this.template = data?.template;
-            this.customer = data?.customer || {};
-            this.stamp_code = data?.stamp_code || {verification_code: ''};
+            this.customer = data?.customer || {...defaultCustomer};
+            this.stamp_code = data?.stamp_code || {...defaultStampCode};
 
             window.localStorage.setItem(KEY_LOCAL_STORAGE.THEME_SETTING, JSON.stringify(data?.template?.data));
         },

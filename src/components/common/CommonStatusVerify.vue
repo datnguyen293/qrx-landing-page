@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import {STATUS_VERIFY} from '@/constants';
+import {useScanQrcodeStore} from "@/store";
+import {computed} from "vue";
 
 defineProps({
   status: { type: String, required: true },
 })
 
+const store = useScanQrcodeStore();
+const stampCode = computed(() => store.getStampCode);
 </script>
 
 <template>
   <template v-if="status === STATUS_VERIFY.SUCCESS">
-    <div class="bg-[#00994D] p-3">
+    <div class="bg-[#00994D] px-3 py-5">
       <div class="logo-success flex justify-center mb-3">
         <svg width="100" height="81" viewBox="0 0 100 81" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="86.2869" cy="9.83962" r="3.0276" fill="#FCFCFC"/>
@@ -23,12 +27,12 @@ defineProps({
         </svg>
       </div>
 
-      <div class="text-center text-[#FCFCFC]">Chúc mừng bạn! Đây là sản phẩm chính hãng. Được phân phối độc quyền bởi Công ty TNHH Dược Vitalife Pharma. Xin cảm ơn quý khách!</div>
+      <div class="text-center text-[#FCFCFC]">{{ stampCode?.message || 'Chúc mừng bạn! Đây là sản phẩm chính hãng. Xin cảm ơn quý khách!'  }}</div>
     </div>
   </template>
 
-  <template v-if="status === STATUS_VERIFY.WARRING">
-    <div class="bg-[#F38020] p-3">
+  <template v-if="status === STATUS_VERIFY.VERIFIED">
+    <div class="bg-[#F38020] px-3 py-5">
       <div class="logo-success flex justify-center mb-3">
         <svg width="100" height="81" viewBox="0 0 100 81" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="86.2869" cy="9.84011" r="3.0276" fill="#FCFCFC"/>
@@ -43,12 +47,12 @@ defineProps({
         </svg>
       </div>
 
-      <div class="text-center text-[#FCFCFC]">Sản phẩm đã được xác thực trước đó. Vui lòng kiểm tra lại hoặc liên hệ với người bán để được hỗ trợ!</div>
+      <div class="text-center text-[#FCFCFC]">{{stampCode?.message || 'Sản phẩm đã được xác thực trước đó. Vui lòng kiểm tra lại hoặc liên hệ với người bán để được hỗ trợ!' }}</div>
     </div>
   </template>
 
   <template v-if="status === STATUS_VERIFY.FAIL">
-    <div class="bg-[#B61212] p-3">
+    <div class="bg-[#B61212] px-3 py-5">
       <div class="logo-success flex justify-center mb-3">
         <svg width="100" height="81" viewBox="0 0 100 81" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="86.2869" cy="9.83962" r="3.0276" fill="#FCFCFC"/>

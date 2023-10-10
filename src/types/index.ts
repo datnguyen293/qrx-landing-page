@@ -1,14 +1,12 @@
 export enum VerifyStatus {
     SUCCESS = 'success',
     FAIL = 'fail',
-    WARNING = 'warring'
+    VERIFIED = 'verified',
 }
 
 export type ICustomer = {
     name: string,
     phone: string,
-    zalo_id?: string,
-    user_id?: string,
 }
 
 export type IStampCode = {
