@@ -54,7 +54,7 @@ onMounted(async () => {
       }
       store.setDataScanQrcode(dataResponse);
     } catch (e) {
-      await router.push({name: 'not-found'});
+      await router.push({name: 'error'});
     } finally {
       isLoading.value = false;
       setTimeout(() => {

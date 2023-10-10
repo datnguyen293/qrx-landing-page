@@ -48,7 +48,7 @@ const handleEventSubmit = async (event: any) => {
     isSerialVerify = true;
   } catch (e) {
     console.log('[QRX] error handle event submit', e);
-    await router.push({name: 'not-found'});
+    await router.push({name: 'error'});
   }
 }
 
