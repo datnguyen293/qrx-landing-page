@@ -2,6 +2,8 @@ export enum VerifyStatus {
     SUCCESS = 'success',
     FAIL = 'fail',
     VERIFIED = 'verified',
+    BLANK = 'blank',
+    OVER_LIMITED = 'over_limited',
 }
 
 export type ICustomer = {

@@ -18,6 +18,8 @@ export default {
     note_verification: `<span class="text-[#B61212]">Lưu ý:</span> Nhập chính xác thông tin họ tên, SĐT để đảm bảo các quyền lợi về tích điểm, đổi quà và các vấn đề xác thực, khiếu nại liên quan.`,
     not_found_content: 'Không có trên dữ liệu trên hệ thống. Vui lòng kiểm tra lại mã xác thực hoặc liên hệ hotline để được tư vấn. Xin cảm ơn!',
     error_content: 'Có lỗi đã xảy ra. Vui lòng kiểm tra lại mã xác thực hoặc liên hệ hotline để được tư vấn. Xin cảm ơn!',
+    limit_scan: 'Số lượng quét vượt quá giới hạn',
+    limit_scan_content: 'Số lượng quét vượt quá giới hạn. Vui lòng liên hệ hotline để được hỗ trợ',
   },
 
   products: {

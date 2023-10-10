@@ -48,6 +48,10 @@ onMounted(async () => {
       }
 
       const {data: dataResponse} = response.data;
+      const rsStatus = dataResponse?.stamp_code?.status || '';
+      if (rsStatus && rsStatus === "over_limited") {
+        await router.push({name: 'over-scan'});
+      }
       store.setDataScanQrcode(dataResponse);
     } catch (e) {
       await router.push({name: 'not-found'});

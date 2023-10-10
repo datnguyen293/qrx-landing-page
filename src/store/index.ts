@@ -86,7 +86,10 @@ export const useScanQrcodeStore = defineStore('useScanQrcodeStore', {
 
         getKeyThemeData(key: any) {
             let themeSetting: any;
-            const themeSettingData = window.localStorage.getItem(KEY_LOCAL_STORAGE.THEME_SETTING);
+            let themeSettingData = window.localStorage.getItem(KEY_LOCAL_STORAGE.THEME_SETTING);
+            if(themeSettingData == 'undefined' || themeSettingData == 'null' || !themeSettingData) {
+                themeSettingData = '{}';
+            }
             try {
                 themeSetting = JSON.parse(themeSettingData || '{}');
             } catch (e) {

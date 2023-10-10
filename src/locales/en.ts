@@ -18,6 +18,8 @@ export default {
     note_verification: `<span class="text-[#B61212]">Note:</span> Please enter accurate personal information, including full name and phone number, to ensure the rights regarding point accumulation, gift redemption, and any related verification or complaint issues.`,
     not_found_content: 'No data found in the system. Please double-check the verification code or contact the hotline for assistance. Thank you!',
     error_content: 'An error occurred. Please double-check the verification code or contact the hotline for assistance. Thank you!',
+    limit_scan: 'The number of scans exceeds the limit',
+    limit_scan_content: 'The number of scans exceeds the limit. Please contact the hotline for assistance',
   },
 
   placeholders: {

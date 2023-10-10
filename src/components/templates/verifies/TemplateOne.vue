@@ -1,15 +1,17 @@
 <script setup lang="ts">
+import {computed} from "vue";
+import {useI18n} from "vue-i18n";
+import {useRoute, useRouter} from "vue-router";
+
 import FormVerify from "@/components/common/FormVerify.vue";
 import CommonFooter from "@/components/common/CommonFooter.vue";
-import {useRoute, useRouter} from "vue-router";
 import CommonSlider from "@/components/common/CommonSlider.vue";
 import ProductDetail from "@/components/common/ProductDetail.vue";
 import CommonStatusVerify from "@/components/common/CommonStatusVerify.vue";
-import {useScanQrcodeStore} from "@/store";
-import {computed} from "vue";
 import CommonContact from "@/components/common/CommonContact.vue";
-import {useI18n} from "vue-i18n";
 import CommonCustomerProfile from "@/components/common/CommonCustomerProfile.vue";
+
+import {useScanQrcodeStore} from "@/store";
 import {apiVerifyStampCode} from "@/api";
 
 const {t: $t} = useI18n();
@@ -37,6 +39,11 @@ const handleEventSubmit = async (event: any) => {
     }
     const response = await apiVerifyStampCode(data);
     const {data: dataResponse} = response.data;
+    const rsStatus = dataResponse?.stamp_code?.status || '';
+    if (rsStatus && rsStatus === "over_limited") {
+      await router.push({name: 'over-scan'});
+    }
+
     store.setDataScanQrcode(dataResponse);
     isSerialVerify = true;
   } catch (e) {
@@ -48,8 +55,6 @@ const handleEventSubmit = async (event: any) => {
 </script>
 <template>
   <div>
-    isSerialVerify {{isSerialVerify}}
-    statusVerify {{statusVerify}}
     <div class="m-auto min-h-screen">
       <el-card class="qrx-card-bank mb-3" :class="!isSerialVerify ? 'mt-10' : ''">
         <template v-if="isSerialVerify">
