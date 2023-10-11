@@ -13,6 +13,7 @@ import CommonCustomerProfile from "@/components/common/CommonCustomerProfile.vue
 
 import {useScanQrcodeStore} from "@/store";
 import {apiVerifyStampCode} from "@/api";
+import {VerifyStatus} from "@/types";
 
 const {t: $t} = useI18n();
 const {query} = useRoute();
@@ -60,19 +61,19 @@ const handleEventSubmit = async (event: any) => {
         <template v-if="isSerialVerify">
           <CommonSlider/>
         </template>
-        <div class="qrx-bg--success text-[16px] leading-5 p-4 text-white font-medium" v-if="!statusVerify || statusVerify === 'blank'">
+        <div class="qrx-bg--success text-[16px] leading-5 p-4 text-white font-medium" v-if="!statusVerify || statusVerify === VerifyStatus.BLANK">
           {{ $t('common.verification_product') }}
         </div>
 
         <CommonStatusVerify :status="statusVerify"/>
-        <div class="p-5" v-if="!statusVerify || statusVerify === 'blank'">
+        <div class="p-5" v-if="!statusVerify || statusVerify === VerifyStatus.BLANK">
           <h2 class="text-[20px] font-bold leading-6 text-[#233438] mb-[2px]">{{product?.name || ''}}</h2>
           <div class="text-[10px] mb-3" v-html="$t('common.note_verification')"></div>
           <FormVerify :is_serial="isSerialVerify" @form-submit="handleEventSubmit"/>
         </div>
       </el-card>
 
-      <CommonCustomerProfile v-if="isSerialVerify && (statusVerify && statusVerify !== 'blank')" class="mb-3"/>
+      <CommonCustomerProfile v-if="isSerialVerify && (statusVerify && statusVerify !== VerifyStatus.BLANK)" class="mb-3"/>
 
       <template v-if="isSerialVerify">
         <ProductDetail class="mb-3"/>

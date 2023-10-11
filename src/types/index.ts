@@ -2,7 +2,7 @@ export enum VerifyStatus {
     SUCCESS = 'success',
     FAIL = 'fail',
     VERIFIED = 'verified',
-    BLANK = 'blank',
+    BLANK = 'new',
     OVER_LIMITED = 'over_limited',
 }
 
