@@ -30,8 +30,6 @@ const ruleForm = reactive<IFormVerify>({
 
 const colorSuccess = computed(() => store.getKeyThemeData('color_success') || '#00994D');
 watch(() => store?.stamp_code?.verification_code, (newValue, oldValue) => {
-  console.log('newValue', newValue)
-  console.log('oldValue', oldValue)
   ruleForm.verification_code = newValue;
   if (newValue) {
     isDisableVerifyCode.value = true;
@@ -40,13 +38,13 @@ watch(() => store?.stamp_code?.verification_code, (newValue, oldValue) => {
 
 const ruleValidates: any = {
   name: [requiredRule($t('common.customer_name')), maxLengthRule($t('common.verify_code'), 100)],
-  phone: [ phoneNumberRules()],
-  verification_code: [requiredRule($t('common.verify_code')), maxLengthRule($t('common.verify_code'), 150)],
+  phone: [ ...phoneNumberRules()],
+  verification_code: [requiredRule($t('common.verify_code')), maxLengthRule($t('common.verify_code'), 20)],
 };
 
 if (!props.is_serial) {
   ruleForm.serial = '';
-  ruleValidates.serial = [requiredRule($t('common.serial')), maxLengthRule($t('common.verify_code'), 50)];
+  ruleValidates.serial = [requiredRule($t('common.serial')), maxLengthRule($t('common.verify_code'), 20)];
 } else {
   delete ruleValidates.serial;
   delete ruleForm.serial;

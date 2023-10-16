@@ -35,7 +35,7 @@ export const maxLengthRule = (
 
     return {
         max: maxNumber,
-        message: $t('validators.max', { name: fieldName, number: maxNumber }),
+        message: $t('validator.max', { name: fieldName, number: maxNumber }),
         trigger,
     };
 };
@@ -63,8 +63,8 @@ export const phoneNumberRules = (trigger: string = 'blur') => {
         requiredRule(name, trigger),
         maxLengthRule(name, 15, trigger),
         {
-            min: 8,
-            message: $t('validator.minPhoneNumber', { number: 8 }),
+            min: 10,
+            message: $t('validator.minPhoneNumber', { number: 10 }),
             trigger,
         },
         whiteSpaceRule(name, trigger),
