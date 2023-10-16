@@ -25,7 +25,6 @@ declare module 'vue' {
     ElSkeleton: typeof import('element-plus/es')['ElSkeleton']
     FormVerify: typeof import('./src/components/common/FormVerify.vue')['default']
     LoadingOverlay: typeof import('./src/components/elements/LoadingOverlay.vue')['default']
-    OldQrcodeMirascan: typeof import('./src/components/templates/verifies/OldQrcodeMirascan.vue')['default']
     OldQrcodeTemplate: typeof import('./src/components/templates/verifies/OldQrcodeTemplate.vue')['default']
     ProductDetail: typeof import('./src/components/common/ProductDetail.vue')['default']
     ProductItem: typeof import('./src/components/common/ProductItem.vue')['default']

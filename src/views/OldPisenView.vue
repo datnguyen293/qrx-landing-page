@@ -19,10 +19,10 @@ const store = useScanQrcodeStore();
 const isLoading = ref(true);
 
 onMounted(async () => {
-  const {id, serial, type} = query;
+  const {id, series, type} = query;
   const browser_id = window.localStorage.getItem('browser_id');
   const scanType = type || 'landing_page';
-  if (!serial || !id) {
+  if (!series || !id) {
     isLoading.value = false;
     await router.push({name: 'error'});
     return;
@@ -35,7 +35,7 @@ onMounted(async () => {
   });
 
   try {
-    const response = await apiScanQRCode({xid: id, serial, type: scanType, browser_id, old_type: 'pisen'});
+    const response = await apiScanQRCode({xid: id, serial: series, type: scanType, browser_id, old_type: 'pisen'});
 
     const {data: dataResponse} = response.data;
     const rsStatus = dataResponse?.stamp_code?.status || '';

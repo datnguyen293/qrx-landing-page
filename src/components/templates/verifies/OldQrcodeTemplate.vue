@@ -23,7 +23,7 @@ const props = defineProps({
   old_type: { type: String, required: true, default: 'mirascan' }
 })
 
-const {id, serial} = query;
+const {id, series} = query;
 
 const store = useScanQrcodeStore();
 const product = computed(() => store.product);
@@ -37,10 +37,11 @@ const handleEventSubmit = async (event: any) => {
     const data = {
       type: 'landing_page',
       id ,
-      serial: props.old_type === 'mirascan' ? id : serial,
+      serial: props.old_type === 'mirascan' ? id : series,
       ...event,
       browser_id,
       is_serial: isSerialVerify ? 1 : 0,
+      old_type: props.old_type,
     }
     const response = await apiVerifyStampCode(data);
     const {data: dataResponse} = response.data;
