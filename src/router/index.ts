@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import NotFoundView from '../views/NotFoundView.vue';
 import ErrorView from '../views/ErrorView.vue';
 import HomeView from '../views/HomeView.vue';
+import OldPisenView from '../views/OldPisenView.vue';
+import OldMirascanView from '../views/OldMirascanView.vue';
 import OverLimitScanView from '../views/OverLimitView.vue';
 
 const router = createRouter({
@@ -12,6 +14,16 @@ const router = createRouter({
       path: '/xac-thuc',
       name: 'home',
       component: HomeView,
+    },
+    {
+      path: '/series/qrcode',
+      name: 'scan-qrcode-pisen',
+      component: OldPisenView,
+    },
+    {
+      path: '/v/s',
+      name: 'mirascan',
+      component: OldMirascanView,
     },
     {
       path: '/not-found',
