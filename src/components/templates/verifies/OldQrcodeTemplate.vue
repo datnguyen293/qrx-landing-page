@@ -20,7 +20,7 @@ const {query} = useRoute();
 const router = useRouter();
 
 const props = defineProps({
-  old_type: { type: String, required: true, default: 'mirascan' }
+  old_qrcode: { type: String, required: true, default: 'mirascan' }
 })
 
 const {id, series} = query;
@@ -37,11 +37,11 @@ const handleEventSubmit = async (event: any) => {
     const data = {
       type: 'landing_page',
       id ,
-      serial: props.old_type === 'mirascan' ? id : series,
+      serial: props.old_qrcode === 'mirascan' ? id : series,
       ...event,
       browser_id,
       is_serial: isSerialVerify ? 1 : 0,
-      old_type: props.old_type,
+      old_qrcode: props.old_qrcode,
     }
     const response = await apiVerifyStampCode(data);
     const {data: dataResponse} = response.data;

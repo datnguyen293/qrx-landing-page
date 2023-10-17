@@ -35,7 +35,7 @@ onMounted(async () => {
   });
 
   try {
-    const response = await apiScanQRCode({xid: id, serial: id, type: scanType, browser_id, old_type: 'mirascan'});
+    const response = await apiScanQRCode({xid: id, serial: id, type: scanType, browser_id, old_qrcode: 'mirascan'});
 
     const {data: dataResponse} = response.data;
     const rsStatus = dataResponse?.stamp_code?.status || '';
@@ -58,6 +58,6 @@ onMounted(async () => {
 <template>
   <div class="qrx-container m-auto overflow-hidden">
     <el-skeleton v-if="isLoading"/>
-    <OldQrcodeTemplate old_type="pisen" v-else/>
+    <OldQrcodeTemplate old_qrcode="pisen" v-else/>
   </div>
 </template>
