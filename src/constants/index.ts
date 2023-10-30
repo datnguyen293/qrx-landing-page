@@ -3,7 +3,24 @@ export const STATUS_VERIFY = {
     FAIL: 'fail',
     SUCCESS: 'success',
     OVER_LIMITED: 'over_limited',
+    UNSOLD: 'unsold',
+    BLOCKED: 'blocked'
 }
+
+export enum STAMP_STATUS {
+    NEW= 'new',
+    BLANK= 'new',
+    PRODUCT_ASSIGNED = 'product_assigned',
+    PROCESSING = 'processing',
+    SOLD= 'sold',
+    WARRANTY_PROCESSING= 'warranty_processing',
+    WARRANTY_REPLACED='warranty_replaced',
+    ACTIVATED='activated',
+    BLOCKED='blocked'
+}
+
+export const STAMP_CODE_UNSOLD: Array<string> = [STAMP_STATUS.BLANK, STAMP_STATUS.PRODUCT_ASSIGNED, STAMP_STATUS.PROCESSING]
+export const STAMP_CODE_VERIFIED: Array<string> = [STAMP_STATUS.WARRANTY_PROCESSING, STAMP_STATUS.WARRANTY_REPLACED, STAMP_STATUS.ACTIVATED]
 
 export const TEMPLATE_TYPES = {
     TEMPLATE_ONE: 'TEMPLATE_ONE',

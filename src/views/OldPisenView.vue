@@ -1,16 +1,11 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import {useHead} from "unhead";
 import {useI18n} from "vue-i18n";
 import {ElLoading} from "element-plus";
 import {apiScanQRCode} from "@/api";
 import {useScanQrcodeStore} from "@/store";
 import OldQrcodeTemplate from "@/components/templates/verifies/OldQrcodeTemplate.vue";
-
-useHead({
-  title: 'Xác thực',
-});
 
 const {t: $t} = useI18n();
 const {query} = useRoute();

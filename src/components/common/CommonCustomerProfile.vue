@@ -3,9 +3,9 @@ import {useScanQrcodeStore} from "@/store";
 import {computed} from "vue";
 
 const store = useScanQrcodeStore();
-const verifyStatus = computed(() => store.getStampCodeStatusVerify);
-const customer = computed(() => store.getCustomer);
-const stampCode = computed(() => store.getStampCode);
+const verifyStatus = computed(() => store.stamp_code?.status || '');
+const customer = computed(() => store.customer);
+const stampCode = computed(() => store.stamp_code);
 </script>
 
 <template>
@@ -29,11 +29,11 @@ const stampCode = computed(() => store.getStampCode);
           <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{ customer?.phone || '' }}</div>
         </div>
 
-        <div class="grid grid-cols-12 gap-4 mb-2" v-if="stampCode?.verification_code">
-          <div class="col-span-5">Mã xác thực</div>
-          <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{ stampCode?.verification_code || '' }}
-          </div>
-        </div>
+<!--        <div class="grid grid-cols-12 gap-4 mb-2" v-if="stampCode?.verification_code">-->
+<!--          <div class="col-span-5">Mã xác thực</div>-->
+<!--          <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{ stampCode?.verification_code || '' }}-->
+<!--          </div>-->
+<!--        </div>-->
 
         <div class="grid grid-cols-12 gap-4 mb-2" v-if="stampCode?.first_verification_at">
           <div class="col-span-5">Xác thực ngày</div>
@@ -43,7 +43,3 @@ const stampCode = computed(() => store.getStampCode);
     </div>
   </el-card>
 </template>
-
-<style scoped lang="scss">
-
-</style>

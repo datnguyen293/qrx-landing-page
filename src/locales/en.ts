@@ -20,6 +20,8 @@ export default {
     error_content: 'An error occurred. Please double-check the verification code or contact the hotline for assistance. Thank you!',
     limit_scan: 'The number of scans exceeds the limit',
     limit_scan_content: 'The number of scans exceeds the limit. Please contact the hotline for assistance',
+    stamp_new_title: 'Warning',
+    stamp_new_content: 'The product has not yet been released from stock. Please check again',
   },
 
   placeholders: {

@@ -8,19 +8,19 @@ const defaultTemplate = {
     data: {...DEFAULT_TEMPLATE_ONE}
 }
 
-const defaultCustomer = {
+const defaultCustomer: any = {
     name: '',
     phone_number: '',
 }
 
-const defaultStampCode = {
+const defaultStampCode: any = {
     verification_code: '',
     status: '',
     first_verification_at: '',
     message: ''
 }
 
-const defaultProduct = {
+const defaultProduct: any = {
     code: '',
     price: 0,
     slug: '',
@@ -34,14 +34,22 @@ const defaultProduct = {
     name: ''
 }
 
-const defaultCompany = {
+const defaultCompany: any = {
     name: '',
     address: '',
     phone: '',
     email: '',
     website: '',
+    small_light_url: '',
     social_networks: [],
 }
+
+const defaultMessage: any = {
+    logo: '',
+    title: '',
+    content: ''
+}
+
 export const useScanQrcodeStore = defineStore('useScanQrcodeStore', {
     state: () => ({
         product: {...defaultProduct},
@@ -49,6 +57,7 @@ export const useScanQrcodeStore = defineStore('useScanQrcodeStore', {
         template: {...defaultTemplate},
         customer: {...defaultCustomer},
         stamp_code: {...defaultStampCode},
+        message: {...defaultMessage},
     }),
 
     getters: {
@@ -56,20 +65,8 @@ export const useScanQrcodeStore = defineStore('useScanQrcodeStore', {
             return state.template.code || TEMPLATE_TYPES.TEMPLATE_ONE;
         },
 
-        getStampCodeVerify(state) {
-            return state.stamp_code.verification_code || '';
-        },
-
         getStampCodeStatusVerify(state) {
             return state.stamp_code.status || '';
-        },
-
-        getCustomer(state) {
-            return state.customer;
-        },
-
-        getStampCode(state) {
-            return state.stamp_code;
         }
     },
 
@@ -80,6 +77,7 @@ export const useScanQrcodeStore = defineStore('useScanQrcodeStore', {
             this.template = data?.template;
             this.customer = data?.customer || {...defaultCustomer};
             this.stamp_code = data?.stamp_code || {...defaultStampCode};
+            this.message = data?.message || [];
 
             window.localStorage.setItem(KEY_LOCAL_STORAGE.THEME_SETTING, JSON.stringify(data?.template?.data));
         },
