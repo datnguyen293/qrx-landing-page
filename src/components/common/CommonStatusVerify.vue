@@ -12,9 +12,6 @@ defineProps({
 const store = useScanQrcodeStore();
 const storeSetting = useSetting();
 const messageStampCode = computed(() => store.message);
-const bgWarning = computed(() => store.getKeyThemeData('color_warring') || '#F38020');
-const colorError = computed(() => store.getKeyThemeData('color_error') || '#B61212');
-const colorSuccess = computed(() => store.getKeyThemeData('color_success') || '#00994D');
 const messageError = computed(() => storeSetting?.setting?.message_error_content || '');
 
 const logoUrl = computed(() => messageStampCode.value?.logo || '');
@@ -23,7 +20,7 @@ const logoErrorUrl = computed(() => storeSetting?.setting?.image_error_url || ''
 
 <template>
   <template v-if="STAMP_CODE_UNSOLD.includes(status)">
-    <div class="px-3 py-5" :class="`bg-[${bgWarning}]`">
+    <div class="px-3 py-5 qrx-bg--warning">
       <div class="logo-success flex justify-center mb-3">
         <img v-if="!isEmpty(logoUrl)" :src="logoUrl" alt="Logo stamp unsold" class="!max-w-[100px] !max-h-[81px]"/>
         <template v-else>
@@ -45,7 +42,7 @@ const logoErrorUrl = computed(() => storeSetting?.setting?.image_error_url || ''
     </div>
   </template>
   <template v-if="status === STAMP_STATUS.BLOCKED">
-    <div class="px-3 py-5" :class="`bg-[${bgWarning}]`">
+    <div class="px-3 py-5 qrx-bg--warning">
       <div class="logo-success flex justify-center mb-3">
         <img v-if="!isEmpty(logoUrl)" :src="logoUrl" alt="Logo stamp block" class="!max-w-[100px] !max-h-[81px]"/>
         <template v-else>
@@ -72,7 +69,7 @@ const logoErrorUrl = computed(() => storeSetting?.setting?.image_error_url || ''
     </div>
   </template>
   <template v-if="status === STATUS_VERIFY.SUCCESS">
-    <div class="px-3 py-5" :class="`bg-[${colorSuccess}]`">
+    <div class="px-3 py-5 qrx-bg--success">
       <div class="logo-success flex justify-center mb-3">
         <img v-if="!isEmpty(logoUrl)" :src="logoUrl" alt="Logo stamp success" class="!max-w-[100px] !max-h-[81px]"/>
         <template v-else>
@@ -96,7 +93,7 @@ const logoErrorUrl = computed(() => storeSetting?.setting?.image_error_url || ''
   </template>
 
   <template v-if="STAMP_CODE_VERIFIED.includes(status)">
-    <div class="px-3 py-5" :class="`bg-[${bgWarning}]`">
+    <div class="px-3 py-5 qrx-bg--warning">
       <div class="logo-success flex justify-center mb-3">
         <img v-if="!isEmpty(logoUrl)" :src="logoUrl" alt="Logo stamp verified" class="!max-w-[100px] !max-h-[81px]"/>
         <template v-else>
@@ -122,7 +119,7 @@ const logoErrorUrl = computed(() => storeSetting?.setting?.image_error_url || ''
     </div>
   </template>
   <template v-if="status === STATUS_VERIFY.FAIL">
-    <div class="px-3 py-5" :class="`bg-[${colorError}]`">
+    <div class="px-3 py-5 qrx-bg--error">
       <div class="logo-success flex justify-center mb-3">
         <img v-if="!isEmpty(logoErrorUrl)" :src="logoErrorUrl" alt="Logo stamp error" class="!max-w-[100px] !max-h-[81px]"/>
         <template v-else>
