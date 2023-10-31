@@ -4,7 +4,7 @@ import {useScanQrcodeStore} from "@/store";
 import type {ITemplate} from "@/types";
 import {isEmpty} from "@/utitls";
 const store = useScanQrcodeStore();
-const product = computed(() => store.product);
+const product = computed<any>(() => store.product);
 const colorSuccess = computed(() => {
   const templateData: ITemplate = store.template;
   if (templateData.data?.color_success) {

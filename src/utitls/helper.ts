@@ -92,3 +92,25 @@ export const generateUUID = () => {
         return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
 }
+
+export const trimStringProperties = (obj: any): any => {
+    if (typeof obj === 'string') {
+        return obj.trim();
+    }
+
+    if (typeof obj === 'object') {
+        const trimmedObj: any = {};
+
+        for (const key in obj) {
+            // eslint-disable-next-line no-prototype-builtins
+            if (!obj.hasOwnProperty(key)) {
+                continue;
+            }
+            trimmedObj[key] = trimStringProperties(obj[key]);
+        }
+
+        return trimmedObj;
+    }
+
+    return obj;
+}
