@@ -56,6 +56,7 @@ const handleEventSubmit = async (event: any) => {
     const response = await apiVerifyStampCode(data);
     const {data: dataResponse} = response.data;
     store.setDataScanQrcode(dataResponse);
+    refStampStatus.value = dataResponse?.stamp_code?.status;
     isSerial.value = true;
   } catch (e) {
     console.log('[QRX] error handle event submit', e);
