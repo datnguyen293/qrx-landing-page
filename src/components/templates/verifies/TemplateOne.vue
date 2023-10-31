@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, onMounted, ref, watch} from "vue";
+import {computed, onMounted, ref} from "vue";
 import {useI18n} from "vue-i18n";
 import {useRoute, useRouter} from "vue-router";
 
@@ -13,14 +13,13 @@ import CommonCustomerProfile from "@/components/common/CommonCustomerProfile.vue
 
 import {useScanQrcodeStore} from "@/store";
 import {apiVerifyStampCode} from "@/api";
-import {STAMP_STATUS} from "@/constants";
+import {STAMP_STATUS, VERIFICATION_TYPE} from "@/constants";
 import {isEmpty} from "@/utitls";
 
 const {t: $t} = useI18n();
 const {query} = useRoute();
+const {xid, serial, user_uuid, lat, lon, factory_name, utm, type} = query;
 const router = useRouter();
-
-const {xid, serial} = query;
 
 const store = useScanQrcodeStore();
 const product = computed(() => store.product);
@@ -37,23 +36,35 @@ onMounted(() => {
   isSerial.value = !!(xid || serial);
 });
 
+const scanType = type && type === VERIFICATION_TYPE.ZALO_APP ? VERIFICATION_TYPE.ZALO_APP : VERIFICATION_TYPE.LANDING_PAGE;
 const handleEventSubmit = async (event: any) => {
   try {
     const data = {
-      type: 'landing_page',
+      type: scanType,
       xid,
       serial,
       ...event,
       browser_id,
       is_serial: isSerial.value ? 1 : 0,
+      user_uuid,
+      lat,
+      lon,
+      factory_name,
+      utm
     }
+
     const response = await apiVerifyStampCode(data);
     const {data: dataResponse} = response.data;
     store.setDataScanQrcode(dataResponse);
     isSerial.value = true;
   } catch (e) {
     console.log('[QRX] error handle event submit', e);
-    // await router.push({name: 'error'});
+
+    if (scanType === VERIFICATION_TYPE.ZALO_APP) {
+      await router.push({name: 'error'});
+      return;
+    }
+
     refStampStatus.value = 'fail';
   }
 }
@@ -62,18 +73,19 @@ const handleEventSubmit = async (event: any) => {
 <template>
   <div>
     <div class="m-auto min-h-screen">
-      <el-card class="qrx-card-bank mb-3" :class="!isSerial ? 'mt-10' : ''">
-        <template v-if="isSerial">
+      <el-card class="qrx-card-bank mb-3" :class="(!isSerial || isEmpty(product)) ? 'mt-10' : ''">
+        <template v-if="isSerial || !isEmpty(product)">
           <CommonSlider/>
         </template>
 
-        <div class="qrx-bg--success text-[16px] leading-5 p-4 text-white font-medium" v-if="!stampStatus || stampStatus === STAMP_STATUS.SOLD">
+        <div class="qrx-bg--success text-[16px] leading-5 p-4 text-white font-medium"
+             v-if="!stampStatus || stampStatus === STAMP_STATUS.SOLD">
           {{ $t('common.verification_product') }}
         </div>
 
         <CommonStatusVerify :status="refStampStatus"/>
         <div class="p-5" v-if="!stampStatus || stampStatus === STAMP_STATUS.SOLD">
-          <h2 class="text-[20px] font-bold leading-6 text-[#233438] mb-[2px]">{{product?.name || ''}}</h2>
+          <h2 class="text-[20px] font-bold leading-6 text-[#233438] mb-[2px]">{{ product?.name || '' }}</h2>
           <div class="text-[10px] mb-3" v-html="$t('common.note_verification')"></div>
           <FormVerify :is_serial="isSerial" @form-submit="handleEventSubmit"/>
         </div>
@@ -82,7 +94,7 @@ const handleEventSubmit = async (event: any) => {
       <CommonCustomerProfile class="mb-3" v-if="!isEmpty(customer) || !isEmpty(customer?.phone)"/>
 
       <template v-if="isSerial">
-        <ProductDetail class="mb-3"/>
+        <ProductDetail class="mb-3" v-if="!isEmpty(product)"/>
         <CommonContact/>
         <CommonFooter/>
       </template>

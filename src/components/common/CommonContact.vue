@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {computed} from "vue";
 import {useScanQrcodeStore} from "@/store";
+import {isEmpty} from "@/utitls";
 import SocialChannel from "@/components/common/SocialChannel.vue";
 
 const store = useScanQrcodeStore();
@@ -8,7 +9,7 @@ const company = computed(() =>store.company);
 </script>
 
 <template>
-  <el-card>
+  <el-card v-if="!isEmpty(company)">
     <div class="image flex justify-center mb-3">
       <el-image v-if="company?.logo" class="max-w-[100px] max-h-[100px]" :src="company?.logo"/>
       <img v-else src="@/assets/images/no-image.png" alt="Logo" class="w-[83px] h-[83px]"/>
@@ -24,7 +25,6 @@ const company = computed(() =>store.company);
         {{ company?.address || '' }}
       </div>
     </div>
-
     <SocialChannel/>
   </el-card>
 </template>

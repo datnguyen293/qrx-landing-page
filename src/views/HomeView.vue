@@ -3,12 +3,12 @@ import {onMounted, ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {useI18n} from "vue-i18n";
 import {ElLoading} from "element-plus";
+import {apiScanQRCode, apiVerifyStampCode} from "@/api";
+import {useScanQrcodeStore} from "@/store";
+import {STAMP_STATUS, VERIFICATION_TYPE} from "@/constants";
 import TemplateOne from "@/components/templates/verifies/TemplateOne.vue";
 import StampCodeNew from "@/components/common/StampCodeNew.vue";
 import StampCodeBlocked from "@/components/common/StampCodeBlocked.vue";
-import {apiScanQRCode, apiVerifyStampCode} from "@/api";
-import {useScanQrcodeStore} from "@/store";
-import {STAMP_STATUS} from "@/constants";
 
 const {t: $t} = useI18n();
 const {query} = useRoute();
@@ -20,8 +20,9 @@ const stampCodeStatus = ref('');
 onMounted(async () => {
   const {xid, serial, type, user_uuid, lat, lon, factory_name, utm} = query;
   const browser_id = window.localStorage.getItem('browser_id');
-  const scanType = type || 'landing_page';
-  if (serial) {
+  const scanType = type || VERIFICATION_TYPE.LANDING_PAGE;
+  if ((serial && scanType === VERIFICATION_TYPE.LANDING_PAGE)
+      || (serial && xid && scanType === VERIFICATION_TYPE.ZALO_APP)) {
     const bgLoading = ElLoading.service({
       lock: true,
       text: $t('common.loading'),
@@ -30,11 +31,11 @@ onMounted(async () => {
 
     try {
       let response;
-      if (scanType === 'zalo_app') {
+      if (scanType === VERIFICATION_TYPE.ZALO_APP) {
         response = await apiVerifyStampCode({
           xid,
           serial,
-          type: 'zalo_app',
+          type: VERIFICATION_TYPE.ZALO_APP,
           browser_id,
           user_uuid,
           lat,
@@ -72,7 +73,7 @@ onMounted(async () => {
       <StampCodeNew v-if="stampCodeStatus === STAMP_STATUS.NEW"/>
       <StampCodeBlocked v-else-if="stampCodeStatus === STAMP_STATUS.BLOCKED"/>
       <template v-else>
-<!--        Handle switch nhiều template-->
+        <!--        Handle switch nhiều template-->
         <TemplateOne/>
       </template>
     </template>
