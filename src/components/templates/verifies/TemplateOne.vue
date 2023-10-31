@@ -79,7 +79,7 @@ const handleEventSubmit = async (event: any) => {
         </div>
       </el-card>
 
-      <CommonCustomerProfile class="mb-3" v-if="!isEmpty(customer)"/>
+      <CommonCustomerProfile class="mb-3" v-if="!isEmpty(customer) || !isEmpty(customer?.phone)"/>
 
       <template v-if="isSerial">
         <ProductDetail class="mb-3"/>

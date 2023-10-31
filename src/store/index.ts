@@ -10,7 +10,7 @@ const defaultTemplate = {
 
 const defaultCustomer: any = {
     name: '',
-    phone_number: '',
+    phone: '',
 }
 
 const defaultStampCode: any = {
@@ -52,10 +52,10 @@ const defaultMessage: any = {
 
 export const useScanQrcodeStore = defineStore('useScanQrcodeStore', {
     state: () => ({
-        product: {...defaultProduct},
+        product: {},
         company: {...defaultCompany},
         template: {...defaultTemplate},
-        customer: {...defaultCustomer},
+        customer: {},
         stamp_code: {...defaultStampCode},
         message: {...defaultMessage},
     }),
