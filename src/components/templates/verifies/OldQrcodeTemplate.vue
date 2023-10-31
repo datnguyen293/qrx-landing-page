@@ -29,7 +29,7 @@ const store = useScanQrcodeStore();
 const product = computed(() => store.product);
 let isSerialVerify = true;
 
-const statusVerify = computed(() => store.getStampCodeStatusVerify);
+const statusVerify = computed(() => store.stamp_code?.status || '');
 const browser_id = window.localStorage.getItem('browser_id');
 
 const handleEventSubmit = async (event: any) => {
