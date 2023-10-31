@@ -57,3 +57,8 @@ export const SOCIAL_NETWORK_LIST = {
 export const KEY_LOCAL_STORAGE = {
     THEME_SETTING: 'THEME_SETTING',
 }
+
+export enum VERIFICATION_TYPE {
+    ZALO_APP = 'zalo_app',
+    LANDING_PAGE = 'landing_page'
+}

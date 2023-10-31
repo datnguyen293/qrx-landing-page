@@ -53,7 +53,7 @@ const defaultMessage: any = {
 export const useScanQrcodeStore = defineStore('useScanQrcodeStore', {
     state: () => ({
         product: {},
-        company: {...defaultCompany},
+        company: {},
         template: {...defaultTemplate},
         customer: {},
         stamp_code: {...defaultStampCode},
