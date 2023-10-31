@@ -1,28 +1,27 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import {useHead} from "unhead";
 import {useI18n} from "vue-i18n";
 import {ElLoading} from "element-plus";
 import TemplateOne from "@/components/templates/verifies/TemplateOne.vue";
+import StampCodeNew from "@/components/common/StampCodeNew.vue";
+import StampCodeBlocked from "@/components/common/StampCodeBlocked.vue";
 import {apiScanQRCode, apiVerifyStampCode} from "@/api";
 import {useScanQrcodeStore} from "@/store";
-
-useHead({
-  title: 'Xác thực',
-});
+import {STAMP_STATUS} from "@/constants";
 
 const {t: $t} = useI18n();
 const {query} = useRoute();
 const router = useRouter();
 const store = useScanQrcodeStore();
 const isLoading = ref(true);
+const stampCodeStatus = ref('');
 
 onMounted(async () => {
   const {xid, serial, type, user_uuid, lat, lon, factory_name, utm} = query;
   const browser_id = window.localStorage.getItem('browser_id');
   const scanType = type || 'landing_page';
-  if (serial && xid) {
+  if (serial) {
     const bgLoading = ElLoading.service({
       lock: true,
       text: $t('common.loading'),
@@ -48,11 +47,10 @@ onMounted(async () => {
       }
 
       const {data: dataResponse} = response.data;
-      const rsStatus = dataResponse?.stamp_code?.status || '';
-      if (rsStatus && rsStatus === "over_limited") {
-        await router.push({name: 'over-scan'});
-      }
       store.setDataScanQrcode(dataResponse);
+
+      // status
+      stampCodeStatus.value = dataResponse?.stamp_code?.status || '';
     } catch (e) {
       await router.push({name: 'error'});
     } finally {
@@ -70,6 +68,13 @@ onMounted(async () => {
 <template>
   <div class="qrx-container m-auto overflow-hidden">
     <el-skeleton v-if="isLoading"/>
-    <TemplateOne v-else/>
+    <template v-else>
+      <StampCodeNew v-if="stampCodeStatus === STAMP_STATUS.NEW"/>
+      <StampCodeBlocked v-else-if="stampCodeStatus === STAMP_STATUS.BLOCKED"/>
+      <template v-else>
+<!--        Handle switch nhiều template-->
+        <TemplateOne/>
+      </template>
+    </template>
   </div>
 </template>

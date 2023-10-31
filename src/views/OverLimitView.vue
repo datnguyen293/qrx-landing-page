@@ -1,11 +1,5 @@
 <script setup lang="ts">
-import {useHead} from "unhead";
 import {useI18n} from "vue-i18n";
-
-useHead({
-  title: 'Vượt quá số lượng xác thực',
-});
-
 const {t: $t} = useI18n();
 </script>
 

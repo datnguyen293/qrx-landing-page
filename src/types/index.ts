@@ -4,6 +4,7 @@ export enum VerifyStatus {
     VERIFIED = 'verified',
     BLANK = 'new',
     OVER_LIMITED = 'over_limited',
+    BLOCKED = 'blocked',
 }
 
 export type ICustomer = {
@@ -75,15 +76,23 @@ export type ITemplate = {
     }
 }
 
+export type IMessage = {
+    logo: string,
+    title: string,
+    content: string
+}
+
 export type IScanQRCodeData = {
     product: IProduct,
     company: ICompany,
     template: ITemplate,
     customer?: ICustomer,
     stamp_code?: IStampCode,
+    message?: IMessage
 }
 
 export type APIResponse<T> = {
     data: T,
     message: string,
 }
+

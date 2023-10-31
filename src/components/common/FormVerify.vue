@@ -4,7 +4,8 @@ import {useI18n} from "vue-i18n";
 import type {FormInstance, FormRules} from "element-plus";
 import type {IFormVerify} from "@/types";
 import {useScanQrcodeStore} from "@/store";
-import {maxLengthRule, phoneNumberRules, requiredRule} from "@/utitls";
+import {isEmpty, maxLengthRule, phoneNumberRules, requiredRule} from "@/utitls";
+import {useRoute} from "vue-router";
 
 const {t: $t} = useI18n();
 const props = defineProps({
@@ -21,6 +22,8 @@ onMounted(() => {
 
 const isDisableVerifyCode = ref(false);
 const isProcessing = ref<boolean>(false);
+const {query} = useRoute();
+const {serial, xid} = query;
 
 const ruleForm = reactive<IFormVerify>({
   name: '',
@@ -29,12 +32,11 @@ const ruleForm = reactive<IFormVerify>({
 });
 
 const colorSuccess = computed(() => store.getKeyThemeData('color_success') || '#00994D');
-watch(() => store?.stamp_code?.verification_code, (newValue, oldValue) => {
-  ruleForm.verification_code = newValue;
-  if (newValue) {
-    isDisableVerifyCode.value = true;
-  }
-});
+const verificationCode = computed(() => store?.stamp_code?.verification_code || '');
+if (xid && verificationCode) {
+  ruleForm.verification_code = verificationCode.value;
+  isDisableVerifyCode.value = true;
+}
 
 const ruleValidates: any = {
   name: [requiredRule($t('common.customer_name')), maxLengthRule($t('common.verify_code'), 100)],
@@ -43,7 +45,7 @@ const ruleValidates: any = {
 };
 
 if (!props.is_serial) {
-  ruleForm.serial = '';
+  ruleForm.serial = serial || '';
   ruleValidates.serial = [requiredRule($t('common.serial')), maxLengthRule($t('common.verify_code'), 20)];
 } else {
   delete ruleValidates.serial;
