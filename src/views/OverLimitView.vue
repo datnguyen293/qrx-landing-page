@@ -24,9 +24,7 @@ const {t: $t} = useI18n();
 
       <div class="m-auto text-center mt-6 px-4">
         <div class="font-bold text-3xl mb-2 qrx-text--warning">{{$t('common.limit_scan')}}</div>
-        <div class="text-[16px] text-app">
-          {{ $t('common.limit_scan_content')}}
-        </div>
+        <div class="text-[16px] text-app qrx-text--warning">{{ $t('common.limit_scan_content') }}</div>
       </div>
     </div>
   </div>

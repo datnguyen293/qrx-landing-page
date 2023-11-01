@@ -26,6 +26,9 @@ export default {
     stamp_blocked_content: 'Mã tem đang bị khoá. Vui lòng liên hệ hotline để được hỗ trợ.',
     stamp_verified: 'Sản phẩm đã được xác thực trước đó. Vui lòng kiểm tra lại hoặc liên hệ với người bán để được hỗ trợ!',
     stamp_verify_success: 'Chúc mừng bạn! Đây là sản phẩm chính hãng. Xin cảm ơn quý khách!',
+
+    stamp_cannot_access_scan_stamp_title: 'Cảnh báo',
+    stamp_cannot_access_scan_stamp_content: 'Sản phẩm không được phép xác thực trên ứng dụng zalo mini app. Vui lòng kiểm tra lại hoặc liên hệ với người bán để được hỗ trợ!',
   },
 
   products: {

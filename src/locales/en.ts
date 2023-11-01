@@ -22,6 +22,9 @@ export default {
     limit_scan_content: 'The number of scans exceeds the limit. Please contact the hotline for assistance',
     stamp_new_title: 'Warning',
     stamp_new_content: 'The product has not yet been released from stock. Please check again',
+
+    stamp_cannot_access_scan_stamp_title: 'Warning',
+    stamp_cannot_access_scan_stamp_content: 'The product is not allowed to verify the stamp code on the Zalo Mini app',
   },
 
   placeholders: {

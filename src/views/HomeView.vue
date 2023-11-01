@@ -5,10 +5,12 @@ import {useI18n} from "vue-i18n";
 import {ElLoading} from "element-plus";
 import {apiScanQRCode, apiVerifyStampCode} from "@/api";
 import {useScanQrcodeStore} from "@/store";
-import {STAMP_STATUS, VERIFICATION_TYPE} from "@/constants";
+import {STAMP_STATUS, STATUS_VERIFY, VERIFICATION_TYPE} from "@/constants";
+
 import TemplateOne from "@/components/templates/verifies/TemplateOne.vue";
 import StampCodeNew from "@/components/common/StampCodeNew.vue";
 import StampCodeBlocked from "@/components/common/StampCodeBlocked.vue";
+import CannotAccessVerifyStamp from "@/components/common/CannotAccessVerifyStamp.vue";
 
 const {t: $t} = useI18n();
 const {query} = useRoute();
@@ -62,7 +64,7 @@ onMounted(async () => {
     }
   }
   isLoading.value = false;
-})
+});
 
 </script>
 
@@ -72,8 +74,9 @@ onMounted(async () => {
     <template v-else>
       <StampCodeNew v-if="stampCodeStatus === STAMP_STATUS.NEW"/>
       <StampCodeBlocked v-else-if="stampCodeStatus === STAMP_STATUS.BLOCKED"/>
+      <CannotAccessVerifyStamp v-else-if="stampCodeStatus === STATUS_VERIFY.CANNOT_ACCESS"/>
       <template v-else>
-        <!--        Handle switch nhiều template-->
+        <!-- Handle switch nhiều template-->
         <TemplateOne/>
       </template>
     </template>
