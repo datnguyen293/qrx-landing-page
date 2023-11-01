@@ -32,7 +32,8 @@ export type IProduct = {
     images?: Array<string>;
     unit?: string;
     category?: string;
-    brand: string
+    brand: string,
+    is_show_price: boolean,
 } & ICommonField;
 
 export type ICompany =  {
