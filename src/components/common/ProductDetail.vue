@@ -29,7 +29,7 @@ const company = computed(() => store.company);
           <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{product?.brand || ''}}</div>
         </div>
 
-        <div class="grid grid-cols-12 gap-4 mb-2">
+        <div class="grid grid-cols-12 gap-4 mb-2" v-if="product?.is_show_price">
           <div class="col-span-5">Giá bán</div>
           <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{formatAmountCurrency(product?.price, company?.currency)}}/ {{product.unit}}</div>
         </div>
