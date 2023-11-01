@@ -4,7 +4,8 @@ export const STATUS_VERIFY = {
     SUCCESS: 'success',
     OVER_LIMITED: 'over_limited',
     UNSOLD: 'unsold',
-    BLOCKED: 'blocked'
+    BLOCKED: 'blocked',
+    CANNOT_ACCESS: 'cannot_access',
 }
 
 export enum STAMP_STATUS {

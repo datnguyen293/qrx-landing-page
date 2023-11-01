@@ -13,7 +13,7 @@ import CommonCustomerProfile from "@/components/common/CommonCustomerProfile.vue
 
 import {useScanQrcodeStore} from "@/store";
 import {apiVerifyStampCode} from "@/api";
-import {STAMP_STATUS, VERIFICATION_TYPE} from "@/constants";
+import {STAMP_STATUS, STATUS_VERIFY, VERIFICATION_TYPE} from "@/constants";
 import {isEmpty} from "@/utitls";
 
 const {t: $t} = useI18n();
@@ -51,13 +51,18 @@ const handleEventSubmit = async (event: any) => {
       lon,
       factory_name,
       utm
-    }
+    };
 
     const response = await apiVerifyStampCode(data);
     const {data: dataResponse} = response.data;
     store.setDataScanQrcode(dataResponse);
     refStampStatus.value = dataResponse?.stamp_code?.status;
     isSerial.value = true;
+    if (scanType == VERIFICATION_TYPE.ZALO_APP && refStampStatus.value === STATUS_VERIFY.CANNOT_ACCESS) {
+        await router.push({name: 'no-authorized'})
+        return;
+    }
+
   } catch (e) {
     console.log('[QRX] error handle event submit', e);
 
