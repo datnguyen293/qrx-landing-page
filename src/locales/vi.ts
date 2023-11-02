@@ -29,6 +29,9 @@ export default {
 
     stamp_cannot_access_scan_stamp_title: 'Cảnh báo',
     stamp_cannot_access_scan_stamp_content: 'Sản phẩm không được phép xác thực trên ứng dụng zalo mini app. Vui lòng kiểm tra lại hoặc liên hệ với người bán để được hỗ trợ!',
+    stamp_processing: 'Cảnh báo',
+    stamp_processing_title: 'Cảnh báo',
+    stamp_processing_content: 'Sản phẩm đang trong quá trình tách lô, chưa xuất bán. Vui lòng kiểm tra lại hoặc liên hệ với người bán để được hỗ trợ!',
   },
 
   products: {
