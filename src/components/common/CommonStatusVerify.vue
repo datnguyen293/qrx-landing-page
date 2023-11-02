@@ -5,9 +5,6 @@ import {useScanQrcodeStore} from "@/store";
 import {useSetting} from "@/store/setting";
 import {isEmpty} from "@/utitls";
 
-defineProps({
-  status: {type: String, required: true},
-})
 
 const store = useScanQrcodeStore();
 const storeSetting = useSetting();
@@ -16,10 +13,26 @@ const messageError = computed(() => storeSetting?.setting?.message_error_content
 
 const logoUrl = computed(() => messageStampCode.value?.logo || '');
 const logoErrorUrl = computed(() => storeSetting?.setting?.image_error_url || '');
+const status = computed(() => store.stamp_code?.status);
 </script>
 
 <template>
-  <template v-if="STAMP_CODE_UNSOLD.includes(status)">
+  <template v-if="status === STAMP_STATUS.PROCESSING">
+    <div class="px-3 py-5 qrx-bg--warning">
+      <div class="logo-success flex justify-center mb-3">
+        <img v-if="!isEmpty(logoUrl)" :src="logoUrl" alt="Logo stamp unsold" class="!max-w-[100px] !max-h-[81px]"/>
+        <template v-else>
+          <svg width="100" height="81" viewBox="0 0 70 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M69.6638 57.875L37.1638 1.625C36.6795 0.789063 35.8435 0.375 34.9998 0.375C34.156 0.375 33.3123 0.789063 32.8357 1.625L0.33572 57.875C-0.625217 59.5469 0.577907 61.625 2.49978 61.625H67.4998C69.4217 61.625 70.6248 59.5469 69.6638 57.875ZM32.4998 23.5C32.4998 23.1562 32.781 22.875 33.1248 22.875H36.8748C37.2185 22.875 37.4998 23.1562 37.4998 23.5V37.875C37.4998 38.2188 37.2185 38.5 36.8748 38.5H33.1248C32.781 38.5 32.4998 38.2188 32.4998 37.875V23.5ZM34.9998 51C34.0185 50.98 33.0841 50.5761 32.3972 49.875C31.7103 49.1739 31.3255 48.2315 31.3255 47.25C31.3255 46.2685 31.7103 45.3261 32.3972 44.625C33.0841 43.9239 34.0185 43.52 34.9998 43.5C35.9811 43.52 36.9154 43.9239 37.6024 44.625C38.2893 45.3261 38.674 46.2685 38.674 47.25C38.674 48.2315 38.2893 49.1739 37.6024 49.875C36.9154 50.5761 35.9811 50.98 34.9998 51V51Z" fill="#FFC53D"/>
+          </svg>
+        </template>
+      </div>
+
+      <div class="text-center text-[#FCFCFC]">{{ messageStampCode?.content || $t('common.stamp_processing_content') }}</div>
+    </div>
+  </template>
+
+  <template v-else-if="STAMP_CODE_UNSOLD.includes(status)">
     <div class="px-3 py-5 qrx-bg--warning">
       <div class="logo-success flex justify-center mb-3">
         <img v-if="!isEmpty(logoUrl)" :src="logoUrl" alt="Logo stamp unsold" class="!max-w-[100px] !max-h-[81px]"/>
@@ -41,7 +54,7 @@ const logoErrorUrl = computed(() => storeSetting?.setting?.image_error_url || ''
       <div class="text-center text-[#FCFCFC]">{{ messageStampCode?.content || $t('common.stamp_new_content') }}</div>
     </div>
   </template>
-  <template v-if="status === STAMP_STATUS.BLOCKED">
+  <template v-else-if="status === STAMP_STATUS.BLOCKED">
     <div class="px-3 py-5 qrx-bg--warning">
       <div class="logo-success flex justify-center mb-3">
         <img v-if="!isEmpty(logoUrl)" :src="logoUrl" alt="Logo stamp block" class="!max-w-[100px] !max-h-[81px]"/>
@@ -68,7 +81,7 @@ const logoErrorUrl = computed(() => storeSetting?.setting?.image_error_url || ''
       </div>
     </div>
   </template>
-  <template v-if="status === STATUS_VERIFY.SUCCESS">
+  <template v-else-if="status === STATUS_VERIFY.SUCCESS">
     <div class="px-3 py-5 qrx-bg--success">
       <div class="logo-success flex justify-center mb-3">
         <img v-if="!isEmpty(logoUrl)" :src="logoUrl" alt="Logo stamp success" class="!max-w-[100px] !max-h-[81px]"/>
@@ -92,7 +105,7 @@ const logoErrorUrl = computed(() => storeSetting?.setting?.image_error_url || ''
     </div>
   </template>
 
-  <template v-if="STAMP_CODE_VERIFIED.includes(status)">
+  <template v-else-if="STAMP_CODE_VERIFIED.includes(status)">
     <div class="px-3 py-5 qrx-bg--warning">
       <div class="logo-success flex justify-center mb-3">
         <img v-if="!isEmpty(logoUrl)" :src="logoUrl" alt="Logo stamp verified" class="!max-w-[100px] !max-h-[81px]"/>
@@ -118,7 +131,7 @@ const logoErrorUrl = computed(() => storeSetting?.setting?.image_error_url || ''
       <div class="text-center text-[#FCFCFC]">{{ messageStampCode?.content || $t('common.stamp_verified') }}</div>
     </div>
   </template>
-  <template v-if="status === STATUS_VERIFY.FAIL">
+  <template v-else-if="status === STATUS_VERIFY.FAIL">
     <div class="px-3 py-5 qrx-bg--error">
       <div class="logo-success flex justify-center mb-3">
         <img v-if="!isEmpty(logoErrorUrl)" :src="logoErrorUrl" alt="Logo stamp error" class="!max-w-[100px] !max-h-[81px]"/>

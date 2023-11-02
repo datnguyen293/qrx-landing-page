@@ -64,13 +64,12 @@ export const useScanQrcodeStore = defineStore('useScanQrcodeStore', {
         getTemplateCode(state) {
             return state.template.code || TEMPLATE_TYPES.TEMPLATE_ONE;
         },
-
-        getStampCodeStatusVerify(state) {
-            return state.stamp_code.status || '';
-        }
     },
 
     actions: {
+        setStatusScanStampCode (status: string) {
+            this.stamp_code.status = status;
+        },
         setDataScanQrcode(data: IScanQRCodeData) {
             this.product = data?.product || {...defaultProduct};
             this.company = data?.company || {...defaultCompany};

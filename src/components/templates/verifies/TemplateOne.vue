@@ -29,7 +29,6 @@ const isSerial = ref(false);
 const stampStatus = computed(() => store.stamp_code?.status || '');
 const browser_id = window.localStorage.getItem('browser_id');
 
-const refStampStatus = ref<any>(stampStatus);
 const customer = computed(() => store.customer);
 
 onMounted(() => {
@@ -56,22 +55,20 @@ const handleEventSubmit = async (event: any) => {
     const response = await apiVerifyStampCode(data);
     const {data: dataResponse} = response.data;
     store.setDataScanQrcode(dataResponse);
-    refStampStatus.value = dataResponse?.stamp_code?.status;
     isSerial.value = true;
-    if (scanType == VERIFICATION_TYPE.ZALO_APP && refStampStatus.value === STATUS_VERIFY.CANNOT_ACCESS) {
+    if (scanType == VERIFICATION_TYPE.ZALO_APP && stampStatus.value === STATUS_VERIFY.CANNOT_ACCESS) {
         await router.push({name: 'no-authorized'})
         return;
     }
 
   } catch (e) {
     console.log('[QRX] error handle event submit', e);
+    store.setStatusScanStampCode('fail');
 
-    if (scanType === VERIFICATION_TYPE.ZALO_APP) {
+    if (scanType === VERIFICATION_TYPE.ZALO_APP || (!xid && !serial)) {
       await router.push({name: 'error'});
       return;
     }
-
-    refStampStatus.value = 'fail';
   }
 }
 
@@ -89,7 +86,7 @@ const handleEventSubmit = async (event: any) => {
           {{ $t('common.verification_product') }}
         </div>
 
-        <CommonStatusVerify :status="refStampStatus"/>
+        <CommonStatusVerify/>
         <div class="p-5" v-if="!stampStatus || stampStatus === STAMP_STATUS.SOLD">
           <h2 class="text-[20px] font-bold leading-6 text-[#233438] mb-[2px]">{{ product?.name || '' }}</h2>
           <div class="text-[10px] mb-3" v-html="$t('common.note_verification')"></div>
