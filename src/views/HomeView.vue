@@ -23,8 +23,8 @@ onMounted(async () => {
   const {xid, serial, type, user_uuid, lat, lon, factory_name, utm} = query;
   const browser_id = window.localStorage.getItem('browser_id');
   const scanType = type || VERIFICATION_TYPE.LANDING_PAGE;
-  if ((serial && scanType === VERIFICATION_TYPE.LANDING_PAGE)
-      || (serial && xid && scanType === VERIFICATION_TYPE.ZALO_APP)) {
+
+  if (serial && xid || serial) {
     const bgLoading = ElLoading.service({
       lock: true,
       text: $t('common.loading'),
@@ -33,7 +33,7 @@ onMounted(async () => {
 
     try {
       let response;
-      if (scanType === VERIFICATION_TYPE.ZALO_APP) {
+      if (scanType === VERIFICATION_TYPE.ZALO_APP && serial) {
         response = await apiVerifyStampCode({
           xid,
           serial,
