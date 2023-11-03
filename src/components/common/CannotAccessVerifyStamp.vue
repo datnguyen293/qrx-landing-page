@@ -14,7 +14,7 @@ const contentError = computed(() => store?.message?.content || '');
   <div class="qrx-container m-auto overflow-hidden flex flex-col justify-between">
     <div class="pt-12">
       <div class="mx-auto max-w-4xl flex justify-center">
-        <img v-if="!isEmpty(logoUrl)" :src="logoUrl" alt="Logo page not found" class="!max-w-[768px] !max-h-[339px]"/>
+        <img v-if="!isEmpty(logoUrl)" :src="logoUrl" alt="Logo page not found" class="!max-w-[337px] !max-h-[339px]"/>
         <template v-else>
           <svg width="251" height="294">
             <g fill="none" fill-rule="evenodd">
