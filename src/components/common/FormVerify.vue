@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import {computed, onMounted, reactive, ref, watch} from "vue";
+import {computed, onMounted, reactive, ref } from "vue";
 import {useI18n} from "vue-i18n";
 import type {FormInstance, FormRules} from "element-plus";
 import type {IFormVerify} from "@/types";
 import {useScanQrcodeStore} from "@/store";
-import {isEmpty, maxLengthRule, phoneNumberRules, requiredRule} from "@/utitls";
+import { maxLengthRule, phoneNumberRules, requiredRule} from "@/utitls";
 import {useRoute} from "vue-router";
 
 const {t: $t} = useI18n();
@@ -33,7 +33,7 @@ const ruleForm = reactive<any>({
 const isScanZaloApp = computed(() => type && type === 'zalo_app');
 const colorSuccess = computed(() => store.getKeyThemeData('color_success') || '#00994D');
 const verificationCode = computed(() => store?.stamp_code?.verification_code || '');
-if (xid && verificationCode) {
+if (xid && verificationCode.value) {
   ruleForm.verification_code = verificationCode.value;
   isDisableVerifyCode.value = true;
 }

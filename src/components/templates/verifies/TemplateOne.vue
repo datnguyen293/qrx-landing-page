@@ -32,7 +32,8 @@ const browser_id = window.localStorage.getItem('browser_id');
 const customer = computed(() => store.customer);
 
 onMounted(() => {
-  isSerial.value = !!(xid || serial);
+  // isSerial.value = !!(xid || serial);
+  isSerial.value = !!(serial);
 });
 
 const scanType = type && type === VERIFICATION_TYPE.ZALO_APP ? VERIFICATION_TYPE.ZALO_APP : VERIFICATION_TYPE.LANDING_PAGE;
