@@ -11,6 +11,7 @@ import TemplateOne from "@/components/templates/verifies/TemplateOne.vue";
 import StampCodeNew from "@/components/common/StampCodeNew.vue";
 import StampCodeBlocked from "@/components/common/StampCodeBlocked.vue";
 import CannotAccessVerifyStamp from "@/components/common/CannotAccessVerifyStamp.vue";
+import {isEmpty} from "@/utitls";
 
 const {t: $t} = useI18n();
 const {query} = useRoute();
@@ -18,6 +19,7 @@ const router = useRouter();
 const store = useScanQrcodeStore();
 const isLoading = ref(true);
 const stampCodeStatus = ref('');
+const isProduct = ref(false);
 
 onMounted(async () => {
   const {xid, serial, type, user_uuid, lat, lon, factory_name, utm} = query;
@@ -50,10 +52,17 @@ onMounted(async () => {
       }
 
       const {data: dataResponse} = response.data;
-      store.setDataScanQrcode(dataResponse);
-
+      if (!isEmpty(dataResponse?.product)) {
+        isProduct.value = true;
+      }
       // status
       stampCodeStatus.value = dataResponse?.stamp_code?.status || '';
+      if (stampCodeStatus.value === 'not_found') {
+        router.push({name: 'not-found'});
+        return;
+      }
+
+      store.setDataScanQrcode(dataResponse);
     } catch (e) {
       await router.push({name: 'error'});
     } finally {
@@ -73,7 +82,7 @@ onMounted(async () => {
     <el-skeleton v-if="isLoading"/>
     <template v-else>
       <StampCodeNew v-if="stampCodeStatus === STAMP_STATUS.NEW"/>
-      <StampCodeBlocked v-else-if="stampCodeStatus === STAMP_STATUS.BLOCKED"/>
+      <StampCodeBlocked v-else-if="stampCodeStatus === STAMP_STATUS.BLOCKED && !isProduct"/>
       <CannotAccessVerifyStamp v-else-if="stampCodeStatus === STATUS_VERIFY.CANNOT_ACCESS"/>
       <template v-else>
         <!-- Handle switch nhiều template-->

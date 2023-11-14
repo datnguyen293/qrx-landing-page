@@ -42,6 +42,7 @@ const handleEventSubmit = async (event: any) => {
       browser_id,
       is_serial: isSerialVerify ? 1 : 0,
       old_qrcode: props.old_qrcode,
+      type_submit: 'submit'
     }
     const response = await apiVerifyStampCode(data);
     const {data: dataResponse} = response.data;
