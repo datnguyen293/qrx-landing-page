@@ -8,7 +8,7 @@ import {useScanQrcodeStore} from "@/store";
 import {STAMP_STATUS, STATUS_VERIFY, VERIFICATION_TYPE} from "@/constants";
 
 import TemplateOne from "@/components/templates/verifies/TemplateOne.vue";
-import StampCodeNew from "@/components/common/StampCodeNew.vue";
+import NewStampCode from "@/components/common/NewStampCode.vue";
 import StampCodeBlocked from "@/components/common/StampCodeBlocked.vue";
 import CannotAccessVerifyStamp from "@/components/common/CannotAccessVerifyStamp.vue";
 import {isEmpty} from "@/utitls";
@@ -81,8 +81,8 @@ onMounted(async () => {
   <div class="qrx-container m-auto overflow-hidden">
     <el-skeleton v-if="isLoading"/>
     <template v-else>
-      <StampCodeNew v-if="stampCodeStatus === STAMP_STATUS.NEW"/>
-      <StampCodeBlocked v-else-if="stampCodeStatus === STAMP_STATUS.BLOCKED && !isProduct"/>
+      <NewStampCode v-if="stampCodeStatus === STAMP_STATUS.NEW"/>
+      <StampCodeBlocked v-else-if="stampCodeStatus === STAMP_STATUS.BLOCKED"/>
       <CannotAccessVerifyStamp v-else-if="stampCodeStatus === STATUS_VERIFY.CANNOT_ACCESS"/>
       <template v-else>
         <!-- Handle switch nhiều template-->

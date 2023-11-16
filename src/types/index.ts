@@ -33,7 +33,7 @@ export type IProduct = {
     unit?: string;
     category?: string;
     brand: string,
-    is_show_price: boolean,
+    is_show_product_price: boolean,
 } & ICommonField;
 
 export type ICompany =  {
