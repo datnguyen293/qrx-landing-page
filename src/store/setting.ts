@@ -1,12 +1,13 @@
 import {defineStore} from "pinia";
 
 const defaultSetting: any = {
-    message_error_title: '',
-    message_error_content: '',
-    message_not_found_title: '',
-    message_not_found_content: '',
-    image_error_url: undefined,
-    image_not_found_url: undefined,
+    icon_stamp_not_found_url: undefined,
+    title_stamp_not_found: '',
+    message_stamp_not_found: '',
+
+    icon_stamp_error_url: undefined,
+    title_stamp_error: '',
+    message_stamp_error: '',
 }
 export const useSetting = defineStore('useSetting', {
     state: () => ({

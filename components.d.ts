@@ -31,7 +31,6 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SocialChannel: typeof import('./src/components/common/SocialChannel.vue')['default']
     StampCodeBlocked: typeof import('./src/components/common/StampCodeBlocked.vue')['default']
-    StampCodeNew: typeof import('./src/components/common/StampCodeNew.vue')['default']
     TemplateOne: typeof import('./src/components/templates/verifies/TemplateOne.vue')['default']
   }
 }
