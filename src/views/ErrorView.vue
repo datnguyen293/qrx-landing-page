@@ -6,9 +6,9 @@ import {isEmpty} from "@/utitls";
 
 const {t: $t} = useI18n();
 const storeSetting = useSetting();
-const imageErrorUrl = computed(() => storeSetting?.setting?.image_error_url || '');
-const titleError = computed(() => storeSetting?.setting?.message_error_title || '');
-const contentError = computed(() => storeSetting?.setting?.message_error_content || '');
+const imageErrorUrl = computed(() => storeSetting?.setting?.icon_stamp_error_url || '');
+const titleError = computed(() => storeSetting?.setting?.title_stamp_error || '');
+const contentError = computed(() => storeSetting?.setting?.message_stamp_error || '');
 </script>
 
 <template>

@@ -15,6 +15,9 @@ import {useScanQrcodeStore} from "@/store";
 import {apiVerifyStampCode} from "@/api";
 import {STAMP_STATUS, STATUS_VERIFY, VERIFICATION_TYPE} from "@/constants";
 import {isEmpty} from "@/utitls";
+import StampCodeBlocked from "@/components/common/StampCodeBlocked.vue";
+import CannotAccessVerifyStamp from "@/components/common/CannotAccessVerifyStamp.vue";
+import NewStampCode from "@/components/common/NewStampCode.vue";
 
 const {t: $t} = useI18n();
 const {query} = useRoute();
@@ -37,6 +40,8 @@ onMounted(() => {
 });
 
 const scanType = type && type === VERIFICATION_TYPE.ZALO_APP ? VERIFICATION_TYPE.ZALO_APP : VERIFICATION_TYPE.LANDING_PAGE;
+
+const stampCodeStatus = computed(() => store.stamp_code?.status || '');
 const handleEventSubmit = async (event: any) => {
   try {
     const data = {
@@ -57,11 +62,6 @@ const handleEventSubmit = async (event: any) => {
     const {data: dataResponse} = response.data;
     store.setDataScanQrcode(dataResponse);
     isSerial.value = true;
-    if (scanType == VERIFICATION_TYPE.ZALO_APP && stampStatus.value === STATUS_VERIFY.CANNOT_ACCESS) {
-        await router.push({name: 'no-authorized'})
-        return;
-    }
-
   } catch (e) {
     console.log('[QRX] error handle event submit', e);
     store.setStatusScanStampCode('fail');
@@ -76,7 +76,13 @@ const handleEventSubmit = async (event: any) => {
 </script>
 <template>
   <div>
-    <div class="m-auto min-h-screen">
+    <template v-if="[STAMP_STATUS.NEW, STAMP_STATUS.BLOCKED, STATUS_VERIFY.CANNOT_ACCESS].includes(stampCodeStatus)">
+      <NewStampCode v-if="stampCodeStatus === STAMP_STATUS.NEW"/>
+      <StampCodeBlocked v-else-if="stampCodeStatus === STAMP_STATUS.BLOCKED"/>
+      <CannotAccessVerifyStamp v-else-if="stampCodeStatus === STATUS_VERIFY.CANNOT_ACCESS"/>
+    </template>
+
+    <div class="m-auto min-h-screen" v-else>
       <el-card class="qrx-card-bank mb-3" :class="(!isSerial || isEmpty(product)) ? 'mt-10' : ''">
         <template v-if="isSerial || !isEmpty(product)">
           <CommonSlider/>

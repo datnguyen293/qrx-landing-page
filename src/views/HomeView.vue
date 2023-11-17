@@ -81,13 +81,8 @@ onMounted(async () => {
   <div class="qrx-container m-auto overflow-hidden">
     <el-skeleton v-if="isLoading"/>
     <template v-else>
-      <NewStampCode v-if="stampCodeStatus === STAMP_STATUS.NEW"/>
-      <StampCodeBlocked v-else-if="stampCodeStatus === STAMP_STATUS.BLOCKED"/>
-      <CannotAccessVerifyStamp v-else-if="stampCodeStatus === STATUS_VERIFY.CANNOT_ACCESS"/>
-      <template v-else>
-        <!-- Handle switch nhiều template-->
-        <TemplateOne/>
-      </template>
+      <!-- Handle switch nhiều template-->
+      <TemplateOne/>
     </template>
   </div>
 </template>

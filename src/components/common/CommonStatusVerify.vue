@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed} from "vue";
-import {STAMP_CODE_UNSOLD, STAMP_CODE_VERIFIED, STAMP_STATUS, STATUS_VERIFY} from '@/constants';
+import {STAMP_CODE_UNSOLD, STAMP_STATUS, STATUS_VERIFY} from '@/constants';
 import {useScanQrcodeStore} from "@/store";
 import {useSetting} from "@/store/setting";
 import {isEmpty} from "@/utitls";
@@ -9,10 +9,10 @@ import {isEmpty} from "@/utitls";
 const store = useScanQrcodeStore();
 const storeSetting = useSetting();
 const messageStampCode = computed(() => store.message);
-const messageError = computed(() => storeSetting?.setting?.message_error_content || '');
+const messageError = computed(() => storeSetting?.setting?.message_stamp_error || '');
 
 const logoUrl = computed(() => messageStampCode.value?.logo || '');
-const logoErrorUrl = computed(() => storeSetting?.setting?.image_error_url || '');
+const logoErrorUrl = computed(() => storeSetting?.setting?.icon_stamp_error_url || '');
 const status = computed(() => store.stamp_code?.status);
 </script>
 
