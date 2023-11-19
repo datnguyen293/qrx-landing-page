@@ -2,6 +2,7 @@
 import {computed, onMounted, ref} from "vue";
 import {useI18n} from "vue-i18n";
 import {useRoute, useRouter} from "vue-router";
+import { ElMessage } from 'element-plus'
 
 import FormVerify from "@/components/common/FormVerify.vue";
 import CommonFooter from "@/components/common/CommonFooter.vue";
@@ -21,7 +22,7 @@ import NewStampCode from "@/components/common/NewStampCode.vue";
 
 const {t: $t} = useI18n();
 const {query} = useRoute();
-const {xid, serial, user_uuid, lat, lon, factory_name, utm, type} = query;
+const {xid, serial, user_uuid, lat, lon, factory_name, utm, type, preview} = query;
 const router = useRouter();
 
 const store = useScanQrcodeStore();
@@ -43,6 +44,15 @@ const scanType = type && type === VERIFICATION_TYPE.ZALO_APP ? VERIFICATION_TYPE
 
 const stampCodeStatus = computed(() => store.stamp_code?.status || '');
 const handleEventSubmit = async (event: any) => {
+  if (preview) {
+    ElMessage({
+      showClose: true,
+      message: 'Cảnh báo. Bạn đang ở chế độ preview, chung tôi không cho phép xác thực mã.',
+      type: 'warning',
+    });
+    return;
+  }
+
   try {
     const data = {
       type: scanType,

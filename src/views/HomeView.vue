@@ -22,7 +22,7 @@ const stampCodeStatus = ref('');
 const isProduct = ref(false);
 
 onMounted(async () => {
-  const {xid, serial, type, user_uuid, lat, lon, factory_name, utm} = query;
+  const {xid, serial, type, user_uuid, lat, lon, factory_name, utm, preview} = query;
   const browser_id = window.localStorage.getItem('browser_id');
   const scanType = type || VERIFICATION_TYPE.LANDING_PAGE;
 
@@ -35,7 +35,7 @@ onMounted(async () => {
 
     try {
       let response;
-      if (scanType === VERIFICATION_TYPE.ZALO_APP && serial) {
+      if (scanType === VERIFICATION_TYPE.ZALO_APP && serial && !preview) {
         response = await apiVerifyStampCode({
           xid,
           serial,
@@ -48,7 +48,7 @@ onMounted(async () => {
           utm
         });
       } else {
-        response = await apiScanQRCode({xid, serial, type: scanType, browser_id});
+        response = await apiScanQRCode({xid, serial, type: scanType, browser_id, preview});
       }
 
       const {data: dataResponse} = response.data;

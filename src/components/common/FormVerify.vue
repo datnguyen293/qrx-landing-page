@@ -23,7 +23,7 @@ onMounted(() => {
 const isDisableVerifyCode = ref(false);
 const isProcessing = ref<boolean>(false);
 const {query} = useRoute();
-const {serial, xid, type} = query;
+const {serial, xid, type, preview} = query;
 
 const ruleForm = reactive<any>({
   verification_code: '',
@@ -98,7 +98,7 @@ const submitForm = async (formEl: any) => {
     </el-form-item>
     <el-button type="success" class="w-full mt-2" :color="colorSuccess"
                @click="submitForm(formRef)"
-               :disabled="isProcessing">
+               :disabled="isProcessing || preview">
       {{ $t('buttons.verification') }}
     </el-button>
   </el-form>
