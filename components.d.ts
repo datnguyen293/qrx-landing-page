@@ -22,6 +22,7 @@ declare module 'vue' {
     ElImage: typeof import('element-plus/es')['ElImage']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElSkeleton: typeof import('element-plus/es')['ElSkeleton']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
     FormVerify: typeof import('./src/components/common/FormVerify.vue')['default']
     NewStampCode: typeof import('./src/components/common/NewStampCode.vue')['default']
     OldQrcodeTemplate: typeof import('./src/components/templates/verifies/OldQrcodeTemplate.vue')['default']

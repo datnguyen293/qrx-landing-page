@@ -47,7 +47,7 @@ const handleEventSubmit = async (event: any) => {
   if (preview) {
     ElMessage({
       showClose: true,
-      message: 'Cảnh báo. Bạn đang ở chế độ preview, chung tôi không cho phép xác thực mã.',
+      message: 'Cảnh báo. Bạn đang ở chế độ preview, chúng tôi không cho phép xác thực mã.',
       type: 'warning',
     });
     return;

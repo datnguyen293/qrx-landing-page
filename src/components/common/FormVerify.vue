@@ -96,10 +96,20 @@ const submitForm = async (formEl: any) => {
     <el-form-item prop="phone" v-if="!isScanZaloApp">
       <el-input v-model="ruleForm.phone" :placeholder="$t('placeholders.phone_number')"/>
     </el-form-item>
-    <el-button type="success" class="w-full mt-2" :color="colorSuccess"
-               @click="submitForm(formRef)"
-               :disabled="isProcessing || preview">
-      {{ $t('buttons.verification') }}
-    </el-button>
+
+    <el-tooltip
+        class="box-item"
+        effect="dark"
+        :disabled="!preview"
+        content="Cảnh báo. Bạn đang ở chế độ preview, chúng tôi không cho phép xác thực mã."
+        placement="top"
+    >
+
+      <el-button type="success" class="w-full mt-2" :color="colorSuccess"
+                 @click="submitForm(formRef)"
+                 :disabled="isProcessing || preview">
+        {{ $t('buttons.verification') }}
+      </el-button>
+    </el-tooltip>
   </el-form>
 </template>
