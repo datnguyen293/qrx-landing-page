@@ -5,12 +5,9 @@ import {useI18n} from "vue-i18n";
 import {ElLoading} from "element-plus";
 import {apiScanQRCode, apiVerifyStampCode} from "@/api";
 import {useScanQrcodeStore} from "@/store";
-import {STAMP_STATUS, STATUS_VERIFY, VERIFICATION_TYPE} from "@/constants";
+import {VERIFICATION_TYPE} from "@/constants";
 
 import TemplateOne from "@/components/templates/verifies/TemplateOne.vue";
-import NewStampCode from "@/components/common/NewStampCode.vue";
-import StampCodeBlocked from "@/components/common/StampCodeBlocked.vue";
-import CannotAccessVerifyStamp from "@/components/common/CannotAccessVerifyStamp.vue";
 import {isEmpty} from "@/utitls";
 
 const {t: $t} = useI18n();
