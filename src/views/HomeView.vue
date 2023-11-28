@@ -60,21 +60,27 @@ onMounted(async () => {
           return;
         }
 
-        router.push({name: 'not-found'});
+        await router.push({name: 'not-found'});
+        isLoading.value = false;
+        setTimeout(() => {
+          bgLoading.close()
+        }, 1000);
         return;
       }
 
       store.setDataScanQrcode(dataResponse);
+      isLoading.value = false;
+      setTimeout(() => {
+        bgLoading.close()
+      }, 1000);
     } catch (e) {
       await router.push({name: 'error'});
-    } finally {
       isLoading.value = false;
       setTimeout(() => {
         bgLoading.close()
       }, 1000);
     }
   }
-  isLoading.value = false;
 });
 
 </script>
