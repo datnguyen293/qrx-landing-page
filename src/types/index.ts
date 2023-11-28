@@ -89,7 +89,8 @@ export type IScanQRCodeData = {
     template: ITemplate,
     customer?: ICustomer,
     stamp_code?: IStampCode,
-    message?: IMessage
+    message?: IMessage,
+    redirect_url?: string
 }
 
 export type APIResponse<T> = {

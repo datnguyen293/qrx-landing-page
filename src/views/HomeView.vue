@@ -8,7 +8,7 @@ import {useScanQrcodeStore} from "@/store";
 import {VERIFICATION_TYPE} from "@/constants";
 
 import TemplateOne from "@/components/templates/verifies/TemplateOne.vue";
-import {isEmpty} from "@/utitls";
+import {isEmpty, isValidUrl} from "@/utitls";
 
 const {t: $t} = useI18n();
 const {query} = useRoute();
@@ -55,6 +55,11 @@ onMounted(async () => {
       // status
       stampCodeStatus.value = dataResponse?.stamp_code?.status || '';
       if (stampCodeStatus.value === 'not_found') {
+        if (!isEmpty(dataResponse?.redirect_url) && isValidUrl(dataResponse?.redirect_url)) {
+          window.location.href = dataResponse?.redirect_url;
+          return;
+        }
+
         router.push({name: 'not-found'});
         return;
       }
