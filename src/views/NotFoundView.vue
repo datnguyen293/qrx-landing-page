@@ -967,9 +967,7 @@ const contentNotFound = computed(() =>  storeSetting?.setting?.message_stamp_not
     </div>
     <div class="m-auto text-center mt-6 px-4">
       <div class="font-bold text-3xl mb-2 qrx-text--warning">{{ !isEmpty(titleNotFound) ? titleNotFound : $t('common.not_found')}}</div>
-      <div class="text-[16px] text-app">
-        {{ !isEmpty(contentNotFound) ? contentNotFound : $t('common.not_found_content')}}
-      </div>
+      <div class="text-[16px] text-app" v-html="!isEmpty(contentNotFound) ? contentNotFound : $t('common.not_found_content')"></div>
     </div>
   </div>
 </template>

@@ -199,10 +199,7 @@ const contentError = computed(() => storeSetting?.setting?.message_stamp_error |
       <div class="font-bold text-3xl mb-2 qrx-text--error">
         {{ !isEmpty(titleError) ? titleError : $t('common.error') }}
       </div>
-      <div class="text-[16px] qrx-text--error">{{
-          !isEmpty(contentError) ? contentError : $t('common.error_content')
-        }}
-      </div>
+      <div class="text-[16px] qrx-text--error" v-html="!isEmpty(contentError) ? contentError : $t('common.error_content')"></div>
     </div>
   </div>
 </template>
