@@ -33,5 +33,7 @@ declare module 'vue' {
     SocialChannel: typeof import('./src/components/common/SocialChannel.vue')['default']
     StampCodeBlocked: typeof import('./src/components/common/StampCodeBlocked.vue')['default']
     TemplateOne: typeof import('./src/components/templates/verifies/TemplateOne.vue')['default']
+    TemplatePisen: typeof import('./src/components/templates/verifies/TemplatePisen.vue')['default']
+    TemplateTwo: typeof import('./src/components/templates/verifies/TemplateTwo.vue')['default']
   }
 }
