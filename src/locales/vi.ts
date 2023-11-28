@@ -6,6 +6,9 @@ export default {
   common: {
     loading: 'Đang tải...',
     customer_name: 'Tên',
+    congratulations: 'Xin chúc mừng',
+    congratulations_content:
+      ' Bạn đã mua được sản phẩm PISEN chính hãng. Xin vui lòng điền thông tin để kích hoạt bảo hành PISEN Care Plus từ 2-6 tháng ',
     phone_number: 'Số điện thoại',
     verify_code: 'Mã xác thực',
     serial: 'Mã serial',
@@ -16,23 +19,28 @@ export default {
     not_found: 'Không tìm thấy',
     verification_product: 'Xác thực sản phẩm',
     note_verification: `<span class="text-[#B61212]">Lưu ý:</span> Nhập chính xác thông tin họ tên, SĐT để đảm bảo các quyền lợi về tích điểm, đổi quà và các vấn đề xác thực, khiếu nại liên quan.`,
-    not_found_content: 'Không có trên dữ liệu trên hệ thống. Vui lòng kiểm tra lại mã xác thực hoặc liên hệ hotline để được tư vấn. Xin cảm ơn!',
-    error_content: 'Có lỗi đã xảy ra. Vui lòng kiểm tra lại mã xác thực hoặc liên hệ hotline để được tư vấn. Xin cảm ơn!',
+    not_found_content:
+      'Không có trên dữ liệu trên hệ thống. Vui lòng kiểm tra lại mã xác thực hoặc liên hệ hotline để được tư vấn. Xin cảm ơn!',
+    error_content:
+      'Có lỗi đã xảy ra. Vui lòng kiểm tra lại mã xác thực hoặc liên hệ hotline để được tư vấn. Xin cảm ơn!',
     limit_scan: 'Số lượng quét vượt quá giới hạn',
     limit_scan_content: 'Số lượng quét vượt quá giới hạn. Vui lòng liên hệ hotline để được hỗ trợ',
     stamp_new_title: 'Cảnh báo',
     stamp_new_content: 'Sản phẩm chưa được xuất kho. Vui lòng liên hệ hotline để được hỗ trợ.',
     stamp_blocked_title: 'Cảnh báo',
     stamp_blocked_content: 'Mã tem đang bị khoá. Vui lòng liên hệ hotline để được hỗ trợ.',
-    stamp_verified: 'Sản phẩm đã được xác thực trước đó. Vui lòng kiểm tra lại hoặc liên hệ với người bán để được hỗ trợ!',
+    stamp_verified:
+      'Sản phẩm đã được xác thực trước đó. Vui lòng kiểm tra lại hoặc liên hệ với người bán để được hỗ trợ!',
     stamp_verify_success: 'Chúc mừng bạn! Đây là sản phẩm chính hãng. Xin cảm ơn quý khách!',
     stamp_warranty_replaced: 'Sản phẩm đã được thay thế bảo hành.',
 
     stamp_cannot_access_scan_stamp_title: 'Cảnh báo',
-    stamp_cannot_access_scan_stamp_content: 'Sản phẩm không được phép xác thực trên ứng dụng zalo mini app. Vui lòng kiểm tra lại hoặc liên hệ với người bán để được hỗ trợ!',
+    stamp_cannot_access_scan_stamp_content:
+      'Sản phẩm không được phép xác thực trên ứng dụng zalo mini app. Vui lòng kiểm tra lại hoặc liên hệ với người bán để được hỗ trợ!',
     stamp_processing: 'Cảnh báo',
     stamp_processing_title: 'Cảnh báo',
-    stamp_processing_content: 'Sản phẩm đang đang trong quá trình xử lý. Vui lòng kiểm tra lại hoặc liên hệ với người bán để được hỗ trợ!',
+    stamp_processing_content:
+      'Sản phẩm đang đang trong quá trình xử lý. Vui lòng kiểm tra lại hoặc liên hệ với người bán để được hỗ trợ!',
   },
 
   products: {
@@ -42,7 +50,7 @@ export default {
     brand: 'Thương hiệu',
     category: 'Danh mục',
     price: 'Giá',
-    description: 'Mô tả'
+    description: 'Mô tả',
   },
 
   placeholders: {
