@@ -109,10 +109,12 @@ const handleEventSubmit = async (event: any) => {
         <template v-if="isSerial || !isEmpty(product)">
           <CommonSlider
             v-if="
-              stampCodeStatus === STAMP_STATUS.PRODUCT_ASSIGNED ||
-              stampCodeStatus === STAMP_STATUS.PROCESSING ||
-              stampCodeStatus === STATUS_VERIFY.OVER_LIMITED ||
-              stampCodeStatus === STAMP_STATUS.WARRANTY_PROCESSING
+              [
+                STAMP_STATUS.PRODUCT_ASSIGNED,
+                STAMP_STATUS.PROCESSING,
+                STATUS_VERIFY.OVER_LIMITED,
+                STAMP_STATUS.WARRANTY_PROCESSING,
+              ].includes(stampCodeStatus) || message.logo === ''
             "
           />
           <img
@@ -126,8 +128,7 @@ const handleEventSubmit = async (event: any) => {
 
         <CommonStatusVerify
           :class="
-            stampCodeStatus === STAMP_STATUS.WARRANTY_REPLACED ||
-            stampCodeStatus === STAMP_STATUS.ACTIVATED
+            [STAMP_STATUS.WARRANTY_REPLACE, STAMP_STATUS.ACTIVATED].includes(stampCodeStatus)
               ? 'hidden'
               : 'block'
           "
@@ -145,14 +146,7 @@ const handleEventSubmit = async (event: any) => {
 
         <div
           class="p-5"
-          v-else-if="
-            !stampStatus ||
-            stampStatus === STAMP_STATUS.WARRANTY_REPLACED ||
-            stampStatus === STATUS_VERIFY.OVER_LIMITED
-          "
-          :class="
-            stampCodeStatus === STATUS_VERIFY.OVER_LIMITED ? 'qrx-bg--warning text-white' : ''
-          "
+          v-else-if="!stampStatus || [STAMP_STATUS.WARRANTY_REPLACED].includes(stampStatus)"
         >
           <h2>
             {{ message.content }}
