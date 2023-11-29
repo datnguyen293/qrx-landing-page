@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import {computed, onMounted, ref} from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { ElLoading } from 'element-plus';
 import { apiScanQRCode, apiVerifyStampCode } from '@/api';
 import { useScanQrcodeStore } from '@/store';
-import { VERIFICATION_TYPE } from '@/constants';
+import {TEMPLATE_TYPES, VERIFICATION_TYPE} from '@/constants';
 
 import TemplateOne from '@/components/templates/verifies/TemplateOne.vue';
 import TemplateTwo from '@/components/templates/verifies/TemplateTwo.vue';
@@ -19,14 +19,11 @@ const isLoading = ref(true);
 const stampCodeStatus = ref('');
 const isProduct = ref(false);
 
-const { template } = store;
-
 onMounted(async () => {
   const { xid, serial, type, user_uuid, lat, lon, factory_name, utm, preview } = query;
 
   const browser_id = window.localStorage.getItem('browser_id');
   const scanType = type || VERIFICATION_TYPE.LANDING_PAGE;
-
   if ((serial && xid) || serial) {
     const bgLoading = ElLoading.service({
       lock: true,
@@ -86,6 +83,8 @@ onMounted(async () => {
     }
   }
 });
+
+const templateCode = computed(() => store?.template?.code || 'mrw_template_1');
 </script>
 
 <template>
@@ -93,11 +92,11 @@ onMounted(async () => {
     <el-skeleton v-if="isLoading" />
     <template v-else>
       <!-- Handle switch nhiều template-->
-      <template v-if="template.code !== 'TEMPLATE_ONE'">
-        <TemplateOne />
+      <template v-if="templateCode === TEMPLATE_TYPES.TEMPLATE_2">
+        <TemplateTwo />
       </template>
       <template v-else>
-        <TemplateTwo />
+        <TemplateOne />
       </template>
     </template>
   </div>

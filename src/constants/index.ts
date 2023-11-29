@@ -25,7 +25,8 @@ export const STAMP_CODE_UNSOLD: Array<string> = [STAMP_STATUS.PRODUCT_ASSIGNED]
 export const STAMP_CODE_VERIFIED: Array<string> = [STAMP_STATUS.WARRANTY_REPLACED, STAMP_STATUS.ACTIVATED]
 
 export const TEMPLATE_TYPES = {
-    TEMPLATE_ONE: 'TEMPLATE_ONE',
+    TEMPLATE_1: 'mrw_template_1',
+    TEMPLATE_2: 'mrw_template_2',
 };
 
 export const TEMPLATE_LIST = Object.values(TEMPLATE_TYPES);
@@ -64,3 +65,5 @@ export enum VERIFICATION_TYPE {
     ZALO_APP = 'zalo_app',
     LANDING_PAGE = 'landing_page'
 }
+
+
