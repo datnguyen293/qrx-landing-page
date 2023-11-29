@@ -33,6 +33,8 @@ export default {
       'Sản phẩm đã được xác thực trước đó. Vui lòng kiểm tra lại hoặc liên hệ với người bán để được hỗ trợ!',
     stamp_verify_success: 'Chúc mừng bạn! Đây là sản phẩm chính hãng. Xin cảm ơn quý khách!',
     stamp_warranty_replaced: 'Sản phẩm đã được thay thế bảo hành.',
+    stamp_unsold_product: "Cảnh báo sản phẩm chưa bán admin",
+    stamp_is_being_processed: 'Tem đang xử lý',
 
     stamp_cannot_access_scan_stamp_title: 'Cảnh báo',
     stamp_cannot_access_scan_stamp_content:
