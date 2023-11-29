@@ -29,8 +29,7 @@ const store = useScanQrcodeStore();
 const product = computed(() => store.product);
 const isSerial = ref(false);
 
-const { template } = store;
-console.log('template', template);
+const { message } = store;
 
 const stampStatus = computed(() => store.stamp_code?.status || '');
 const browser_id = window.localStorage.getItem('browser_id');
@@ -108,14 +107,31 @@ const handleEventSubmit = async (event: any) => {
         :class="!isSerial || isEmpty(product) ? 'mt-10' : ''"
       >
         <template v-if="isSerial || !isEmpty(product)">
+          <CommonSlider
+            v-if="
+              stampCodeStatus === STAMP_STATUS.PRODUCT_ASSIGNED ||
+              stampCodeStatus === STAMP_STATUS.PROCESSING ||
+              stampCodeStatus === STATUS_VERIFY.OVER_LIMITED ||
+              stampCodeStatus === STAMP_STATUS.WARRANTY_PROCESSING
+            "
+          />
           <img
-            src="https://dev.qrx.com.vn/uploads/layout-templates/5/layout-templates_rllv8wvdei8gdtsmwbm2.png"
+            :src="message.logo"
             alt="Logo stamp success"
             class="!w-[200px] !h-[180px]"
+            :class="stampCodeStatus === STATUS_VERIFY.SUCCESS ? 'hidden' : ''"
+            v-else
           />
         </template>
 
-        <CommonStatusVerify />
+        <CommonStatusVerify
+          :class="
+            stampCodeStatus === STAMP_STATUS.WARRANTY_REPLACED ||
+            stampCodeStatus === STAMP_STATUS.ACTIVATED
+              ? 'hidden'
+              : 'block'
+          "
+        />
 
         <div class="p-5" v-if="!stampStatus || stampStatus === STAMP_STATUS.SOLD">
           <h2 class="text-[28px] font-bold leading-6 text-[#233438] mb-[2px]">
@@ -125,6 +141,32 @@ const handleEventSubmit = async (event: any) => {
             {{ $t('common.congratulations_content') }}
           </p>
           <FormVerify :is_serial="isSerial" @form-submit="handleEventSubmit" />
+        </div>
+
+        <div
+          class="p-5"
+          v-else-if="
+            !stampStatus ||
+            stampStatus === STAMP_STATUS.WARRANTY_REPLACED ||
+            stampStatus === STATUS_VERIFY.OVER_LIMITED
+          "
+          :class="
+            stampCodeStatus === STATUS_VERIFY.OVER_LIMITED ? 'qrx-bg--warning text-white' : ''
+          "
+        >
+          <h2>
+            {{ message.content }}
+          </h2>
+          <p class="!leading-6 my-5">
+            {{ product.name }}
+          </p>
+        </div>
+        <div
+          class="p-5 px-3 py-5 qrx-bg--warning"
+          v-else-if="stampCodeStatus === STAMP_STATUS.ACTIVATED"
+        >
+          <p class="text-center text-white">{{ product.name }}</p>
+          <div class="text-center text-white mt-[16px]" v-html="message.content"></div>
         </div>
       </el-card>
 

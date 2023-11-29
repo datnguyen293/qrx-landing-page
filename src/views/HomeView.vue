@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import {computed, onMounted, ref} from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { ElLoading } from 'element-plus';
 import { apiScanQRCode, apiVerifyStampCode } from '@/api';
 import { useScanQrcodeStore } from '@/store';
-import {TEMPLATE_TYPES, VERIFICATION_TYPE} from '@/constants';
+import { TEMPLATE_TYPES, VERIFICATION_TYPE } from '@/constants';
 
 import TemplateOne from '@/components/templates/verifies/TemplateOne.vue';
 import TemplateTwo from '@/components/templates/verifies/TemplateTwo.vue';
