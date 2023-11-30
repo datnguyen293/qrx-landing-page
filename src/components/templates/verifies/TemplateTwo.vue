@@ -86,6 +86,13 @@ const handleEventSubmit = async (event: any) => {
     }
   }
 };
+
+const resultComonSlider = [
+  STAMP_STATUS.PRODUCT_ASSIGNED,
+  STAMP_STATUS.PROCESSING,
+  STATUS_VERIFY.OVER_LIMITED,
+  STAMP_STATUS.WARRANTY_PROCESSING,
+];
 </script>
 <template>
   <div>
@@ -107,30 +114,25 @@ const handleEventSubmit = async (event: any) => {
         :class="!isSerial || isEmpty(product) ? 'mt-10' : ''"
       >
         <template v-if="isSerial || !isEmpty(product)">
-          <CommonSlider
-            v-if="
-              [
-                STAMP_STATUS.PRODUCT_ASSIGNED,
-                STAMP_STATUS.PROCESSING,
-                STATUS_VERIFY.OVER_LIMITED,
-                STAMP_STATUS.WARRANTY_PROCESSING,
-              ].includes(stampCodeStatus)
-            "
-          />
-          <img
-            :src="message.logo"
-            alt="Logo stamp success"
-            class="!w-[200px] !h-[180px]"
-            :class="stampCodeStatus === STATUS_VERIFY.SUCCESS ? 'hidden' : ''"
-            v-else-if="message.logo !== ''"
-          />
-          <img
-            src="@/assets/images/icon-hero.png"
-            alt="Logo stamp success"
-            class="!w-[200px] !h-[180px]"
-            :class="stampCodeStatus === STATUS_VERIFY.SUCCESS ? 'hidden' : ''"
-            v-else
-          />
+          <template v-if="resultComonSlider.includes(stampCodeStatus)">
+            <CommonSlider />
+          </template>
+          <template v-if="message.logo !== ''">
+            <img
+              :src="message.logo"
+              alt="Logo stamp success"
+              class="!w-[200px] !h-[180px]"
+              :class="stampCodeStatus === STATUS_VERIFY.SUCCESS ? 'hidden' : ''"
+            />
+          </template>
+          <template v-if="message.logo === ''">
+            <img
+              src="@/assets/images/icon-hero.png"
+              alt="Logo stamp success"
+              class="!w-[200px] !h-[180px]"
+              :class="stampCodeStatus === STATUS_VERIFY.SUCCESS ? 'hidden' : ''"
+            />
+          </template>
         </template>
 
         <CommonStatusVerify
