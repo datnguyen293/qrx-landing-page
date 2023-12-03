@@ -163,10 +163,10 @@ const contentError = computed(() => store?.message?.content || '');
       </div>
 
       <div class="m-auto text-center mt-6 px-4">
-        <div class="font-bold text-3xl mb-2 qrx-text--warning">
+        <div class="font-bold text-3xl mb-2 qrx-text--warning qrx-line-break">
           {{ !isEmpty(titleError) ? titleError : $t('common.stamp_cannot_access_scan_stamp_title') }}
         </div>
-        <div class="text-[16px] qrx-text--warning">
+        <div class="text-[16px] qrx-text--warning qrx-line-break">
           {{ !isEmpty(contentError) ? contentError : $t('common.stamp_cannot_access_scan_stamp_content') }}
         </div>
       </div>
