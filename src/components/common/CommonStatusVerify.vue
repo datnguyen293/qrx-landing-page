@@ -28,7 +28,7 @@ const status = computed(() => store.stamp_code?.status);
         </template>
       </div>
 
-      <div class="text-center text-[#FCFCFC]" v-html="messageStampCode?.content || $t('common.stamp_processing_content')"></div>
+      <div class="text-center text-[#FCFCFC] qrx-line-break" v-html="messageStampCode?.content || $t('common.stamp_processing_content')"></div>
     </div>
   </template>
 
@@ -51,7 +51,7 @@ const status = computed(() => store.stamp_code?.status);
         </template>
       </div>
 
-      <div class="text-center text-[#FCFCFC]" v-html="messageStampCode?.content || $t('common.stamp_new_content')"></div>
+      <div class="text-center text-[#FCFCFC] qrx-line-break" v-html="messageStampCode?.content || $t('common.stamp_new_content')"></div>
     </div>
   </template>
   <template v-else-if="status === STAMP_STATUS.BLOCKED">
@@ -77,7 +77,7 @@ const status = computed(() => store.stamp_code?.status);
         </template>
       </div>
 
-      <div class="text-center text-[#FCFCFC]" v-html="messageStampCode?.content || $t('common.stamp_blocked_content')"></div>
+      <div class="text-center text-[#FCFCFC] qrx-line-break" v-html="messageStampCode?.content || $t('common.stamp_blocked_content')"></div>
     </div>
   </template>
   <template v-else-if="status === STATUS_VERIFY.SUCCESS">
@@ -100,7 +100,7 @@ const status = computed(() => store.stamp_code?.status);
         </template>
       </div>
 
-      <div class="text-center text-[#FCFCFC]" v-html="messageStampCode?.content || $t('common.stamp_verify_success')"></div>
+      <div class="text-center text-[#FCFCFC] qrx-line-break" v-html="messageStampCode?.content || $t('common.stamp_verify_success')"></div>
     </div>
   </template>
 
@@ -127,7 +127,7 @@ const status = computed(() => store.stamp_code?.status);
         </template>
       </div>
 
-      <div class="text-center text-[#FCFCFC]" v-html="messageStampCode?.content || $t('common.stamp_verified')"></div>
+      <div class="text-center text-[#FCFCFC] qrx-line-break" v-html="messageStampCode?.content || $t('common.stamp_verified')"></div>
     </div>
   </template>
 
@@ -152,7 +152,7 @@ const status = computed(() => store.stamp_code?.status);
         </template>
       </div>
 
-      <div class="text-center text-[#FCFCFC]" v-html="messageStampCode?.content || $t('common.stamp_warranty_replaced')"></div>
+      <div class="text-center text-[#FCFCFC] qrx-line-break" v-html="messageStampCode?.content || $t('common.stamp_warranty_replaced')"></div>
     </div>
   </template>
 
@@ -176,7 +176,7 @@ const status = computed(() => store.stamp_code?.status);
         </template>
       </div>
 
-      <div class="text-center text-[#FCFCFC]" v-html="messageStampCode?.content || $t('common.limit_scan_content')"></div>
+      <div class="text-center text-[#FCFCFC] qrx-line-break" v-html="messageStampCode?.content || $t('common.limit_scan_content')"></div>
     </div>
   </template>
   <template v-else-if="status === STATUS_VERIFY.FAIL">
@@ -199,7 +199,7 @@ const status = computed(() => store.stamp_code?.status);
         </template>
       </div>
 
-      <div class="text-center text-[#FCFCFC]" v-html="!isEmpty(messageError) ? messageError : $t('common.error_content')"></div>
+      <div class="text-center text-[#FCFCFC] qrx-line-break" v-html="!isEmpty(messageError) ? messageError : $t('common.error_content')"></div>
     </div>
   </template>
 </template>

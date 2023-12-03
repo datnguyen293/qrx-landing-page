@@ -196,10 +196,10 @@ const contentError = computed(() => storeSetting?.setting?.message_stamp_error |
     </div>
 
     <div class="m-auto text-center mt-6 px-4">
-      <div class="font-bold text-3xl mb-2 qrx-text--error">
+      <div class="font-bold text-3xl mb-2 qrx-text--error qrx-line-break">
         {{ !isEmpty(titleError) ? titleError : $t('common.error') }}
       </div>
-      <div class="text-[16px] qrx-text--error" v-html="!isEmpty(contentError) ? contentError : $t('common.error_content')"></div>
+      <div class="text-[16px] qrx-text--error qrx-line-break" v-html="!isEmpty(contentError) ? contentError : $t('common.error_content')"></div>
     </div>
   </div>
 </template>
