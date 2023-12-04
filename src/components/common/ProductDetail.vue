@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {computed} from "vue";
 import {useScanQrcodeStore} from "@/store";
-import {formatAmountCurrency} from "@/utitls";
+import {formatAmountCurrency, isEmpty} from "@/utitls";
 
 const store = useScanQrcodeStore();
 const product = computed(() => store.product);
@@ -36,9 +36,9 @@ const company = computed(() => store.company);
       </dl>
     </div>
 
-    <div v-if="product?.description">
+    <div v-if="!isEmpty(product?.description)">
         <div>Mô tả</div>
-        <div v-html="product?.description"></div>
+        <div class="qrx-line-break" v-html="product?.description"></div>
     </div>
   </el-card>
 </template>
