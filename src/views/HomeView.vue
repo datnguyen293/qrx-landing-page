@@ -15,7 +15,6 @@ const { t: $t } = useI18n();
 const { query } = useRoute();
 const router = useRouter();
 const store = useScanQrcodeStore();
-const isLoading = ref(true);
 const stampCodeStatus = ref('');
 const isProduct = ref(false);
 
@@ -62,7 +61,6 @@ onMounted(async () => {
         }
 
         await router.push({ name: 'not-found' });
-        isLoading.value = false;
         setTimeout(() => {
           bgLoading.close();
         }, 1000);
@@ -70,13 +68,11 @@ onMounted(async () => {
       }
 
       store.setDataScanQrcode(dataResponse);
-      isLoading.value = false;
       setTimeout(() => {
         bgLoading.close();
       }, 1000);
     } catch (e) {
       await router.push({ name: 'error' });
-      isLoading.value = false;
       setTimeout(() => {
         bgLoading.close();
       }, 1000);
@@ -84,20 +80,17 @@ onMounted(async () => {
   }
 });
 
+
 const templateCode = computed(() => store?.template?.code || 'mrw_template_1');
 </script>
 
 <template>
   <div class="qrx-container m-auto overflow-hidden">
-    <el-skeleton v-if="isLoading" />
+    <template v-if="templateCode === TEMPLATE_TYPES.TEMPLATE_2">
+      <TemplateTwo />
+    </template>
     <template v-else>
-      <!-- Handle switch nhiều template-->
-      <template v-if="templateCode === TEMPLATE_TYPES.TEMPLATE_2">
-        <TemplateTwo />
-      </template>
-      <template v-else>
-        <TemplateOne />
-      </template>
+      <TemplateOne />
     </template>
   </div>
 </template>

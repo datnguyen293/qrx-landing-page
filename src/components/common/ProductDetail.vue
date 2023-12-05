@@ -38,7 +38,7 @@ const company = computed(() => store.company);
 
     <div v-if="!isEmpty(product?.description)">
         <div>Mô tả</div>
-        <div class="qrx-line-break" v-html="product?.description"></div>
+        <div v-html="product?.description"></div>
     </div>
   </el-card>
 </template>

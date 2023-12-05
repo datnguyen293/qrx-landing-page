@@ -137,7 +137,7 @@ const resultComonSlider = [
 
         <CommonStatusVerify
           :class="
-            [STAMP_STATUS.WARRANTY_REPLACE, STAMP_STATUS.ACTIVATED].includes(stampCodeStatus)
+            [STAMP_STATUS.WARRANTY_REPLACED, STAMP_STATUS.ACTIVATED].includes(stampCodeStatus)
               ? 'hidden'
               : 'block'
           "
