@@ -23,6 +23,8 @@ export default {
       'Không có trên dữ liệu trên hệ thống. Vui lòng kiểm tra lại mã xác thực hoặc liên hệ hotline để được tư vấn. Xin cảm ơn!',
     error_content:
       'Có lỗi đã xảy ra. Vui lòng kiểm tra lại mã xác thực hoặc liên hệ hotline để được tư vấn. Xin cảm ơn!',
+    message_content:
+      'Vui lòng nhập mã xác thực vào bên dưới. Sau đó ấn nút Xác Nhận để xác thực hàng hóa.',
     limit_scan: 'Số lượng quét vượt quá giới hạn',
     limit_scan_content: 'Số lượng quét vượt quá giới hạn. Vui lòng liên hệ hotline để được hỗ trợ',
     stamp_new_title: 'Cảnh báo',
@@ -33,7 +35,7 @@ export default {
       'Sản phẩm đã được xác thực trước đó. Vui lòng kiểm tra lại hoặc liên hệ với người bán để được hỗ trợ!',
     stamp_verify_success: 'Chúc mừng bạn! Đây là sản phẩm chính hãng. Xin cảm ơn quý khách!',
     stamp_warranty_replaced: 'Sản phẩm đã được thay thế bảo hành.',
-    stamp_unsold_product: "Cảnh báo sản phẩm chưa bán admin",
+    stamp_unsold_product: 'Cảnh báo sản phẩm chưa bán admin',
     stamp_is_being_processed: 'Tem đang xử lý',
 
     stamp_cannot_access_scan_stamp_title: 'Cảnh báo',

@@ -9,10 +9,14 @@ declare module 'vue' {
   export interface GlobalComponents {
     CannotAccessVerifyStamp: typeof import('./src/components/common/CannotAccessVerifyStamp.vue')['default']
     CommonContact: typeof import('./src/components/common/CommonContact.vue')['default']
+    CommonContactVerTwo: typeof import('./src/components/common/CommonContactVerTwo.vue')['default']
     CommonCustomerProfile: typeof import('./src/components/common/CommonCustomerProfile.vue')['default']
     CommonFooter: typeof import('./src/components/common/CommonFooter.vue')['default']
+    CommonFooterVerTwo: typeof import('./src/components/common/CommonFooterVerTwo.vue')['default']
     CommonSlider: typeof import('./src/components/common/CommonSlider.vue')['default']
     CommonStatusVerify: typeof import('./src/components/common/CommonStatusVerify.vue')['default']
+    ContactStack: typeof import('./src/components/templates/verifies/TemplateThree/ContactStack.vue')['default']
+    copy: typeof import('./src/components/common/CommonFooter copy.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElCarousel: typeof import('element-plus/es')['ElCarousel']
@@ -24,6 +28,7 @@ declare module 'vue' {
     ElSkeleton: typeof import('element-plus/es')['ElSkeleton']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     FormVerify: typeof import('./src/components/common/FormVerify.vue')['default']
+    HomeStack: typeof import('./src/components/templates/verifies/TemplateThree/HomeStack.vue')['default']
     NewStampCode: typeof import('./src/components/common/NewStampCode.vue')['default']
     OldQrcodeTemplate: typeof import('./src/components/templates/verifies/OldQrcodeTemplate.vue')['default']
     ProductDetail: typeof import('./src/components/common/ProductDetail.vue')['default']
@@ -32,7 +37,10 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SocialChannel: typeof import('./src/components/common/SocialChannel.vue')['default']
     StampCodeBlocked: typeof import('./src/components/common/StampCodeBlocked.vue')['default']
+    SuggestionStack: typeof import('./src/components/templates/verifies/TemplateThree/SuggestionStack.vue')['default']
     TemplateOne: typeof import('./src/components/templates/verifies/TemplateOne.vue')['default']
+    TemplateThree: typeof import('./src/components/templates/verifies/TemplateThree/index.vue')['default']
     TemplateTwo: typeof import('./src/components/templates/verifies/TemplateTwo.vue')['default']
+    VerifyStack: typeof import('./src/components/templates/verifies/TemplateThree/VerifyStack.vue')['default']
   }
 }
