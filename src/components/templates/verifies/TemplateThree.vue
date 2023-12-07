@@ -56,7 +56,7 @@ const stacks = ref([
 
   <div class="max-w-[768px] mx-auto bg-white flex justify-between fixed left-0 right-0 bottom-0">
     <div
-      class="text-center flex-1 p-[10px] cursor-pointer rounded-[12px]"
+      class="text-center qrx-text--default flex-1 p-[10px] qrx-fill cursor-pointer rounded-[12px]"
       :class="chooseStack === stack.sku ? 'qrx-bg--success text-white fill-white' : ''"
       @click="chooseStack = stack.sku"
       v-for="(stack, index) in stacks"

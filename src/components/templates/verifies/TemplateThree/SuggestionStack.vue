@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { reactive, computed, ref, onMounted } from 'vue';
 import type { IsContactFrom, IsContactRulers } from '@/types';
+import { ElMessage } from 'element-plus';
 import { requiredRule } from '@/utitls';
 import { useI18n } from 'vue-i18n';
 import { useScanQrcodeStore } from '@/store';
@@ -22,6 +23,8 @@ const rules = ref<IsContactRulers>({
   email: [requiredRule($t('placeholders.email_address'))],
   content: [requiredRule($t('placeholders.content'))],
 });
+
+const isDisable = ref(true);
 </script>
 
 <template>
@@ -51,14 +54,22 @@ const rules = ref<IsContactRulers>({
             />
           </el-form-item>
           <el-form-item>
-            <el-button
-              type="success"
-              class="w-full mt-2 text-white hover:text-white"
-              :color="colorSuccess"
-              :disabled="true"
+            <el-tooltip
+              class="box-item"
+              effect="dark"
+              :disabled="!isDisable"
+              content="Chức năng đang trong giai đoạn phát triển"
+              placement="top"
             >
-              {{ $t('buttons.send') }}
-            </el-button>
+              <el-button
+                type="success"
+                class="w-full mt-2 text-white hover:text-white"
+                :color="colorSuccess"
+                :disabled="isDisable"
+              >
+                {{ $t('buttons.send') }}
+              </el-button>
+            </el-tooltip>
           </el-form-item>
         </el-form>
       </div>
