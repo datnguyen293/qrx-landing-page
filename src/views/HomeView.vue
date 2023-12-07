@@ -96,10 +96,10 @@ const templateCode = computed(() => store?.template?.code || 'mrw_template_1');
       <template v-if="templateCode === TEMPLATE_TYPES.TEMPLATE_3">
         <TemplateThree />
       </template>
-      <template v-if="templateCode === TEMPLATE_TYPES.TEMPLATE_2">
+      <template v-else-if="templateCode === TEMPLATE_TYPES.TEMPLATE_2">
         <TemplateTwo />
       </template>
-      <template v-if="templateCode === TEMPLATE_TYPES.TEMPLATE_1">
+      <template v-else>
         <TemplateOne />
       </template>
     </template>
