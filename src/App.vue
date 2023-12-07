@@ -1,28 +1,31 @@
 <script setup lang="ts">
 import vi from 'element-plus/dist/locale/vi.mjs';
-import {ElConfigProvider, ElLoading} from 'element-plus';
-import {computed, onMounted, ref} from "vue";
-import {useI18n} from "vue-i18n";
+import { ElConfigProvider, ElLoading } from 'element-plus';
+import { computed, onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-import {useScanQrcodeStore} from './store';
-import {generateUUID, isEmpty} from "@/utitls";
-import {apiInitSetting} from "@/api";
-import {useSetting} from "@/store/setting";
-import {useFavicon, useTitle} from "@vueuse/core";
+import { useScanQrcodeStore } from './store';
+import { generateUUID, isEmpty } from '@/utitls';
+import { apiInitSetting } from '@/api';
+import { useSetting } from '@/store/setting';
+import { useFavicon, useTitle } from '@vueuse/core';
 
 const locale = ref(vi);
 const store = useScanQrcodeStore();
 const storeSetting = useSetting();
-const {t: $t} = useI18n();
+const { t: $t } = useI18n();
 const isLoading = ref(true);
-
 
 const companyName = computed(() => store?.company?.name || '');
 const companyUrl = computed(() => store?.company?.small_light_url || '');
-useTitle(companyName.value ? `Xác thực và Bảo hành online - ${companyName.value}` : 'Xác thực và Bảo hành online');
+useTitle(
+  companyName.value
+    ? `Xác thực và Bảo hành online - ${companyName.value}`
+    : 'Xác thực và Bảo hành online',
+);
 
 useFavicon(!isEmpty(companyUrl) ? companyUrl : './favicon.ico');
-onMounted(() => initData())
+onMounted(() => initData());
 
 const textDefault = computed(() => store.getKeyThemeData('color_default') || '#4B6166');
 const bgWarning = computed(() => store.getKeyThemeData('color_warring') || '#F38020');
@@ -48,12 +51,12 @@ const initData = async () => {
   });
   try {
     const response = await apiInitSetting();
-    const {data: dataResponse} = response.data;
+    const { data: dataResponse } = response.data;
     storeSetting.setSettingData(dataResponse?.credentials || {});
     storeSetting.actionIsFetched();
   } finally {
     setTimeout(() => {
-      bgLoading.close()
+      bgLoading.close();
     }, 1000);
     isLoading.value = false;
   }
@@ -62,9 +65,9 @@ const initData = async () => {
 
 <template>
   <el-config-provider :locale="locale">
-    <el-skeleton v-if="isLoading"/>
+    <el-skeleton v-if="isLoading" />
     <template v-else>
-      <RouterView/>
+      <RouterView />
     </template>
   </el-config-provider>
 </template>
@@ -101,6 +104,9 @@ const initData = async () => {
     &--error {
       color: v-bind(colorError);
     }
+  }
+  &-fill {
+    fill: v-bind(textDefault);
   }
 }
 

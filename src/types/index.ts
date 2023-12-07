@@ -1,3 +1,4 @@
+
 export enum VerifyStatus {
     SUCCESS = 'success',
     FAIL = 'fail',
@@ -98,3 +99,16 @@ export type APIResponse<T> = {
     message: string,
 }
 
+export type IsContactFrom = {
+    name: string,
+    phone: string,
+    email: string,
+    content: string,
+}
+
+export type IsContactRulers = {
+    name: Array<any>,
+    phone: Array<any>,
+    email: Array<any>,
+    content: Array<any>
+}

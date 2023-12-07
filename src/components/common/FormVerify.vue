@@ -112,7 +112,7 @@ const submitForm = async (formEl: any) => {
     >
       <el-button
         type="success"
-        class="w-full mt-2"
+        class="w-full mt-2 text-white hover:text-white"
         :color="colorSuccess"
         @click="submitForm(formRef)"
         :disabled="isProcessing || preview"
