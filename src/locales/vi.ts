@@ -9,9 +9,11 @@ export default {
     loading: 'Đang tải...',
     contact: 'Liên hệ',
     customer_name: 'Tên',
+    content: 'Nội dung',
     congratulations: 'Xin chúc mừng',
     congratulations_content:
       ' Bạn đã mua được sản phẩm PISEN chính hãng. Xin vui lòng điền thông tin để kích hoạt bảo hành PISEN Care Plus từ 2-6 tháng ',
+    email: 'Email',
     phone_number: 'Số điện thoại',
     verify_code: 'Mã xác thực',
     serial: 'Mã serial',
@@ -78,6 +80,8 @@ export default {
   },
 
   validator: {
+    content: 'Nội dung không được để trống',
+    email: 'Email không đúng định dạng',
     required: '{name} không được để trống',
     max: '{name} không được phép vượt quá {number} ký tự',
     min: '{name} không được phép ít hơn {number} ký tự',

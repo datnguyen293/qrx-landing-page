@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { reactive, computed, ref, onMounted } from 'vue';
+import type { FormInstance, FormRules } from 'element-plus';
+import { maxLengthRule, phoneNumberRules, requiredRule, emailRules } from '@/utitls';
+
 import { useI18n } from 'vue-i18n';
 
 import { useScanQrcodeStore } from '@/store';
@@ -7,10 +10,40 @@ import { useScanQrcodeStore } from '@/store';
 const store = useScanQrcodeStore();
 const colorSuccess = computed(() => store.getKeyThemeData('color_success') || '#00994D');
 const { t: $t } = useI18n();
-const name = ref('');
-const phone = ref('');
-const email = ref('');
-const content = ref('');
+
+const formRef = ref<FormInstance>();
+const emit = defineEmits(['formSubmit']);
+onMounted(() => {
+  formRef.value?.clearValidate();
+});
+
+interface RuleForm {
+  name: string;
+  phone: string;
+  email: string;
+  content: string;
+}
+
+const ruleForm = reactive<RuleForm>({
+  name: '',
+  phone: '',
+  email: '',
+  content: '',
+});
+
+const ruleValidates: any = {
+  verification_code: [requiredRule($t('common.verify_code'))],
+};
+
+ruleValidates.name = [requiredRule($t('common.customer_name'))];
+
+ruleValidates.phone = [requiredRule($t('common.phone_number'))];
+
+ruleValidates.email = [requiredRule($t('common.email'))];
+
+ruleValidates.content = [requiredRule($t('common.content'))];
+
+const rules = reactive<FormRules>(ruleValidates);
 </script>
 
 <template>
@@ -21,18 +54,30 @@ const content = ref('');
       </div>
 
       <div class="p-[16px] flex flex-col gap-[10px]">
-        <el-input v-model="name" :placeholder="$t('placeholders.customer_name')" type="text" />
-        <el-input v-model="phone" :placeholder="$t('placeholders.phone_number')" type="tel" />
-        <el-input v-model="email" :placeholder="$t('placeholders.email_address')" type="email" />
-        <el-input
-          v-model="content"
-          :placeholder="$t('placeholders.content')"
-          show-word-limit
-          type="textarea"
-        />
-        <el-button type="success" class="w-full mt-2 text-white" :color="colorSuccess">
-          {{ $t('buttons.send') }}
-        </el-button>
+        <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules">
+          <el-form-item prop="name">
+            <el-input v-model="ruleForm.name" :placeholder="$t('placeholders.customer_name')" />
+          </el-form-item>
+          <el-form-item prop="phone">
+            <el-input v-model="ruleForm.phone" :placeholder="$t('placeholders.phone_number')" />
+          </el-form-item>
+          <el-form-item prop="email">
+            <el-input v-model="ruleForm.email" :placeholder="$t('placeholders.email_address')" />
+          </el-form-item>
+          <el-form-item prop="content">
+            <el-input
+              v-model="ruleForm.content"
+              :placeholder="$t('placeholders.content')"
+              show-word-limit
+              type="textarea"
+            />
+          </el-form-item>
+          <el-form-item>
+            <el-button type="success" class="w-full mt-2 text-white" :color="colorSuccess">
+              {{ $t('buttons.send') }}
+            </el-button>
+          </el-form-item>
+        </el-form>
       </div>
     </el-card>
   </div>

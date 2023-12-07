@@ -137,7 +137,7 @@ const resultComonSlider = [
 
         <CommonStatusVerify
           :class="
-            [STAMP_STATUS.WARRANTY_REPLACE, STAMP_STATUS.ACTIVATED].includes(stampCodeStatus)
+            [STAMP_STATUS.WARRANTY_REPLACED, STAMP_STATUS.ACTIVATED].includes(stampCodeStatus)
               ? 'hidden'
               : 'block'
           "
@@ -161,14 +161,14 @@ const resultComonSlider = [
             {{ message.content }}
           </h2>
           <p class="!leading-6 my-5">
-            {{ product.name }}
+            {{ product?.name }}
           </p>
         </div>
         <div
           class="p-5 px-3 py-5 qrx-bg--warning"
           v-else-if="stampCodeStatus === STAMP_STATUS.ACTIVATED"
         >
-          <p class="text-center text-white">{{ product.name }}</p>
+          <p class="text-center text-white">{{ product?.name }}</p>
           <div class="text-center text-white mt-[16px]" v-html="message.content"></div>
         </div>
       </el-card>

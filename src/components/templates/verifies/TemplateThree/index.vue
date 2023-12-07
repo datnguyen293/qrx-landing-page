@@ -5,7 +5,7 @@ import VerifyStack from './VerifyStack.vue';
 import ContactStack from './ContactStack.vue';
 import SuggestionStack from './SuggestionStack.vue';
 
-const chooseStack = ref('verify');
+const chooseStack = ref('home');
 
 const stacks = ref([
   {

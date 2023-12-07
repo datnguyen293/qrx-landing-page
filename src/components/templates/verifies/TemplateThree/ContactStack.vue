@@ -4,19 +4,13 @@ import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 
 import { useScanQrcodeStore } from '@/store';
-import { isEmpty } from '@/utitls';
 
 const { t: $t } = useI18n();
-const { query } = useRoute();
-const router = useRouter();
 
 const store = useScanQrcodeStore();
 const { company } = store;
-const product = computed(() => store.product);
-const isSerial = ref(false);
 
 const stampCodeStatus = computed(() => store.stamp_code?.status || '');
-
 </script>
 
 <template>
@@ -29,7 +23,7 @@ const stampCodeStatus = computed(() => store.stamp_code?.status || '');
       <div class="p-[16px]">
         <a :href="'tel:' + company?.phone" class="no-underline text-black">
           <div class="flex justify-between p-[12px]">
-            <p> {{ $t('common.hotline') }} {{ company?.phone }}</p>
+            <p>{{ $t('common.hotline') }} {{ company?.phone }}</p>
             <svg
               fill="green"
               xmlns="http://www.w3.org/2000/svg"
