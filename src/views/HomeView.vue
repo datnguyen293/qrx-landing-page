@@ -9,6 +9,7 @@ import { TEMPLATE_TYPES, VERIFICATION_TYPE } from '@/constants';
 
 import TemplateOne from '@/components/templates/verifies/TemplateOne.vue';
 import TemplateTwo from '@/components/templates/verifies/TemplateTwo.vue';
+import TemplateThree from '@/components/templates/verifies/TemplateThree/index.vue';
 import { isEmpty, isValidUrl } from '@/utitls';
 
 const { t: $t } = useI18n();
@@ -80,12 +81,14 @@ onMounted(async () => {
   }
 });
 
-
 const templateCode = computed(() => store?.template?.code || 'mrw_template_1');
 </script>
 
 <template>
   <div class="qrx-container m-auto overflow-hidden">
+    <template v-if="templateCode === TEMPLATE_TYPES.TEMPLATE_3">
+      <TemplateThree />
+    </template>
     <template v-if="templateCode === TEMPLATE_TYPES.TEMPLATE_2">
       <TemplateTwo />
     </template>
