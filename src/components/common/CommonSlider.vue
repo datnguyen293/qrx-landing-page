@@ -21,7 +21,7 @@ const colorSuccess = computed(() => {
       <el-carousel height="240px" :autoplay="false" trigger="click" class="product-item-slide z-[1] w-full m-auto">
         <template v-if="!isEmpty(product.images)">
           <el-carousel-item v-for="(item, index) in product.images" :key="index">
-            <img :src="item" :alt="product.name" class="!w-full !h-full"/>
+            <img :src="item" :alt="product.name" class="!w-full !h-full object-contain"/>
           </el-carousel-item>
         </template>
       </el-carousel>
@@ -30,10 +30,10 @@ const colorSuccess = computed(() => {
     <template v-else>
         <div class="h-[240px] flex justify-center items-center">
           <template v-if="!isEmpty(product.images)">
-            <img :src="product.images[0]" :alt="product?.name || ''" class="!w-full !h-full"/>
+            <img :src="product.images[0]" :alt="product?.name || ''" class="!w-full !h-full object-contain"/>
           </template>
           <template v-else>
-            <img src="@/assets/images/no-image.png" :alt="product?.name || ''" class="!w-full !h-full"/>
+            <img src="@/assets/images/no-image.png" :alt="product?.name || ''" class="!w-full !h-full object-contain"/>
           </template>
         </div>
     </template>

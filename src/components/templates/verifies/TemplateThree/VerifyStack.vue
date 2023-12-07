@@ -118,7 +118,7 @@ const handleEventSubmit = async (event: any) => {
           <div class="bg-[#eaeaea] p-[16px] -mx-5 -mt-5 mb-5">
             <h1 class="text-[24px] text-center">{{ company.name }}</h1>
             <p class="text-center mt-[12px]">
-              Vui lòng nhập mã xác thực vào bên dưới. Sau đó ấn nút Xác Nhận để xác thực hàng hóa.
+              {{ $t('common.vetify_message') }}
             </p>
           </div>
           <h2 class="text-[20px] font-bold leading-6 text-[#233438] mb-[2px]">

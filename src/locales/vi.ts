@@ -1,10 +1,13 @@
 export default {
   buttons: {
     verification: 'Xác thực',
+    verification_now: 'Xác thực ngay',
+    send: 'Gửi phản hồi',
   },
 
   common: {
     loading: 'Đang tải...',
+    contact: 'Liên hệ',
     customer_name: 'Tên',
     congratulations: 'Xin chúc mừng',
     congratulations_content:
@@ -14,9 +17,17 @@ export default {
     serial: 'Mã serial',
     error: 'Lỗi',
     success: 'Thành công',
+    suggestion: 'Thư góp ý',
+    home: 'Trang chủ',
+    hotline: 'Liên hệ hotline:',
     warning: 'Cảnh báo',
+    wellcome_title: 'RẤT VUI KHI BẠN ĐÃ QUAN TÂM VÀ SỬ DỤNG DỊCH VỤ CỦA CHÚNG TÔI! ',
+    wellcome:
+      'Chúng tôi tạo ra những điều hữu ích nhất giúp bạn có thể kiểm tra sản phẩm mua hàng để đảm bảo an toàn nhất. Bạn có thể chọn "Tra xuất thông tin sản phẩm" để tìm hiểu kỹ về thông tin sản phẩm hoặc xác thực sản phẩm chính hãng bằng cách chọn "Kiểm tra sản phẩm chính hãng" trên tay bạn ',
     info: 'Thông tin',
     not_found: 'Không tìm thấy',
+    vetify_message:
+      'Vui lòng nhập mã xác thực vào bên dưới. Sau đó ấn nút Xác Nhận để xác thực hàng hóa.',
     verification_product: 'Xác thực sản phẩm',
     note_verification: `<span class="text-[#B61212]">Lưu ý:</span> Nhập chính xác thông tin họ tên, SĐT để đảm bảo các quyền lợi về tích điểm, đổi quà và các vấn đề xác thực, khiếu nại liên quan.`,
     not_found_content:
@@ -60,6 +71,8 @@ export default {
   placeholders: {
     customer_name: 'Nhập tên',
     phone_number: 'Nhập số điện thoại',
+    email_address: 'Nhập email',
+    content: 'Nhập nội dung',
     verify_code: 'Nhập mã xác thực',
     serial: 'Nhập mã serial',
   },
