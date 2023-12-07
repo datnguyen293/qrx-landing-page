@@ -37,7 +37,7 @@ const colorSuccess = computed(() => store.getKeyThemeData('color_success') || '#
         </p>
         <el-button
           type="success"
-          class="w-full mt-2 text-white"
+          class="w-full mt-2 text-white hover:text-white"
           :color="colorSuccess"
           @click="$emit('update-choose-stack', 'verify')"
         >

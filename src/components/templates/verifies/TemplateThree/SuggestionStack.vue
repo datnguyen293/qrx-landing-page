@@ -1,49 +1,27 @@
 <script setup lang="ts">
 import { reactive, computed, ref, onMounted } from 'vue';
-import type { FormInstance, FormRules } from 'element-plus';
-import { maxLengthRule, phoneNumberRules, requiredRule, emailRules } from '@/utitls';
-
+import { IsContactFrom, IsContactRulers } from '@/types';
+import { requiredRule } from '@/utitls';
 import { useI18n } from 'vue-i18n';
-
 import { useScanQrcodeStore } from '@/store';
 
 const store = useScanQrcodeStore();
 const colorSuccess = computed(() => store.getKeyThemeData('color_success') || '#00994D');
 const { t: $t } = useI18n();
 
-const formRef = ref<FormInstance>();
-const emit = defineEmits(['formSubmit']);
-onMounted(() => {
-  formRef.value?.clearValidate();
-});
-
-interface RuleForm {
-  name: string;
-  phone: string;
-  email: string;
-  content: string;
-}
-
-const ruleForm = reactive<RuleForm>({
+const ruleForm = reactive<IsContactFrom>({
   name: '',
   phone: '',
   email: '',
   content: '',
 });
 
-const ruleValidates: any = {
-  verification_code: [requiredRule($t('common.verify_code'))],
-};
-
-ruleValidates.name = [requiredRule($t('common.customer_name'))];
-
-ruleValidates.phone = [requiredRule($t('common.phone_number'))];
-
-ruleValidates.email = [requiredRule($t('common.email'))];
-
-ruleValidates.content = [requiredRule($t('common.content'))];
-
-const rules = reactive<FormRules>(ruleValidates);
+const rules = ref<IsContactRulers>({
+  name: [requiredRule($t('placeholders.customer_name'))],
+  phone: [requiredRule($t('placeholders.phone_number'))],
+  email: [requiredRule($t('placeholders.email_address'))],
+  content: [requiredRule($t('placeholders.content'))],
+});
 </script>
 
 <template>
@@ -73,7 +51,11 @@ const rules = reactive<FormRules>(ruleValidates);
             />
           </el-form-item>
           <el-form-item>
-            <el-button type="success" class="w-full mt-2 text-white" :color="colorSuccess">
+            <el-button
+              type="success"
+              class="w-full mt-2 text-white hover:text-white"
+              :color="colorSuccess"
+            >
               {{ $t('buttons.send') }}
             </el-button>
           </el-form-item>

@@ -21,7 +21,7 @@ export default {
     success: 'Thành công',
     suggestion: 'Thư góp ý',
     home: 'Trang chủ',
-    hotline: 'Liên hệ hotline:',
+    hotline: 'Liên hệ hotline: {phone}',
     warning: 'Cảnh báo',
     wellcome_title: 'RẤT VUI KHI BẠN ĐÃ QUAN TÂM VÀ SỬ DỤNG DỊCH VỤ CỦA CHÚNG TÔI! ',
     wellcome:

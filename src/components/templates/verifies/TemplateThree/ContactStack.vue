@@ -9,8 +9,6 @@ const { t: $t } = useI18n();
 
 const store = useScanQrcodeStore();
 const { company } = store;
-
-const stampCodeStatus = computed(() => store.stamp_code?.status || '');
 </script>
 
 <template>
@@ -23,7 +21,7 @@ const stampCodeStatus = computed(() => store.stamp_code?.status || '');
       <div class="p-[16px]">
         <a :href="'tel:' + company?.phone" class="no-underline text-black">
           <div class="flex justify-between p-[12px]">
-            <p>{{ $t('common.hotline') }} {{ company?.phone }}</p>
+            <p>{{ $t('common.hotline', {phone: company?.phone}) }}</p>
             <svg
               fill="green"
               xmlns="http://www.w3.org/2000/svg"
