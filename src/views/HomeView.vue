@@ -9,7 +9,7 @@ import { TEMPLATE_TYPES, VERIFICATION_TYPE } from '@/constants';
 
 import TemplateOne from '@/components/templates/verifies/TemplateOne.vue';
 import TemplateTwo from '@/components/templates/verifies/TemplateTwo.vue';
-import TemplateThree from '@/components/templates/verifies/TemplateThree/index.vue';
+import TemplateThree from '@/components/templates/verifies/TemplateThree.vue';
 import { isEmpty, isValidUrl } from '@/utitls';
 
 const { t: $t } = useI18n();

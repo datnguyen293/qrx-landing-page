@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, computed, ref, onMounted } from 'vue';
-import { IsContactFrom, IsContactRulers } from '@/types';
+import type { IsContactFrom, IsContactRulers } from '@/types';
 import { requiredRule } from '@/utitls';
 import { useI18n } from 'vue-i18n';
 import { useScanQrcodeStore } from '@/store';
@@ -55,6 +55,7 @@ const rules = ref<IsContactRulers>({
               type="success"
               class="w-full mt-2 text-white hover:text-white"
               :color="colorSuccess"
+              :disabled="true"
             >
               {{ $t('buttons.send') }}
             </el-button>

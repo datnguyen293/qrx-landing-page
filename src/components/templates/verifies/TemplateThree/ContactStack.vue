@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useRoute, useRouter } from 'vue-router';
-
 import { useScanQrcodeStore } from '@/store';
-
 const { t: $t } = useI18n();
 
 const store = useScanQrcodeStore();
@@ -21,7 +17,7 @@ const { company } = store;
       <div class="p-[16px]">
         <a :href="'tel:' + company?.phone" class="no-underline text-black">
           <div class="flex justify-between p-[12px]">
-            <p>{{ $t('common.hotline', {phone: company?.phone}) }}</p>
+            <p>{{ $t('common.hotline', { phone: company?.phone }) }}</p>
             <svg
               fill="green"
               xmlns="http://www.w3.org/2000/svg"

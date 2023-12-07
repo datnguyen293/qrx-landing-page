@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import HomeStack from './HomeStack.vue';
-import VerifyStack from './VerifyStack.vue';
-import ContactStack from './ContactStack.vue';
-import SuggestionStack from './SuggestionStack.vue';
+import HomeStack from '@/components/templates/verifies/TemplateThree/HomeStack.vue';
+import VerifyStack from '@/components/templates/verifies/TemplateThree/VerifyStack.vue';
+import ContactStack from '@/components/templates/verifies/TemplateThree/ContactStack.vue';
+import SuggestionStack from '@/components/templates/verifies/TemplateThree/SuggestionStack.vue';
 
 const chooseStack = ref('verify');
 
@@ -59,7 +59,8 @@ const stacks = ref([
       class="text-center flex-1 p-[10px] cursor-pointer rounded-[12px]"
       :class="chooseStack === stack.sku ? 'qrx-bg--success text-white fill-white' : ''"
       @click="chooseStack = stack.sku"
-      v-for="(stack, index) in stacks" :key="index"
+      v-for="(stack, index) in stacks"
+      :key="index"
     >
       <div v-html="stack.svg"></div>
       <p class="max-sm:hidden">{{ stack.name }}</p>
