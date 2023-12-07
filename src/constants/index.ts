@@ -27,6 +27,7 @@ export const STAMP_CODE_VERIFIED: Array<string> = [STAMP_STATUS.WARRANTY_REPLACE
 export const TEMPLATE_TYPES = {
     TEMPLATE_1: 'mrw_template_1',
     TEMPLATE_2: 'mrw_template_2',
+    TEMPLATE_3: 'mrw_template_3',
 };
 
 export const TEMPLATE_LIST = Object.values(TEMPLATE_TYPES);
