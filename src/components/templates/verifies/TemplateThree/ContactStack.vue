@@ -42,7 +42,7 @@ const { company } = store;
         <div v-if="company?.social_networks && company?.social_networks?.length > 0">
           <div class="flex justify-center items-center gap-[5px] my-6">
             <div class="flex-1 h-[2px] qrx-bg--success rounded-[30px]" />
-            <p class="qrx-text--default">OR</p>
+            <p class="qrx-text--default">{{ $t('common.or') }}</p>
             <div class="flex-1 h-[2px] qrx-bg--success rounded-[30px]" />
           </div>
           <SocialChannel />

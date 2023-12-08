@@ -101,7 +101,7 @@ const handleEventSubmit = async (event: any) => {
     </template>
 
     <div class="m-auto min-h-screen" v-else>
-      <el-card class="qrx-card-bank mb-3" >
+      <el-card class="qrx-card-bank mb-3" :class="!isSerial || isEmpty(product) ? 'mt-10' : ''">
         <div
           class="qrx-bg--success text-[16px] text-center leading-5 p-4 text-white font-medium"
           v-if="!stampStatus || stampStatus === STAMP_STATUS.SOLD"
