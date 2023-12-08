@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { reactive, computed, ref, onMounted } from 'vue';
 import type { IsContactFrom, IsContactRulers } from '@/types';
-import { ElMessage } from 'element-plus';
+import { useScanQrcodeStore } from '@/store';
 import { requiredRule } from '@/utitls';
 import { useI18n } from 'vue-i18n';
-import { useScanQrcodeStore } from '@/store';
+
+
+const { t: $t } = useI18n();
 
 const store = useScanQrcodeStore();
 const colorSuccess = computed(() => store.getKeyThemeData('color_success') || '#00994D');
-const { t: $t } = useI18n();
 
 const ruleForm = reactive<IsContactFrom>({
   name: '',

@@ -58,6 +58,7 @@ export default {
     stamp_processing_title: 'Cảnh báo',
     stamp_processing_content:
       'Sản phẩm đang đang trong quá trình xử lý. Vui lòng kiểm tra lại hoặc liên hệ với người bán để được hỗ trợ!',
+    or: 'hoặc',
   },
 
   products: {
