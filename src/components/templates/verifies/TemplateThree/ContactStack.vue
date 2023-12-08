@@ -3,6 +3,7 @@ import { useI18n } from 'vue-i18n';
 import { useScanQrcodeStore } from '@/store';
 
 import SocialChannel from '@/components/common/SocialChannel.vue';
+import { isEmpty } from '@/utitls';
 
 const { t: $t } = useI18n();
 
@@ -39,7 +40,7 @@ const { company } = store;
             </svg>
           </div>
         </a>
-        <div v-if="company?.social_networks && company?.social_networks?.length > 0">
+        <div v-if="!isEmpty(company?.social_networks)">
           <div class="flex justify-center items-center gap-[5px] my-6">
             <div class="flex-1 h-[2px] qrx-bg--success rounded-[30px]" />
             <p class="qrx-text--default">{{ $t('common.or') }}</p>
