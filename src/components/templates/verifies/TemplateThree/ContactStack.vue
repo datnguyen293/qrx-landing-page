@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 import { useScanQrcodeStore } from '@/store';
+
+import SocialChannel from '@/components/common/SocialChannel.vue';
+
 const { t: $t } = useI18n();
 
 const store = useScanQrcodeStore();
@@ -36,6 +39,12 @@ const { company } = store;
             </svg>
           </div>
         </a>
+        <div class="flex justify-center items-center gap-[5px] my-6">
+          <div class="flex-1 h-[3px] qrx-bg--success" />
+          <p class="qrx-text--default">OR</p>
+          <div class="flex-1 h-[3px] qrx-bg--success" />
+        </div>
+        <SocialChannel />
       </div>
     </el-card>
   </div>
