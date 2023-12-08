@@ -39,12 +39,14 @@ const { company } = store;
             </svg>
           </div>
         </a>
-        <div class="flex justify-center items-center gap-[5px] my-6">
-          <div class="flex-1 h-[3px] qrx-bg--success" />
-          <p class="qrx-text--default">OR</p>
-          <div class="flex-1 h-[3px] qrx-bg--success" />
+        <div v-if="company?.social_networks && company?.social_networks?.length > 0">
+          <div class="flex justify-center items-center gap-[5px] my-6">
+            <div class="flex-1 h-[2px] qrx-bg--success rounded-[30px]" />
+            <p class="qrx-text--default">OR</p>
+            <div class="flex-1 h-[2px] qrx-bg--success rounded-[30px]" />
+          </div>
+          <SocialChannel />
         </div>
-        <SocialChannel />
       </div>
     </el-card>
   </div>
