@@ -13,7 +13,6 @@ import CommonContact from '@/components/common/CommonContact.vue';
 import CommonCustomerProfile from '@/components/common/CommonCustomerProfile.vue';
 
 import { useScanQrcodeStore } from '@/store';
-import { useSetting } from '@/store/setting';
 import { apiVerifyStampCode } from '@/api';
 import { STAMP_CODE_VERIFIED, STAMP_STATUS, STATUS_VERIFY, VERIFICATION_TYPE } from '@/constants';
 import { isEmpty } from '@/utitls';
@@ -36,9 +35,6 @@ const stampStatus = computed(() => store.stamp_code?.status || '');
 const browser_id = window.localStorage.getItem('browser_id');
 
 const customer = computed(() => store.customer);
-const storeSetting = useSetting();
-const messageError = computed(() => storeSetting?.setting?.message_stamp_error || '');
-// console.log(messageError?.response.status);
 
 onMounted(() => {
   // isSerial.value = !!(xid || serial);
@@ -134,7 +130,11 @@ const reultStatusVerify = [
               :src="message.logo"
               alt="Logo stamp success"
               class="!w-[250px]"
-              :class="stampCodeStatus === STATUS_VERIFY.SUCCESS || messageError ? 'hidden' : ''"
+              :class="
+                stampCodeStatus === STATUS_VERIFY.SUCCESS || stampStatus === STATUS_VERIFY.FAIL
+                  ? 'hidden'
+                  : ''
+              "
             />
           </template>
           <template v-if="message.logo === ''">
@@ -142,7 +142,11 @@ const reultStatusVerify = [
               src="@/assets/images/icon-hero.png"
               alt="Logo stamp success"
               class="!w-[250px]"
-              :class="stampCodeStatus === STATUS_VERIFY.SUCCESS || messageError ? 'hidden' : ''"
+              :class="
+                stampCodeStatus === STATUS_VERIFY.SUCCESS || stampStatus === STATUS_VERIFY.FAIL
+                  ? 'hidden'
+                  : ''
+              "
             />
           </template>
           <template v-if="stampCodeStatus === STATUS_VERIFY.SUCCESS">
@@ -150,7 +154,7 @@ const reultStatusVerify = [
               :src="message.logo"
               alt="Logo stamp success"
               class="!w-[250px]"
-              :class="messageError ? 'hidden' : ''"
+              :class="stampStatus === STATUS_VERIFY.FAIL ? 'hidden' : ''"
             />
           </template>
         </template>
