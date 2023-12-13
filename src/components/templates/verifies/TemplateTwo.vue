@@ -87,13 +87,6 @@ const handleEventSubmit = async (event: any) => {
   }
 };
 
-const isHiddenLogo = computed(() =>
-  store.stamp_code?.status === STATUS_VERIFY.SUCCESS ||
-  store.stamp_code?.status === STATUS_VERIFY.FAIL
-    ? 'hidden'
-    : '',
-);
-
 const resultCommonSliders = [
   STAMP_STATUS.PRODUCT_ASSIGNED,
   STAMP_STATUS.PROCESSING,
@@ -135,7 +128,7 @@ const reultStatusVerify = [
               :src="message.logo"
               alt="Logo stamp success"
               class="!w-[250px]"
-              :class="isHiddenLogo"
+              :class="stampCodeStatus === STATUS_VERIFY.FAIL ? 'hidden' : ''"
             />
           </template>
           <template v-else>
@@ -143,15 +136,7 @@ const reultStatusVerify = [
               src="@/assets/images/icon-hero.png"
               alt="Logo stamp success"
               class="!w-[250px]"
-              :class="isHiddenLogo"
-            />
-          </template>
-          <template v-if="stampCodeStatus === STATUS_VERIFY.SUCCESS">
-            <img
-              :src="message.logo"
-              alt="Logo stamp success"
-              class="!w-[250px]"
-              :class="stampStatus === STATUS_VERIFY.FAIL ? 'hidden' : ''"
+              :class="stampCodeStatus === STATUS_VERIFY.FAIL ? 'hidden' : ''"
             />
           </template>
         </template>
