@@ -13,7 +13,6 @@ import CommonContact from '@/components/common/CommonContact.vue';
 import CommonCustomerProfile from '@/components/common/CommonCustomerProfile.vue';
 
 import { useScanQrcodeStore } from '@/store';
-import { useSetting } from '@/store/setting';
 import { apiVerifyStampCode } from '@/api';
 import { STAMP_CODE_VERIFIED, STAMP_STATUS, STATUS_VERIFY, VERIFICATION_TYPE } from '@/constants';
 import { isEmpty } from '@/utitls';
@@ -36,8 +35,6 @@ const stampStatus = computed(() => store.stamp_code?.status || '');
 const browser_id = window.localStorage.getItem('browser_id');
 
 const customer = computed(() => store.customer);
-const storeSetting = useSetting();
-const messageError = computed(() => storeSetting?.setting?.message_stamp_error || '');
 
 onMounted(() => {
   // isSerial.value = !!(xid || serial);
