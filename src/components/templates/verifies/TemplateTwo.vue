@@ -87,7 +87,7 @@ const handleEventSubmit = async (event: any) => {
   }
 };
 
-const resultComonSlider = [
+const resultCommonSliders = [
   STAMP_STATUS.PRODUCT_ASSIGNED,
   STAMP_STATUS.PROCESSING,
   STATUS_VERIFY.OVER_LIMITED,
@@ -122,39 +122,21 @@ const reultStatusVerify = [
         :class="!isSerial || isEmpty(product) ? 'mt-10' : ''"
       >
         <template v-if="isSerial || !isEmpty(product)">
-          <template v-if="resultComonSlider.includes(stampCodeStatus)">
-            <CommonSlider />
-          </template>
+          <CommonSlider v-if="resultCommonSliders.includes(stampCodeStatus)" />
           <template v-if="message.logo !== ''">
             <img
               :src="message.logo"
               alt="Logo stamp success"
               class="!w-[250px]"
-              :class="
-                stampCodeStatus === STATUS_VERIFY.SUCCESS || stampStatus === STATUS_VERIFY.FAIL
-                  ? 'hidden'
-                  : ''
-              "
+              :class="stampCodeStatus === STATUS_VERIFY.FAIL ? 'hidden' : ''"
             />
           </template>
-          <template v-if="message.logo === ''">
+          <template v-else>
             <img
               src="@/assets/images/icon-hero.png"
               alt="Logo stamp success"
               class="!w-[250px]"
-              :class="
-                stampCodeStatus === STATUS_VERIFY.SUCCESS || stampStatus === STATUS_VERIFY.FAIL
-                  ? 'hidden'
-                  : ''
-              "
-            />
-          </template>
-          <template v-if="stampCodeStatus === STATUS_VERIFY.SUCCESS">
-            <img
-              :src="message.logo"
-              alt="Logo stamp success"
-              class="!w-[250px]"
-              :class="stampStatus === STATUS_VERIFY.FAIL ? 'hidden' : ''"
+              :class="stampCodeStatus === STATUS_VERIFY.FAIL ? 'hidden' : ''"
             />
           </template>
         </template>
@@ -173,11 +155,11 @@ const reultStatusVerify = [
           <FormVerify :is_serial="isSerial" @form-submit="handleEventSubmit" />
         </div>
 
-        <div v-else-if="!stampStatus || stampStatus === STATUS_VERIFY.SUCCESS">
+        <div class="p-5" v-else-if="!stampStatus || stampStatus === STATUS_VERIFY.SUCCESS">
           <h2 class="text-[28px] font-bold leading-6 text-[#233438] mb-[2px]">
             {{ message.title }}
           </h2>
-          <p class="!leading-6 my-5">
+          <p class="!leading-6 my-5 text-justify">
             {{ message.content }}
           </p>
         </div>
@@ -197,8 +179,8 @@ const reultStatusVerify = [
           class="p-5 px-3 py-5 qrx-bg--warning"
           v-else-if="stampCodeStatus === STAMP_STATUS.ACTIVATED"
         >
-          <p class="text-center text-white">{{ product?.name }}</p>
-          <div class="text-center text-white mt-[16px]" v-html="message.content"></div>
+          <p class="text-justify text-white">{{ product?.name }}</p>
+          <div class="text-justify text-white mt-[16px]" v-html="message.content"></div>
         </div>
       </el-card>
 
