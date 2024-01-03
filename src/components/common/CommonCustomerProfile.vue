@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {useScanQrcodeStore} from "@/store";
 import {computed} from "vue";
+import { isEmpty } from '@/utitls';
 
 const store = useScanQrcodeStore();
 const verifyStatus = computed(() => store.stamp_code?.status || '');
@@ -9,7 +10,7 @@ const stampCode = computed(() => store.stamp_code);
 </script>
 
 <template>
-  <el-card>
+  <el-card v-if="!isEmpty(stampCode?.first_verification_at) && !isEmpty(customer)">
     <template #header>
       <div class="text-[#F38020] text-[16px] font-bold border-b border-[#D9E6E9]">
         Thông tin xác thực

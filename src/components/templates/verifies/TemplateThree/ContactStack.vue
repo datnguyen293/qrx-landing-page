@@ -2,7 +2,7 @@
 import { useI18n } from 'vue-i18n';
 import { useScanQrcodeStore } from '@/store';
 
-import SocialChannel from '@/components/common/SocialChannel.vue';
+import SocialChannel from '@/components/elements/SocialChannel.vue';
 import { isEmpty } from '@/utitls';
 
 const { t: $t } = useI18n();

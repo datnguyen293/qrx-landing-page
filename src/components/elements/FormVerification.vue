@@ -1,17 +1,12 @@
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue';
+import { computed, onMounted, reactive, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import type { FormInstance, FormRules } from 'element-plus';
-import type { IFormVerify } from '@/types';
+import type { FormInstance } from 'element-plus';
 import { useScanQrcodeStore } from '@/store';
-import { maxLengthRule, phoneNumberRules, requiredRule } from '@/utitls';
+import { isEmpty, maxLengthRule, phoneNumberRules, requiredRule } from '@/utitls';
 import { useRoute } from 'vue-router';
 
 const { t: $t } = useI18n();
-const props = defineProps({
-  is_serial: { type: Boolean, required: true, default: true },
-});
-
 const formRef = ref<FormInstance>();
 const emit = defineEmits(['formSubmit']);
 
@@ -23,18 +18,27 @@ onMounted(() => {
 const isDisableVerifyCode = ref(false);
 const isProcessing = ref<boolean>(false);
 const { query } = useRoute();
-const { serial, xid, type, preview } = query;
+const { type, preview, serial } = query;
 
 const ruleForm = reactive<any>({
   verification_code: '',
+  name: '',
+  phone: '',
 });
 
 const isScanZaloApp = computed(() => type && type === 'zalo_app');
 const colorSuccess = computed(() => store.getKeyThemeData('color_success') || '#00994D');
 const verificationCode = computed(() => store?.stamp_code?.verification_code || '');
-if (xid && verificationCode.value) {
+const hasWarranty = computed(() => store?.stamp_code?.has_warranty || false);
+const customerData: any = computed(() => store?.customer);
+if (verificationCode.value) {
   ruleForm.verification_code = verificationCode.value;
   isDisableVerifyCode.value = true;
+}
+
+if (!isEmpty(customerData)) {
+  ruleForm.name = customerData.value?.name || '';
+  ruleForm.phone = customerData.value?.phone || '';
 }
 
 const ruleValidates: any = {
@@ -44,33 +48,17 @@ const ruleValidates: any = {
   ],
 };
 
-if (!props.is_serial) {
-  ruleForm.serial = serial || '';
-  ruleValidates.serial = [
-    requiredRule($t('common.serial')),
-    maxLengthRule($t('common.verify_code'), 20),
-  ];
-} else {
-  delete ruleValidates.serial;
-  delete ruleForm.serial;
-}
-
-if (!isScanZaloApp.value) {
-  ruleForm.name = '';
-  ruleForm.phone = '';
+if (hasWarranty.value || !serial) {
   ruleValidates.name = [
     requiredRule($t('common.customer_name')),
     maxLengthRule($t('common.verify_code'), 100),
   ];
+
   ruleValidates.phone = [...phoneNumberRules()];
-} else {
-  delete ruleForm.name;
-  delete ruleValidates.name;
-  delete ruleForm.phone;
-  delete ruleValidates.phone;
 }
 
-const rules = reactive<FormRules<IFormVerify>>(ruleValidates);
+const rules = ref(ruleValidates)
+
 const submitForm = async (formEl: any) => {
   isProcessing.value = true;
   await formEl.validate((valid: any) => {
@@ -86,20 +74,17 @@ const submitForm = async (formEl: any) => {
 
 <template>
   <el-form ref="formRef" label-position="top" :model="ruleForm" :rules="rules">
-    <el-form-item prop="serial" v-if="!is_serial">
-      <el-input v-model="ruleForm.serial" :placeholder="$t('placeholders.serial')" />
-    </el-form-item>
-    <el-form-item prop="verification_code">
+    <el-form-item prop="verification_code" :label="$t('common.verify_code')">
       <el-input
         v-model="ruleForm.verification_code"
         :placeholder="$t('placeholders.verify_code')"
         :disabled="isDisableVerifyCode"
       />
     </el-form-item>
-    <el-form-item prop="name" v-if="!isScanZaloApp">
+    <el-form-item prop="name" v-if="!isScanZaloApp" :label="$t('common.customer_name')">
       <el-input v-model="ruleForm.name" :placeholder="$t('placeholders.customer_name')" />
     </el-form-item>
-    <el-form-item prop="phone" v-if="!isScanZaloApp">
+    <el-form-item prop="phone" v-if="!isScanZaloApp" :label="$t('common.phone_number')">
       <el-input v-model="ruleForm.phone" :placeholder="$t('placeholders.phone_number')" />
     </el-form-item>
 

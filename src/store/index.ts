@@ -3,8 +3,8 @@ import type {IScanQRCodeData} from "@/types";
 import {DEFAULT_TEMPLATE_ONE, KEY_LOCAL_STORAGE, TEMPLATE_TYPES} from "@/constants";
 // Define a store
 const defaultTemplate = {
-    name: TEMPLATE_TYPES.TEMPLATE_ONE,
-    code: TEMPLATE_TYPES.TEMPLATE_ONE,
+    name: TEMPLATE_TYPES.TEMPLATE_1,
+    code: TEMPLATE_TYPES.TEMPLATE_1,
     data: {...DEFAULT_TEMPLATE_ONE}
 }
 
@@ -17,7 +17,8 @@ const defaultStampCode: any = {
     verification_code: '',
     status: '',
     first_verification_at: '',
-    message: ''
+    message: '',
+    has_warranty: false,
 }
 
 const defaultProduct: any = {
@@ -62,7 +63,7 @@ export const useScanQrcodeStore = defineStore('useScanQrcodeStore', {
 
     getters: {
         getTemplateCode(state) {
-            return state.template.code || TEMPLATE_TYPES.TEMPLATE_ONE;
+            return state.template.code || TEMPLATE_TYPES.TEMPLATE_1;
         },
     },
 
