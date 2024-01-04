@@ -26,7 +26,6 @@ const ruleForm = reactive<any>({
   phone: '',
 });
 
-const isScanZaloApp = computed(() => type && type === 'zalo_app');
 const colorSuccess = computed(() => store.getKeyThemeData('color_success') || '#00994D');
 const verificationCode = computed(() => store?.stamp_code?.verification_code || '');
 const hasWarranty = computed(() => store?.stamp_code?.has_warranty || false);
@@ -81,10 +80,10 @@ const submitForm = async (formEl: any) => {
         :disabled="isDisableVerifyCode"
       />
     </el-form-item>
-    <el-form-item prop="name" v-if="!isScanZaloApp" :label="$t('common.customer_name')">
+    <el-form-item prop="name" :label="$t('common.customer_name')">
       <el-input v-model="ruleForm.name" :placeholder="$t('placeholders.customer_name')" />
     </el-form-item>
-    <el-form-item prop="phone" v-if="!isScanZaloApp" :label="$t('common.phone_number')">
+    <el-form-item prop="phone" :label="$t('common.phone_number')">
       <el-input v-model="ruleForm.phone" :placeholder="$t('placeholders.phone_number')" />
     </el-form-item>
 
