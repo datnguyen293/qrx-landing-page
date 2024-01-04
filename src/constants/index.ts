@@ -28,10 +28,8 @@ export const TEMPLATE_TYPES = {
     TEMPLATE_1: 'mrw_template_1',
     TEMPLATE_2: 'mrw_template_2',
     TEMPLATE_3: 'mrw_template_3',
+    TEMPLATE_4: 'mrw_template_4',
 };
-
-export const TEMPLATE_LIST = Object.values(TEMPLATE_TYPES);
-
 
 export const DEFAULT_TEMPLATE_ONE = {
     text_default: '#fff',

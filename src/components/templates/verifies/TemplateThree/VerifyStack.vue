@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
 
-import FormVerify from '@/components/common/FormVerify.vue';
+import FormVerify from '@/components/elements/FormVerification.vue';
 import CommonFooter from '@/components/common/CommonFooter.vue';
 import CommonSlider from '@/components/common/CommonSlider.vue';
 import ProductDetail from '@/components/common/ProductDetail.vue';

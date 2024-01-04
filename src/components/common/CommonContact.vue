@@ -2,7 +2,7 @@
 import {computed} from "vue";
 import {useScanQrcodeStore} from "@/store";
 import {isEmpty} from "@/utitls";
-import SocialChannel from "@/components/common/SocialChannel.vue";
+import SocialChannel from "@/components/elements/SocialChannel.vue";
 
 const store = useScanQrcodeStore();
 const company = computed(() =>store.company);

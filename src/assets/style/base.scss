@@ -14,7 +14,6 @@ body,
   font-family: 'Be Vietnam Pro', sans-serif;
   line-height: 1.2;
   user-select: none;
-  white-space: pre-line;
 }
 
 /* custom scrollbar */
@@ -29,6 +28,7 @@ body,
 .qrx-container {
   max-width: 768px;
   min-height: 100vh;
+  //white-space: pre-line;
 }
 
 .el-card {
@@ -59,10 +59,33 @@ body,
 }
 
 .el-form-item {
-  margin-bottom: 25px;
+  //margin-bottom: 25px;
   &__error {
     padding-top: 5px;
   }
+}
+
+* {
+  user-select: none;
+  -khtml-user-select: none;
+  -o-user-select: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+}
+
+input, textarea {
+  -webkit-user-select: text; /* Chrome, Opera, Safari */
+  -moz-user-select: text; /* Firefox 2+ */
+  -ms-user-select: text; /* IE 10+ */
+  user-select: text; /* Standard syntax */
+}
+
+input, input:before, input:after {
+  -webkit-user-select: initial;
+  -khtml-user-select: initial;
+  -moz-user-select: initial;
+  -ms-user-select: initial;
+  user-select: initial;
 }
 
 //img {

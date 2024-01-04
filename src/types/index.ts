@@ -17,6 +17,7 @@ export type IStampCode = {
     verification_code: string,
     status?: VerifyStatus,
     serial?: string,
+    has_warranty: boolean,
 }
 
 export type ICommonField = {
@@ -111,4 +112,8 @@ export type IsContactRulers = {
     phone: Array<any>,
     email: Array<any>,
     content: Array<any>
+}
+
+export type IResStampOld = {
+    serial: string
 }

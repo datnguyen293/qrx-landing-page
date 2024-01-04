@@ -3,23 +3,18 @@ import {onMounted, ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {useI18n} from "vue-i18n";
 import {ElLoading} from "element-plus";
-import {apiScanQRCode} from "@/api";
-import {useScanQrcodeStore} from "@/store";
-import OldQrcodeTemplate from "@/components/templates/verifies/OldQrcodeTemplate.vue";
+import { apiCheckStampOld } from '@/api';
 
 const {t: $t} = useI18n();
 const {query} = useRoute();
 const router = useRouter();
-const store = useScanQrcodeStore();
 const isLoading = ref(true);
 
 onMounted(async () => {
-  const {id, series, type} = query;
-  const browser_id = window.localStorage.getItem('browser_id');
-  const scanType = type || 'landing_page';
-  if (!series || !id) {
+  const {id, type, user_uuid, series} = query;
+  if (!id) {
     isLoading.value = false;
-    await router.push({name: 'error'});
+    await router.push({name: 'not_found'});
     return;
   }
 
@@ -30,16 +25,16 @@ onMounted(async () => {
   });
 
   try {
-    const response = await apiScanQRCode({xid: id, serial: series, type: scanType, browser_id, old_qrcode: 'pisen'});
-
-    const {data: dataResponse} = response.data;
-    const rsStatus = dataResponse?.stamp_code?.status || '';
-    if (rsStatus && rsStatus === "over_limited") {
-      await router.push({name: 'over-scan'});
+    const response = await apiCheckStampOld({xid: id, serial: series, type: 'pisen'});
+    const serialData = response.data.data.serial;
+    if (!serialData) {
+      await router.push({name: 'not_found'});
+      return;
     }
-    store.setDataScanQrcode(dataResponse);
+
+    await router.push({name: 'home', query: {serial: serialData, type, user_uuid}});
   } catch (e) {
-    await router.push({name: 'error'});
+    await router.push({name: 'not_found'});
   } finally {
     isLoading.value = false;
     setTimeout(() => {
@@ -52,7 +47,6 @@ onMounted(async () => {
 
 <template>
   <div class="qrx-container m-auto overflow-hidden">
-    <el-skeleton v-if="isLoading"/>
-    <OldQrcodeTemplate old_qrcode="pisen" v-else/>
+    <el-skeleton/>
   </div>
 </template>
