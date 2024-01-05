@@ -2,7 +2,7 @@
 import { reactive, computed, ref } from 'vue';
 import type { IsContactFrom, IsContactRulers } from '@/types';
 import { useScanQrcodeStore } from '@/store';
-import { requiredRule } from '@/utitls';
+import { requiredRule, phoneNumberRules, emailRules } from '@/utitls';
 import { useI18n } from 'vue-i18n';
 
 
@@ -20,8 +20,8 @@ const ruleForm = reactive<IsContactFrom>({
 
 const rules = ref<IsContactRulers>({
   name: [requiredRule($t('placeholders.customer_name'))],
-  phone: [requiredRule($t('placeholders.phone_number'))],
-  email: [requiredRule($t('placeholders.email_address'))],
+  phone: [...phoneNumberRules($t('placeholders.phone_number'))],
+  email: [...emailRules($t('placeholders.email_address'))],
   content: [requiredRule($t('placeholders.content'))],
 });
 

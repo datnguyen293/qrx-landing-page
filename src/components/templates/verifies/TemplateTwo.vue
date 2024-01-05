@@ -17,7 +17,6 @@ import { apiVerifyStampCode } from '@/api';
 import { STAMP_STATUS, STATUS_VERIFY, VERIFICATION_TYPE } from '@/constants';
 import { isEmpty } from '@/utitls';
 
-
 const { t: $t } = useI18n();
 const { query } = useRoute();
 const { xid, serial, user_uuid, lat, lon, utm, type, preview } = query;
@@ -29,7 +28,8 @@ const { message } = store;
 const stampStatus = computed(() => store.stamp_code?.status || '');
 const browser_id = window.localStorage.getItem('browser_id');
 
-const scanType = type === VERIFICATION_TYPE.ZALO_APP ? VERIFICATION_TYPE.ZALO_APP : VERIFICATION_TYPE.LANDING_PAGE;
+const scanType =
+  type === VERIFICATION_TYPE.ZALO_APP ? VERIFICATION_TYPE.ZALO_APP : VERIFICATION_TYPE.LANDING_PAGE;
 
 const stampCodeStatus = computed(() => store.stamp_code?.status || '');
 const handleEventSubmit = async (event: any) => {
@@ -52,7 +52,7 @@ const handleEventSubmit = async (event: any) => {
       user_uuid,
       lat,
       lon,
-      utm
+      utm,
     };
 
     const response = await apiVerifyStampCode(data);
@@ -75,6 +75,13 @@ const resultStatusVerification = [
   STAMP_STATUS.ACTIVATED,
   STATUS_VERIFY.SUCCESS,
 ];
+const resultLogo = [
+  STAMP_STATUS.PRODUCT_ASSIGNED,
+  STAMP_STATUS.PROCESSING,
+  STATUS_VERIFY.OVER_LIMITED,
+  STAMP_STATUS.WARRANTY_PROCESSING,
+  STATUS_VERIFY.FAIL,
+];
 </script>
 <template>
   <div class="m-auto min-h-screen">
@@ -83,26 +90,25 @@ const resultStatusVerification = [
     </div>
     <el-card
       class="qrx-card-bank mb-3 text-center"
-      :class="(!serial || isEmpty(product)) ? 'mt-10' : ''"
+      :class="!serial || isEmpty(product) ? 'mt-10' : ''"
     >
       <template v-if="!isEmpty(serial) || !isEmpty(product)">
         <CommonSlider v-if="resultCommonSliders.includes(stampCodeStatus)" />
-        <template v-if="message.logo !== ''">
           <img
+            v-if="!isEmpty(message.logo)"
             :src="message.logo"
             alt="Logo stamp success"
             class="!w-[250px]"
-            :class="stampCodeStatus === STATUS_VERIFY.FAIL ? 'hidden' : ''"
+            :class="resultLogo.includes(stampCodeStatus) ? 'hidden' : ''"
           />
-        </template>
-        <template v-else>
+
           <img
+            v-else
             src="@/assets/images/icon-hero.png"
             alt="Logo stamp success"
             class="!w-[250px]"
-            :class="stampCodeStatus === STATUS_VERIFY.FAIL ? 'hidden' : ''"
+            :class="resultLogo.includes(stampCodeStatus) ? 'hidden' : ''"
           />
-        </template>
       </template>
 
       <StampStatusVerification

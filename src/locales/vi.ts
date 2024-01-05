@@ -6,6 +6,8 @@ export default {
   },
 
   common: {
+    introduce: 'Giới thiệu',
+    address: 'Địa chỉ',
     loading: 'Đang tải...',
     contact: 'Liên hệ',
     customer_name: 'Tên',

@@ -69,7 +69,7 @@ const handleEventSubmit = async (event: any) => {
     <el-card class="qrx-card-bank mb-3" :class="!serial || isEmpty(product) ? 'mt-10' : ''">
       <div
         class="qrx-bg--success text-[16px] text-center leading-5 p-4 text-white font-medium"
-        v-if="!stampStatus || stampStatus === STAMP_STATUS.SOLD"
+        v-if="stampStatus || stampStatus === STAMP_STATUS.SOLD"
       >
         {{ $t('common.verification_product') }}
       </div>
@@ -99,7 +99,6 @@ const handleEventSubmit = async (event: any) => {
     <template v-if="!isEmpty(serial)">
       <ProductDetail class="mb-3" v-if="!isEmpty(product)" />
       <CommonContact />
-      <CommonFooter />
     </template>
   </div>
 </template>
