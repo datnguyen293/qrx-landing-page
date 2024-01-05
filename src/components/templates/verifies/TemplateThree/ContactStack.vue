@@ -22,8 +22,8 @@ const { company } = store;
         <div class="w-[50px] h-[2px] qrx-bg--success"/>
         <div class="mt-4 rounded-[8px] shadow-xl p-3 flex flex-col gap-2">
           <h1 class="text-[18px]">{{ company?.name }}</h1>
-          <p>{{ $t('common.address') + ' : ' + company?.address }}</p>
-          <p>{{ $t('common.email')  + ' : ' + company?.email }}</p>
+          <p>{{ $t('common.address') + ': ' + company?.address }}</p>
+          <p>{{ $t('common.email')  + ': ' + company?.email }}</p>
           <a :href="'tel:' + company?.phone" class="no-underline text-black">
             <p>{{ $t('common.hotline', { phone: company?.phone }) }}</p>
           </a>
