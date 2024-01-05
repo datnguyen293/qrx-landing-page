@@ -14,7 +14,7 @@ onMounted(async () => {
   const {id, type, user_uuid} = query;
   if (!id) {
     isLoading.value = false;
-    await router.push({name: 'not_found'});
+    await router.push({name: 'not-found'});
     return;
   }
 
@@ -28,13 +28,13 @@ onMounted(async () => {
     const response = await apiCheckStampOld({xid: id, type: 'pisen'});
     const serialData = response.data.data.serial;
     if (!serialData) {
-      await router.push({name: 'not_found'});
+      await router.push({name: 'not-found'});
       return;
     }
 
     await router.push({name: 'home', query: {serial: serialData, type, user_uuid}});
   } catch (e) {
-    await router.push({name: 'not_found'});
+    await router.push({name: 'not-found'});
   } finally {
     isLoading.value = false;
     setTimeout(() => {

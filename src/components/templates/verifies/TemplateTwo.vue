@@ -1,49 +1,35 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { ElMessage } from 'element-plus';
 
 import FormVerify from '@/components/elements/FormVerification.vue';
 import CommonFooter from '@/components/common/CommonFooter.vue';
 import CommonSlider from '@/components/common/CommonSlider.vue';
 import ProductDetail from '@/components/common/ProductDetail.vue';
-import CommonStatusVerify from '@/components/common/CommonStatusVerify.vue';
+import StampStatusVerification from '@/components/elements/StampStatusVerification.vue';
 import CommonContact from '@/components/common/CommonContact.vue';
-import CommonCustomerProfile from '@/components/common/CommonCustomerProfile.vue';
+import CustomerProfile from '@/components/common/CustomerProfile.vue';
 
 import { useScanQrcodeStore } from '@/store';
 import { apiVerifyStampCode } from '@/api';
-import { STAMP_CODE_VERIFIED, STAMP_STATUS, STATUS_VERIFY, VERIFICATION_TYPE } from '@/constants';
+import { STAMP_STATUS, STATUS_VERIFY, VERIFICATION_TYPE } from '@/constants';
 import { isEmpty } from '@/utitls';
-import StampCodeBlocked from '@/components/common/StampCodeBlocked.vue';
-import CannotAccessVerifyStamp from '@/components/common/CannotAccessVerifyStamp.vue';
-import NewStampCode from '@/components/common/NewStampCode.vue';
+
 
 const { t: $t } = useI18n();
 const { query } = useRoute();
-const { xid, serial, user_uuid, lat, lon, factory_name, utm, type, preview } = query;
-const router = useRouter();
-
+const { xid, serial, user_uuid, lat, lon, utm, type, preview } = query;
 const store = useScanQrcodeStore();
 const product = computed(() => store.product);
-const isSerial = ref(false);
 
 const { message } = store;
 
 const stampStatus = computed(() => store.stamp_code?.status || '');
 const browser_id = window.localStorage.getItem('browser_id');
 
-
-onMounted(() => {
-  // isSerial.value = !!(xid || serial);
-  isSerial.value = !!serial;
-});
-
-const scanType =
-  type && type === VERIFICATION_TYPE.ZALO_APP
-    ? VERIFICATION_TYPE.ZALO_APP
-    : VERIFICATION_TYPE.LANDING_PAGE;
+const scanType = type === VERIFICATION_TYPE.ZALO_APP ? VERIFICATION_TYPE.ZALO_APP : VERIFICATION_TYPE.LANDING_PAGE;
 
 const stampCodeStatus = computed(() => store.stamp_code?.status || '');
 const handleEventSubmit = async (event: any) => {
@@ -72,7 +58,6 @@ const handleEventSubmit = async (event: any) => {
     const response = await apiVerifyStampCode(data);
     const { data: dataResponse } = response.data;
     store.setDataScanQrcode(dataResponse);
-    isSerial.value = true;
   } catch (e) {
     console.log('[QRX] error handle event submit', e);
     store.setStatusScanStampCode('fail');
@@ -85,7 +70,7 @@ const resultCommonSliders = [
   STATUS_VERIFY.OVER_LIMITED,
   STAMP_STATUS.WARRANTY_PROCESSING,
 ];
-const reultStatusVerify = [
+const resultStatusVerification = [
   STAMP_STATUS.WARRANTY_REPLACED,
   STAMP_STATUS.ACTIVATED,
   STATUS_VERIFY.SUCCESS,
@@ -98,9 +83,9 @@ const reultStatusVerify = [
     </div>
     <el-card
       class="qrx-card-bank mb-3 text-center"
-      :class="!isSerial || isEmpty(product) ? 'mt-10' : ''"
+      :class="(!serial || isEmpty(product)) ? 'mt-10' : ''"
     >
-      <template v-if="isSerial || !isEmpty(product)">
+      <template v-if="!isEmpty(serial) || !isEmpty(product)">
         <CommonSlider v-if="resultCommonSliders.includes(stampCodeStatus)" />
         <template v-if="message.logo !== ''">
           <img
@@ -120,8 +105,8 @@ const reultStatusVerify = [
         </template>
       </template>
 
-      <CommonStatusVerify
-        :class="reultStatusVerify.includes(stampCodeStatus) ? 'hidden' : 'block'"
+      <StampStatusVerification
+        :class="resultStatusVerification.includes(stampCodeStatus) ? 'hidden' : 'block'"
       />
 
       <div class="p-5" v-if="!stampStatus || stampStatus === STAMP_STATUS.SOLD">
@@ -131,7 +116,7 @@ const reultStatusVerify = [
         <p class="!leading-6 my-5">
           {{ $t('common.congratulations_content') }}
         </p>
-        <FormVerify :is_serial="isSerial" @form-submit="handleEventSubmit" />
+        <FormVerify @form-submit="handleEventSubmit" />
       </div>
 
       <div class="p-5" v-else-if="!stampStatus || stampStatus === STATUS_VERIFY.SUCCESS">
@@ -163,9 +148,9 @@ const reultStatusVerify = [
       </div>
     </el-card>
 
-    <CommonCustomerProfile class="mb-3" />
+    <CustomerProfile class="mb-3" />
 
-    <template v-if="isSerial">
+    <template v-if="!isEmpty(serial)">
       <ProductDetail class="mb-3" v-if="!isEmpty(product)" />
       <CommonContact />
       <CommonFooter />
