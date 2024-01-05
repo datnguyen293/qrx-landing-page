@@ -94,22 +94,21 @@ const resultLogo = [
     >
       <template v-if="!isEmpty(serial) || !isEmpty(product)">
         <CommonSlider v-if="resultCommonSliders.includes(stampCodeStatus)" />
-        <template v-if="message.logo !== ''">
           <img
+            v-if="!isEmpty(message.logo)"
             :src="message.logo"
             alt="Logo stamp success"
             class="!w-[250px]"
             :class="resultLogo.includes(stampCodeStatus) ? 'hidden' : ''"
           />
-        </template>
-        <template v-else>
+
           <img
+            v-else
             src="@/assets/images/icon-hero.png"
             alt="Logo stamp success"
             class="!w-[250px]"
             :class="resultLogo.includes(stampCodeStatus) ? 'hidden' : ''"
           />
-        </template>
       </template>
 
       <StampStatusVerification
