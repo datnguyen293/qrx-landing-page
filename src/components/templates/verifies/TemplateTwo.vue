@@ -92,7 +92,7 @@ const resultStatusVerification = [
             :src="message.logo"
             alt="Logo stamp success"
             class="!w-[250px]"
-            :class="stampCodeStatus === STATUS_VERIFY.FAIL ? 'hidden' : ''"
+            :class="stampCodeStatus === STATUS_VERIFY.FAIL || resultCommonSliders.includes(stampCodeStatus) ? 'hidden' : ''"
           />
         </template>
         <template v-else>
