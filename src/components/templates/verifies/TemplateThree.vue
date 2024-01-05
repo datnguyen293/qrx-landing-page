@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import HomeStack from '@/components/templates/verifies/TemplateThree/HomeStack.vue';
 import VerifyStack from '@/components/templates/verifies/TemplateThree/VerifyStack.vue';
 import ContactStack from '@/components/templates/verifies/TemplateThree/ContactStack.vue';
 import SuggestionStack from '@/components/templates/verifies/TemplateThree/SuggestionStack.vue';
