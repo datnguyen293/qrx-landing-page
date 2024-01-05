@@ -7,9 +7,9 @@ import FormVerify from "@/components/elements/FormVerification.vue";
 import CommonFooter from "@/components/common/CommonFooter.vue";
 import CommonSlider from "@/components/common/CommonSlider.vue";
 import ProductDetail from "@/components/common/ProductDetail.vue";
-import CommonStatusVerify from "@/components/common/CommonStatusVerify.vue";
+import StampStatusVerification from "@/components/elements/StampStatusVerification.vue";
 import CommonContact from "@/components/common/CommonContact.vue";
-import CommonCustomerProfile from "@/components/common/CommonCustomerProfile.vue";
+import CustomerProfile from "@/components/common/CustomerProfile.vue";
 
 import {useScanQrcodeStore} from "@/store";
 import {apiVerifyStampCode} from "@/api";
@@ -27,9 +27,9 @@ const {id, series} = query;
 
 const store = useScanQrcodeStore();
 const product = computed(() => store.product);
-let isSerialVerify = true;
+let hasStampVerified = true;
 
-const statusVerify = computed(() => store.stamp_code?.status || '');
+const stampVerified = computed(() => store.stamp_code?.status || '');
 const browser_id = window.localStorage.getItem('browser_id');
 
 const handleEventSubmit = async (event: any) => {
@@ -40,7 +40,6 @@ const handleEventSubmit = async (event: any) => {
       serial: props.old_qrcode === 'mirascan' ? id : series,
       ...event,
       browser_id,
-      is_serial: isSerialVerify ? 1 : 0,
       old_qrcode: props.old_qrcode,
       type_submit: 'submit'
     }
@@ -52,7 +51,7 @@ const handleEventSubmit = async (event: any) => {
     }
 
     store.setDataScanQrcode(dataResponse);
-    isSerialVerify = true;
+    hasStampVerified = true;
   } catch (e) {
     console.log('[QRX] error handle event submit', e);
     await router.push({name: 'error'});
@@ -63,25 +62,25 @@ const handleEventSubmit = async (event: any) => {
 <template>
   <div>
     <div class="m-auto min-h-screen">
-      <el-card class="qrx-card-bank mb-3" :class="!isSerialVerify ? 'mt-10' : ''">
-        <template v-if="isSerialVerify">
+      <el-card class="qrx-card-bank mb-3" :class="!hasStampVerified ? 'mt-10' : ''">
+        <template v-if="hasStampVerified">
           <CommonSlider/>
         </template>
-        <div class="qrx-bg--success text-[16px] leading-5 p-4 text-white font-medium" v-if="!statusVerify || statusVerify === VerifyStatus.BLANK">
+        <div class="qrx-bg--success text-[16px] leading-5 p-4 text-white font-medium" v-if="!stampVerified || stampVerified === VerifyStatus.BLANK">
           {{ $t('common.verification_product') }}
         </div>
 
-        <CommonStatusVerify :status="statusVerify"/>
-        <div class="p-5" v-if="!statusVerify || statusVerify === VerifyStatus.BLANK">
+        <StampStatusVerification :status="stampVerified"/>
+        <div class="p-5" v-if="!stampVerified || stampVerified === VerifyStatus.BLANK">
           <h2 class="text-[20px] font-bold leading-6 text-[#233438] mb-[2px]">{{product?.name || ''}}</h2>
           <div class="text-[10px] mb-3" v-html="$t('common.note_verification')"></div>
-          <FormVerify :is_serial="isSerialVerify" @form-submit="handleEventSubmit"/>
+          <FormVerify :is_serial="hasStampVerified" @form-submit="handleEventSubmit"/>
         </div>
       </el-card>
 
-      <CommonCustomerProfile v-if="isSerialVerify && (statusVerify && statusVerify !== VerifyStatus.BLANK)" class="mb-3"/>
+      <CustomerProfile v-if="hasStampVerified && (stampVerified && stampVerified !== VerifyStatus.BLANK)" class="mb-3"/>
 
-      <template v-if="isSerialVerify">
+      <template v-if="hasStampVerified">
         <ProductDetail class="mb-3"/>
         <CommonContact/>
         <CommonFooter/>

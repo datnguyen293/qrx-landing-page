@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, computed, ref, onMounted } from 'vue';
+import { reactive, computed, ref } from 'vue';
 import type { IsContactFrom, IsContactRulers } from '@/types';
 import { useScanQrcodeStore } from '@/store';
 import { requiredRule } from '@/utitls';

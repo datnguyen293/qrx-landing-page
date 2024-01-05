@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n';
 import { ElLoading } from 'element-plus';
 import { apiScanQRCode } from '@/api';
 import { useScanQrcodeStore } from '@/store';
-import { TEMPLATE_TYPES, VERIFICATION_TYPE } from '@/constants';
+import { STAMP_STATUS, STATUS_VERIFY, TEMPLATE_TYPES, VERIFICATION_TYPE } from '@/constants';
 
 import TemplateOne from '@/components/templates/verifies/TemplateOne.vue';
 import TemplateTwo from '@/components/templates/verifies/TemplateTwo.vue';
@@ -52,6 +52,15 @@ onMounted(async () => {
     }
 
     store.setDataScanQrcode(dataResponse);
+    const hasStampError = [STAMP_STATUS.NEW, STAMP_STATUS.BLOCKED, STATUS_VERIFY.CANNOT_ACCESS].includes(stampCodeStatus.value);
+    if (hasStampError) {
+      await router.push({ name: 'stamp-error' });
+      setTimeout(() => {
+        bgLoading.close();
+      }, 1000);
+      return;
+    }
+
     setTimeout(() => {
       bgLoading.close();
     }, 1000);

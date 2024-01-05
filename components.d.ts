@@ -7,13 +7,14 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    CannotAccessVerifyStamp: typeof import('./src/components/common/CannotAccessVerifyStamp.vue')['default']
+    CannotAccessVerifyStamp: typeof import('./src/components/elements/CannotAccessVerifyStamp.vue')['default']
     CommonContact: typeof import('./src/components/common/CommonContact.vue')['default']
     CommonCustomerProfile: typeof import('./src/components/common/CommonCustomerProfile.vue')['default']
     CommonFooter: typeof import('./src/components/common/CommonFooter.vue')['default']
     CommonSlider: typeof import('./src/components/common/CommonSlider.vue')['default']
-    CommonStatusVerify: typeof import('./src/components/common/CommonStatusVerify.vue')['default']
+    CommonStatusVerify: typeof import('./src/components/elements/CommonStatusVerify.vue')['default']
     ContactStack: typeof import('./src/components/templates/verifies/TemplateThree/ContactStack.vue')['default']
+    CustomerProfile: typeof import('./src/components/common/CustomerProfile.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElCarousel: typeof import('element-plus/es')['ElCarousel']
@@ -34,6 +35,9 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SocialChannel: typeof import('./src/components/elements/SocialChannel.vue')['default']
     StampCodeBlocked: typeof import('./src/components/common/StampCodeBlocked.vue')['default']
+    StampStatusVerification: typeof import('./src/components/elements/StampStatusVerification.vue')['default']
+    StampUnauthorized: typeof import('./src/components/elements/StampUnauthorized.vue')['default']
+    StatusVerification: typeof import('./src/components/elements/StatusVerification.vue')['default']
     SuggestionStack: typeof import('./src/components/templates/verifies/TemplateThree/SuggestionStack.vue')['default']
     TemplateOne: typeof import('./src/components/templates/verifies/TemplateOne.vue')['default']
     TemplateThree: typeof import('./src/components/templates/verifies/TemplateThree.vue')['default']

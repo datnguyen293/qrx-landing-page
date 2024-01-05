@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref, watch } from 'vue';
+import { computed, onMounted, reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { FormInstance } from 'element-plus';
 import { useScanQrcodeStore } from '@/store';
@@ -18,7 +18,7 @@ onMounted(() => {
 const isDisableVerifyCode = ref(false);
 const isProcessing = ref<boolean>(false);
 const { query } = useRoute();
-const { type, preview, serial } = query;
+const { preview, serial } = query;
 
 const ruleForm = reactive<any>({
   verification_code: '',
@@ -55,6 +55,8 @@ if (hasWarranty.value || !serial) {
 
   ruleValidates.phone = [...phoneNumberRules()];
 }
+
+console.log('ruleValidates', ruleValidates)
 
 const rules = ref(ruleValidates)
 

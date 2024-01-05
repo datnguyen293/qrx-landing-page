@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { delay, hasQrcodeURL } from '@/utitls';
+import { delay } from '@/utitls';
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { ElLoading } from 'element-plus';
