@@ -10,13 +10,8 @@ const chooseStack = ref('verify');
 const stacks = ref([
   {
     name: 'Trang chủ',
-    sku: 'home',
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 1024 1024" data-v-ea893728=""><path fill="currentColor" d="M512 128 128 447.936V896h255.936V640H640v256h255.936V447.936z"></path></svg>`,
-  },
-  {
-    name: 'Xác thực',
     sku: 'verify',
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 1024 1024" data-v-ea893728=""><path fill="currentColor" d="M77.248 415.04a64 64 0 0 1 90.496 0l226.304 226.304L846.528 188.8a64 64 0 1 1 90.56 90.496l-543.04 543.04-316.8-316.8a64 64 0 0 1 0-90.496z"></path></svg>`,
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 1024 1024" data-v-ea893728=""><path fill="currentColor" d="M512 128 128 447.936V896h255.936V640H640v256h255.936V447.936z"></path></svg>`,
   },
   {
     name: 'Liên hệ',
@@ -32,11 +27,6 @@ const stacks = ref([
 </script>
 <template>
   <div class="pb-[80px]">
-    <HomeStack
-      :chooseStack="chooseStack"
-      @update-choose-stack="chooseStack = $event"
-      v-if="chooseStack === 'home'"
-    />
     <VerifyStack
       :chooseStack="chooseStack"
       @update-choose-stack="chooseStack = $event"

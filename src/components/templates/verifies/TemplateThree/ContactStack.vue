@@ -17,29 +17,28 @@ const { company } = store;
       <div class="qrx-bg--success text-[16px] text-center leading-5 p-4 text-white font-medium">
         {{ $t('common.contact') }}
       </div>
-
-      <div class="p-[16px]">
-        <a :href="'tel:' + company?.phone" class="no-underline text-black">
-          <div class="flex justify-between p-[12px]">
+      <div class="p-4">
+        <h1 class="text-[18px]">{{ $t('common.introduce') }}</h1>
+        <div class="w-[50px] h-[2px] qrx-bg--success"/>
+        <div class="mt-4 rounded-[8px] shadow-xl p-3 flex flex-col gap-2">
+          <h1 class="text-[18px]">{{ company?.name }}</h1>
+          <p>{{ $t('common.address') + ' : ' + company?.address }}</p>
+          <p>{{ $t('common.email')  + ' : ' + company?.email }}</p>
+          <a :href="'tel:' + company?.phone" class="no-underline text-black">
             <p>{{ $t('common.hotline', { phone: company?.phone }) }}</p>
-            <svg
-              fill="green"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              xml:space="preserve"
-              width="20"
-              height="20"
-            >
-              <g xmlns="http://www.w3.org/2000/svg" data-name="Layer 2">
-                <path
-                  d="M17.4 22A15.42 15.42 0 0 1 2 6.6 4.6 4.6 0 0 1 6.6 2a3.94 3.94 0 0 1 .77.07 3.79 3.79 0 0 1 .72.18 1 1 0 0 1 .65.75l1.37 6a1 1 0 0 1-.26.92c-.13.14-.14.15-1.37.79a9.91 9.91 0 0 0 4.87 4.89c.65-1.24.66-1.25.8-1.38a1 1 0 0 1 .92-.26l6 1.37a1 1 0 0 1 .72.65 4.34 4.34 0 0 1 .19.73 4.77 4.77 0 0 1 .06.76A4.6 4.6 0 0 1 17.4 22z"
-                  data-name="phone"
-                ></path>
-              </g>
-            </svg>
-          </div>
-        </a>
+          </a>
+        </div>
+        
+        <h1 class="text-[18px] mt-[40px]">{{ $t('common.contact') }}</h1>
+        <div class="w-[50px] h-[2px] qrx-bg--success"/>
+        <div class="mt-4 rounded-[8px] shadow-xl p-3 flex flex-col gap-2">
+          <p>{{ $t('common.address') + ' : ' + company?.address }}</p>
+          <p>{{ $t('common.email')  + ' : ' + company?.email }}</p>
+          <a :href="'tel:' + company?.phone" class="no-underline text-black">
+            <p>{{ $t('common.hotline', { phone: company?.phone }) }}</p>
+          </a>
+        </div>
+
         <div v-if="!isEmpty(company?.social_networks)">
           <div class="flex justify-center items-center gap-[5px] my-6">
             <div class="flex-1 h-[2px] qrx-bg--success rounded-[30px]" />
