@@ -76,10 +76,7 @@ const resultStatusVerification = [
   STATUS_VERIFY.SUCCESS,
 ];
 const resultLogo = [
-  STAMP_STATUS.PRODUCT_ASSIGNED,
-  STAMP_STATUS.PROCESSING,
-  STATUS_VERIFY.OVER_LIMITED,
-  STAMP_STATUS.WARRANTY_PROCESSING,
+  ...resultCommonSliders,
   STATUS_VERIFY.FAIL,
 ];
 </script>
