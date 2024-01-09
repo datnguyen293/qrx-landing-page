@@ -149,17 +149,23 @@ const handleRedirectURL = () => {
       </svg>
     </div>
 
-    <div class="mb-3 px-3 text-sm text-center">
+    <div class="mb-3 px-3 text-[20px] text-center font-semibold">
       Mã QR này không phải do QRX phát hành
     </div>
 
-    <div class="text-center" v-if="url">
+    <div class="text-center text-[#574E4E] text-[12px] px-12 font-medium">Vui lòng kiểm tra và đảm bảo đường dẫn an toàn trước khi truy cập</div>
+
+    <div v-if="url" class="text-[12px] mt-6 !mx-3" style="border: 1px solid #ED7F22; border-radius: 8px; min-height: 50px; max-height: 100px; overflow: auto;padding: 10px;word-wrap: break-word;">
+      <span style="max-width: 96%;">{{url}}</span>
+    </div>
+
+    <div v-if="url" class="text-center mt-10">
       <el-button
         type="warning"
-        class="mt-2 text-white hover:text-white"
+        class="mt-2 text-white hover:text-white !bg-[#ED7F22]"
         @click="handleRedirectURL"
       >
-        Đi tới trang đích
+        Đi đến trang đích
       </el-button>
     </div>
   </div>
