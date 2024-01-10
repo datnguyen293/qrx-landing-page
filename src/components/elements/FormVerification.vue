@@ -40,21 +40,25 @@ if (!isEmpty(customerData)) {
   ruleForm.phone = customerData.value?.phone || '';
 }
 
+const stampHasWarranty = hasWarranty.value || !serial;
+
 const ruleValidates: any = {
   verification_code: [
     requiredRule($t('common.verify_code')),
     maxLengthRule($t('common.verify_code'), 20),
   ],
+
+  phone: [...phoneNumberRules('blur', stampHasWarranty)]
 };
 
-if (hasWarranty.value || !serial) {
+
+if (stampHasWarranty) {
   ruleValidates.name = [
     requiredRule($t('common.customer_name')),
     maxLengthRule($t('common.verify_code'), 100),
   ];
-
-  ruleValidates.phone = [...phoneNumberRules()];
 }
+
 
 console.log('ruleValidates', ruleValidates)
 

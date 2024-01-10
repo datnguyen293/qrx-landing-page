@@ -54,13 +54,12 @@ export const minLengthRule = (
   };
 };
 
-export const phoneNumberRules = (trigger: string = 'blur') => {
+export const phoneNumberRules = (trigger: string = 'blur', isRequired = false) => {
   const { t: $t } = useI18n();
   const name = $t('common.phone_number');
   const message = $t('validator.phone');
 
-  return [
-    requiredRule(name, trigger),
+  const rulesValidates = [
     maxLengthRule(name, 15, trigger),
     {
       min: 10,
@@ -70,6 +69,13 @@ export const phoneNumberRules = (trigger: string = 'blur') => {
     whiteSpaceRule(name, trigger),
     patternRegexRule(message, new RegExp('^\\+?[0-9\\s]+$'), trigger),
   ];
+
+
+  if (!isRequired) {
+    return rulesValidates;
+  }
+
+  return [requiredRule(name, trigger),...rulesValidates];
 };
 
 // Validate field do not exist whitespace between value
