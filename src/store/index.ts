@@ -68,6 +68,10 @@ export const useScanQrcodeStore = defineStore('useScanQrcodeStore', {
     },
 
     actions: {
+        setCustomerInfo(data: any) {
+          this.customer = data  || {...defaultCustomer};
+        },
+
         setStatusScanStampCode (status: string) {
             this.stamp_code.status = status;
         },
