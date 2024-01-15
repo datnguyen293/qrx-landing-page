@@ -7,6 +7,8 @@ const store = useScanQrcodeStore();
 const verifyStatus = computed(() => store.stamp_code?.status || '');
 const customer = computed(() => store.customer);
 const stampCode = computed(() => store.stamp_code);
+
+const stampHasWarranty = computed(() => !isEmpty(stampCode.value?.stamp_has_warranty) && !isEmpty(stampCode.value?.warranty_starts_at) && !isEmpty(stampCode.value?.warranty_ends_at))
 </script>
 
 <template>
@@ -39,6 +41,11 @@ const stampCode = computed(() => store.stamp_code);
         <div class="grid grid-cols-12 gap-4 mb-2" v-if="stampCode?.first_verification_at">
           <div class="col-span-5">Xác thực ngày</div>
           <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{ stampCode?.first_verification_at || '' }}</div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-4 mb-2" v-if="stampHasWarranty">
+          <div class="col-span-5">Thời gian bảo hành</div>
+          <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{ stampCode?.warranty_starts_at }} - {{ stampCode?.warranty_ends_at}}</div>
         </div>
       </div>
     </div>

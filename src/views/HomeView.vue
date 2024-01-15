@@ -78,10 +78,11 @@ onMounted(async () => {
     store.setDataScanQrcode(dataResponse);
     const hasStampError = [STAMP_STATUS.NEW, STAMP_STATUS.BLOCKED, STATUS_VERIFY.CANNOT_ACCESS].includes(stampCodeStatus.value);
     if (hasStampError) {
-      await router.push({ name: 'stamp-error' });
       setTimeout(() => {
         bgLoading.close();
       }, 1000);
+      await router.push({ name: 'stamp-error' });
+      isLoading.value = false;
       return;
     }
 
