@@ -19,6 +19,9 @@ const defaultStampCode: any = {
     first_verification_at: '',
     message: '',
     has_warranty: false,
+    stamp_has_warranty: false,
+    warranty_starts_at: '',
+    warranty_ends_at: ''
 }
 
 const defaultProduct: any = {
