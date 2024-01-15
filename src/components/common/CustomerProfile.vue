@@ -8,7 +8,7 @@ const verifyStatus = computed(() => store.stamp_code?.status || '');
 const customer = computed(() => store.customer);
 const stampCode = computed(() => store.stamp_code);
 
-const stampHasWarranty = computed(() => !isEmpty(stampCode.value?.stamp_has_warranty) && !isEmpty(stampCode.value?.warranty_starts_at) && !isEmpty(stampCode.value?.warranty_ends_at))
+const stampHasWarranty = computed(() => stampCode.value?.stamp_has_warranty && !isEmpty(stampCode.value?.warranty_starts_at) && !isEmpty(stampCode.value?.warranty_ends_at))
 </script>
 
 <template>
