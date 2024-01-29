@@ -21,7 +21,8 @@ const defaultStampCode: any = {
     has_warranty: false,
     stamp_has_warranty: false,
     warranty_starts_at: '',
-    warranty_ends_at: ''
+    warranty_ends_at: '',
+    is_show_customer_stamp_anti_counterfeit: false,
 }
 
 const defaultProduct: any = {

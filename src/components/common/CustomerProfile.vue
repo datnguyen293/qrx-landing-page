@@ -8,7 +8,9 @@ const verifyStatus = computed(() => store.stamp_code?.status || '');
 const customer = computed(() => store.customer);
 const stampCode = computed(() => store.stamp_code);
 
-const stampHasWarranty = computed(() => stampCode.value?.stamp_has_warranty && !isEmpty(stampCode.value?.warranty_starts_at) && !isEmpty(stampCode.value?.warranty_ends_at))
+const stampHasWarranty = computed(() => stampCode.value?.stamp_has_warranty && !isEmpty(stampCode.value?.warranty_starts_at) && !isEmpty(stampCode.value?.warranty_ends_at));
+const showShowCustomerStampAntiCounterfeit = computed(() => stampCode.value?.is_show_customer_stamp_anti_counterfeit || false);
+const showCustomer = computed(() => verifyStatus.value !== 'warning' && showShowCustomerStampAntiCounterfeit.value);
 </script>
 
 <template>
@@ -21,13 +23,13 @@ const stampHasWarranty = computed(() => stampCode.value?.stamp_has_warranty && !
 
     <div class="customer-profile">
       <div class="py-3">
-        <div class="grid grid-cols-12 gap-4 mb-2" v-if="verifyStatus !== 'warning'">
+        <div class="grid grid-cols-12 gap-4 mb-2" v-if="showCustomer && customer?.name">
           <div class="col-span-5">Họ và tên</div>
           <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{ customer?.name || '' }}
           </div>
         </div>
 
-        <div class="grid grid-cols-12 gap-4 mb-2" v-if="verifyStatus !== 'warning'">
+        <div class="grid grid-cols-12 gap-4 mb-2" v-if="showCustomer && customer?.phone">
           <div class="col-span-5">SĐT</div>
           <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{ customer?.phone || '' }}</div>
         </div>
