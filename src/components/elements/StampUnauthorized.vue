@@ -1,13 +1,52 @@
 <script setup lang="ts">
-import {isEmpty} from "@/utitls";
 import {computed} from "vue";
+import { useI18n } from 'vue-i18n';
 import {useScanQrcodeStore} from "@/store";
 import CommonFooter from "@/components/common/CommonFooter.vue";
+import { KEY_LOCAL_STORAGE } from '@/constants';
+import { isEmpty, parseStorageValue } from '@/utitls';
 
+const {t} = useI18n();
 const store = useScanQrcodeStore();
-const logoUrl = computed(() => store?.message?.logo || '');
-const titleError = computed(() => store?.message?.title || '');
-const contentError = computed(() => store?.message?.content || '');
+const messageLocalState = parseStorageValue(window.localStorage.getItem(KEY_LOCAL_STORAGE.STAMP_MESSAGE_STATES));
+const logoUrl: any = computed(() => {
+  const logoState = store?.message?.logo || '';
+  if (!isEmpty(messageLocalState?.logo) && isEmpty(logoState)) {
+      return messageLocalState.logo;
+  }
+
+  if (!isEmpty(logoState)) {
+    return logoState;
+  }
+
+  return '';
+})
+
+const titleError: any = computed(() => {
+  const titleState = store?.message?.title || '';
+  if (!isEmpty(messageLocalState?.title) && isEmpty(titleState)) {
+    return messageLocalState.title;
+  }
+
+  if (!isEmpty(titleState)) {
+    return titleState;
+  }
+
+  return t('common.stamp_cannot_access_scan_stamp_title');
+})
+
+const contentError: any = computed(() => {
+  const contentState = store?.message?.content || '';
+  if (!isEmpty(messageLocalState?.content) && isEmpty(contentState)) {
+    return messageLocalState.content;
+  }
+
+  if (!isEmpty(contentState)) {
+    return contentState;
+  }
+
+  return t('common.stamp_cannot_access_scan_stamp_content');
+})
 </script>
 
 <template>
@@ -164,10 +203,10 @@ const contentError = computed(() => store?.message?.content || '');
 
       <div class="m-auto text-center mt-6 px-4">
         <div class="font-bold text-3xl mb-2 qrx-text--warning">
-          {{ !isEmpty(titleError) ? titleError : $t('common.stamp_cannot_access_scan_stamp_title') }}
+          {{ titleError }}
         </div>
         <div class="text-[16px] qrx-text--warning">
-          {{ !isEmpty(contentError) ? contentError : $t('common.stamp_cannot_access_scan_stamp_content') }}
+          {{ contentError }}
         </div>
       </div>
     </div>

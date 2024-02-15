@@ -88,6 +88,8 @@ export const useScanQrcodeStore = defineStore('useScanQrcodeStore', {
             this.message = data?.message || [];
 
             window.localStorage.setItem(KEY_LOCAL_STORAGE.THEME_SETTING, JSON.stringify(data?.template?.data));
+            window.localStorage.setItem(KEY_LOCAL_STORAGE.COMPANY_SCAN, JSON.stringify(this.company));
+            window.localStorage.setItem(KEY_LOCAL_STORAGE.STAMP_MESSAGE_STATES, JSON.stringify(this.message));
         },
 
         getKeyThemeData(key: any) {

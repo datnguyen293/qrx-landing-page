@@ -58,6 +58,8 @@ export const SOCIAL_NETWORK_LIST = {
 
 export const KEY_LOCAL_STORAGE = {
     THEME_SETTING: 'THEME_SETTING',
+    STAMP_MESSAGE_STATES: 'qrx_stamp_messages',
+    COMPANY_SCAN: 'qrx_company_scan',
 }
 
 export enum VERIFICATION_TYPE {
