@@ -11,7 +11,7 @@ const contentError = computed(() => store?.message?.content || '');
 </script>
 
 <template>
-  <div class="qrx-container m-auto overflow-hidden flex flex-col justify-between">
+  <div class="qrx-container whitespace-pre-line m-auto overflow-hidden flex flex-col justify-between">
     <div class="pt-12">
       <div class="mx-auto max-w-4xl flex justify-center">
         <img v-if="!isEmpty(logoUrl)" :src="logoUrl" alt="Logo page not found" class="!max-w-[337px] !max-h-[339px]"/>
