@@ -146,8 +146,8 @@ const resultLogo = [
         class="p-5 px-3 py-5 qrx-bg--warning"
         v-else-if="stampCodeStatus === STAMP_STATUS.ACTIVATED"
       >
-        <p class="text-justify text-white">{{ product?.name }}</p>
-        <div class="text-justify text-white mt-[16px]" v-html="message.content"></div>
+        <p class="text-center text-white">{{ product?.name }}</p>
+        <div class="text-center text-white mt-[16px]" v-html="message.content"></div>
       </div>
     </el-card>
 
