@@ -92,7 +92,7 @@ const resultLogo = [
       <template v-if="!isEmpty(serial) || !isEmpty(product)">
         <CommonSlider v-if="resultCommonSliders.includes(stampCodeStatus)" />
           <img
-            v-if="!isEmpty(message.logo)"
+            v-if="!isEmpty(message.logo) && stampCodeStatus !== STAMP_STATUS.SOLD"
             :src="message.logo"
             alt="Logo stamp success"
             class="!w-[250px]"
