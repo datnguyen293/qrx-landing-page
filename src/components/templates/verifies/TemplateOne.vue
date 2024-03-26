@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {computed } from "vue";
+import { computed, onMounted, ref } from 'vue';
 import {useI18n} from "vue-i18n";
-import {useRoute} from "vue-router";
+import { useRoute, useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
 
 import {useScanQrcodeStore} from "@/store";
@@ -19,12 +19,18 @@ import CustomerProfile from "@/components/common/CustomerProfile.vue";
 
 const {t: $t} = useI18n();
 const {query} = useRoute();
+const router = useRouter();
 const {xid, serial, user_uuid, lat, lon, utm, type, preview} = query;
 
 const store = useScanQrcodeStore();
 const product = computed(() => store.product);
 const stampStatus = computed(() => store.stamp_code?.status || '');
 const browser_id = window.localStorage.getItem('browser_id');
+const isSerial = ref(false);
+
+onMounted(() => {
+  isSerial.value = !!serial;
+});
 
 const scanType = type === VERIFICATION_TYPE.ZALO_APP ? VERIFICATION_TYPE.ZALO_APP : VERIFICATION_TYPE.LANDING_PAGE;
 const handleEventSubmit = async (event: any) => {
@@ -52,9 +58,14 @@ const handleEventSubmit = async (event: any) => {
 
     const response = await apiVerifyStampCode(data);
     const {data: dataResponse} = response.data;
+    isSerial.value = true;
     store.setDataScanQrcode(dataResponse);
   } catch (e) {
     console.log('[QRX] error handle event submit', e);
+    if (!serial) {
+      await router.push({name: 'error'});
+      return;
+    }
     store.setStatusScanStampCode('fail');
   }
 }
@@ -62,8 +73,8 @@ const handleEventSubmit = async (event: any) => {
 </script>
 <template>
     <div class="m-auto min-h-screen">
-      <el-card class="qrx-card-bank mb-3" :class="(!serial || isEmpty(product)) ? 'mt-10' : ''">
-        <template v-if="!isEmpty(serial) || !isEmpty(product)">
+      <el-card class="qrx-card-bank mb-3" :class="(!isSerial || isEmpty(product)) ? 'mt-10' : ''">
+        <template v-if="isSerial || !isEmpty(product)">
           <CommonSlider/>
         </template>
 
@@ -82,7 +93,7 @@ const handleEventSubmit = async (event: any) => {
 
       <CustomerProfile class="mb-3"/>
 
-      <template v-if="!isEmpty(serial)">
+      <template v-if="isSerial">
         <ProductDetail class="mb-3" v-if="!isEmpty(product)"/>
         <CommonContact/>
         <CommonFooter/>

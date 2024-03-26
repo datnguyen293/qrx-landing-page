@@ -1,4 +1,4 @@
-import type { APIResponse, IResStampOld, IScanQRCodeData } from '@/types';
+import type { APIResponse, IResStampOld, IScanQRCodeData, IZaloCustomer } from '@/types';
 import axiosInstance from "@/utitls/request";
 import {trimStringProperties} from "@/utitls";
 
@@ -18,4 +18,13 @@ export const apiVerifyStampCode = (data: any) => {
 export const apiCheckStampOld = (data: any) => {
     data = trimStringProperties(data);
     return axiosInstance.post<APIResponse<IResStampOld>>('/api/v1/check-stamp-old', data);
+}
+
+export const apiGetCustomerInfo = (data: any) => {
+    data = trimStringProperties(data);
+    return axiosInstance.post<APIResponse<IZaloCustomer>>('/api/v1/verify/profile-zalo', data, {
+        headers: {
+            x_scan: 'qrx.com.vn'
+        }
+    });
 }

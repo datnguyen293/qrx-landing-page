@@ -3,7 +3,7 @@ import { computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { ElLoading } from 'element-plus';
-import { apiScanQRCode } from '@/api';
+import { apiGetCustomerInfo, apiScanQRCode } from '@/api';
 import { useScanQrcodeStore } from '@/store';
 import { STAMP_STATUS, STATUS_VERIFY, TEMPLATE_TYPES, VERIFICATION_TYPE } from '@/constants';
 
@@ -26,7 +26,31 @@ onMounted(async () => {
   const browser_id = window.localStorage.getItem('browser_id');
   const scanType = type || VERIFICATION_TYPE.LANDING_PAGE;
   if (!serial) {
-    isLoading.value = false;
+    if (!user_uuid || scanType != 'zalo_app') {
+      isLoading.value = false;
+      return;
+    }
+
+    const bgLoading = ElLoading.service({
+      lock: true,
+      text: $t('common.loading'),
+      background: '#f8f8ff',
+    });
+
+   try {
+     const resCustomer = await apiGetCustomerInfo({uuid: user_uuid, type: scanType});
+     const { data: dataResCustomer } = resCustomer.data;
+     if (dataResCustomer) {
+       store.setCustomerInfo(dataResCustomer)
+     }
+   } catch (error) {
+     console.log('[ERROR] get profile customer', error);
+   } finally {
+     setTimeout(() => {
+       isLoading.value = false;
+       bgLoading.close();
+     }, 1000);
+   }
    return;
   }
 
@@ -54,10 +78,11 @@ onMounted(async () => {
     store.setDataScanQrcode(dataResponse);
     const hasStampError = [STAMP_STATUS.NEW, STAMP_STATUS.BLOCKED, STATUS_VERIFY.CANNOT_ACCESS].includes(stampCodeStatus.value);
     if (hasStampError) {
-      await router.push({ name: 'stamp-error' });
       setTimeout(() => {
         bgLoading.close();
       }, 1000);
+      await router.push({ name: 'stamp-error' });
+      isLoading.value = false;
       return;
     }
 

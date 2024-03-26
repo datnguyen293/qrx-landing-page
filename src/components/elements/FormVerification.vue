@@ -29,6 +29,7 @@ const ruleForm = reactive<any>({
 const colorSuccess = computed(() => store.getKeyThemeData('color_success') || '#00994D');
 const verificationCode = computed(() => store?.stamp_code?.verification_code || '');
 const hasWarranty = computed(() => store?.stamp_code?.has_warranty || false);
+const showCustomerStampAntiCounterfeit = computed(() => store?.stamp_code?.is_show_customer_stamp_anti_counterfeit || false);
 const customerData: any = computed(() => store?.customer);
 if (verificationCode.value) {
   ruleForm.verification_code = verificationCode.value;
@@ -40,21 +41,25 @@ if (!isEmpty(customerData)) {
   ruleForm.phone = customerData.value?.phone || '';
 }
 
+const stampHasWarranty = hasWarranty.value || !serial;
+
 const ruleValidates: any = {
   verification_code: [
     requiredRule($t('common.verify_code')),
     maxLengthRule($t('common.verify_code'), 20),
   ],
+
+  phone: [...phoneNumberRules('blur', stampHasWarranty)]
 };
 
-if (hasWarranty.value || !serial) {
+
+if (stampHasWarranty) {
   ruleValidates.name = [
     requiredRule($t('common.customer_name')),
     maxLengthRule($t('common.verify_code'), 100),
   ];
-
-  ruleValidates.phone = [...phoneNumberRules()];
 }
+
 
 console.log('ruleValidates', ruleValidates)
 
@@ -82,10 +87,10 @@ const submitForm = async (formEl: any) => {
         :disabled="isDisableVerifyCode"
       />
     </el-form-item>
-    <el-form-item prop="name" :label="$t('common.customer_name')">
+    <el-form-item v-if="showCustomerStampAntiCounterfeit" prop="name" :label="$t('common.customer_name')">
       <el-input v-model="ruleForm.name" :placeholder="$t('placeholders.customer_name')" />
     </el-form-item>
-    <el-form-item prop="phone" :label="$t('common.phone_number')">
+    <el-form-item v-if="showCustomerStampAntiCounterfeit" prop="phone" :label="$t('common.phone_number')">
       <el-input v-model="ruleForm.phone" :placeholder="$t('placeholders.phone_number')" />
     </el-form-item>
 

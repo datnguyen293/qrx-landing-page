@@ -117,3 +117,7 @@ export type IsContactRulers = {
 export type IResStampOld = {
     serial: string
 }
+export type IZaloCustomer = {
+    name: string,
+    phone: string
+}

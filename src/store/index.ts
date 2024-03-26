@@ -19,6 +19,10 @@ const defaultStampCode: any = {
     first_verification_at: '',
     message: '',
     has_warranty: false,
+    stamp_has_warranty: false,
+    warranty_starts_at: '',
+    warranty_ends_at: '',
+    is_show_customer_stamp_anti_counterfeit: false,
 }
 
 const defaultProduct: any = {
@@ -68,6 +72,10 @@ export const useScanQrcodeStore = defineStore('useScanQrcodeStore', {
     },
 
     actions: {
+        setCustomerInfo(data: any) {
+          this.customer = data  || {...defaultCustomer};
+        },
+
         setStatusScanStampCode (status: string) {
             this.stamp_code.status = status;
         },
@@ -80,6 +88,8 @@ export const useScanQrcodeStore = defineStore('useScanQrcodeStore', {
             this.message = data?.message || [];
 
             window.localStorage.setItem(KEY_LOCAL_STORAGE.THEME_SETTING, JSON.stringify(data?.template?.data));
+            window.localStorage.setItem(KEY_LOCAL_STORAGE.COMPANY_SCAN, JSON.stringify(this.company));
+            window.localStorage.setItem(KEY_LOCAL_STORAGE.STAMP_MESSAGE_STATES, JSON.stringify(this.message));
         },
 
         getKeyThemeData(key: any) {

@@ -124,3 +124,16 @@ export const isValidUrl = (urlString: string)=> {
         '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator
     return urlPattern.test(urlString);
 }
+
+
+/**
+ * Read and parse value
+ * @param value
+ */
+export function parseStorageValue(value: string | null): any {
+    try {
+        return JSON.parse(<string>value);
+    } catch (err) {
+        return null;
+    }
+}
