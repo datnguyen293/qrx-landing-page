@@ -9,7 +9,7 @@ const company = computed(() => store.company);
 </script>
 
 <template>
-  <el-card v-if="!isEmpty(company) && company.is_show_footer">
+  <el-card v-if="!isEmpty(company) && company.is_show_contact">
     <div class="image flex justify-center mb-3">
       <el-image v-if="company?.logo" class="max-w-[100px] max-h-[100px]" :src="company?.logo" />
       <img v-else src="@/assets/images/no-image.png" alt="Logo" class="w-[83px] h-[83px]" />
