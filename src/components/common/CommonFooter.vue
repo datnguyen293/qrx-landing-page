@@ -6,7 +6,7 @@ const store = useScanQrcodeStore();
 const company = computed(() =>store.company);
 </script>
 <template>
-  <div class="p-4" v-if="company.phone && company.email">
+  <div class="p-4" v-if="company.phone && company.email && company.is_show_footer">
     <div class="font-medium">Mọi thắc mắc gửi về</div>
     <div class="text-[#14272B]">{{company?.phone || ''}}</div>
     <div class="text-[#14272B]">{{ company?.email || ''}}</div>
