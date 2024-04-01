@@ -25,29 +25,29 @@ const showCustomer = computed(() => verifyStatus.value !== 'warning' && showShow
       <div class="py-3">
         <div class="grid grid-cols-12 gap-4 mb-2" v-if="showCustomer && customer?.name">
           <div class="col-span-5">Họ và tên</div>
-          <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{ customer?.name || '' }}
+          <div class="col-span-7 text-right qrx-text--default font-semibold">{{ customer?.name || '' }}
           </div>
         </div>
 
         <div class="grid grid-cols-12 gap-4 mb-2" v-if="showCustomer && customer?.phone">
           <div class="col-span-5">SĐT</div>
-          <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{ customer?.phone || '' }}</div>
+          <div class="col-span-7 text-right qrx-text--default font-semibold">{{ customer?.phone || '' }}</div>
         </div>
 
 <!--        <div class="grid grid-cols-12 gap-4 mb-2" v-if="stampCode?.verification_code">-->
 <!--          <div class="col-span-5">Mã xác thực</div>-->
-<!--          <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{ stampCode?.verification_code || '' }}-->
+<!--          <div class="col-span-7 text-right qrx-text--default font-semibold">{{ stampCode?.verification_code || '' }}-->
 <!--          </div>-->
 <!--        </div>-->
 
         <div class="grid grid-cols-12 gap-4 mb-2" v-if="stampCode?.first_verification_at">
           <div class="col-span-5">Xác thực ngày</div>
-          <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{ stampCode?.first_verification_at || '' }}</div>
+          <div class="col-span-7 text-right qrx-text--default font-semibold">{{ stampCode?.first_verification_at || '' }}</div>
         </div>
 
         <div class="grid grid-cols-12 gap-4 mb-2" v-if="stampHasWarranty">
           <div class="col-span-5">Thời gian bảo hành</div>
-          <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{ stampCode?.warranty_starts_at }} - {{ stampCode?.warranty_ends_at}}</div>
+          <div class="col-span-7 text-right qrx-text--default font-semibold">{{ stampCode?.warranty_starts_at }} - {{ stampCode?.warranty_ends_at}}</div>
         </div>
       </div>
     </div>
