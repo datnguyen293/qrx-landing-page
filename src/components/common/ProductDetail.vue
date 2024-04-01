@@ -21,22 +21,22 @@ const company = computed(() => store.company);
       <dl>
         <div class="grid grid-cols-12 gap-4 mb-2">
           <div class="col-span-5">Tên sản phẩm</div>
-          <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{product?.name || ''}}</div>
+          <div class="col-span-7 text-right qrx-text--default font-semibold">{{product?.name || ''}}</div>
         </div>
 
         <div class="grid grid-cols-12 gap-4 mb-2" v-if="product?.brand">
           <div class="col-span-5">Thương hiệu</div>
-          <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{product?.brand || ''}}</div>
+          <div class="col-span-7 text-right qrx-text--default font-semibold">{{product?.brand || ''}}</div>
         </div>
 
         <div class="grid grid-cols-12 gap-4 mb-2" v-if="product?.is_show_product_price">
           <div class="col-span-5">Giá bán</div>
-          <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{formatAmountCurrency(product?.price, company?.currency)}}/ {{product.unit}}</div>
+          <div class="col-span-7 text-right qrx-text--default font-semibold">{{formatAmountCurrency(product?.price, company?.currency)}}/ {{product.unit}}</div>
         </div>
         
         <div class="grid grid-cols-12 gap-4 mb-2" v-if="product?.custom_fields" v-for="(content, index) in product?.custom_fields">
           <div class="col-span-5">{{content?.field_name}}</div>
-          <div class="col-span-7 text-right text-[#4B6166] font-semibold">{{content?.field_value}}</div>
+          <div class="col-span-7 text-right qrx-text--default font-semibold">{{content?.field_value}}</div>
         </div>
       </dl>
     </div>

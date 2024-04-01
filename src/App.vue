@@ -27,7 +27,7 @@ useTitle(
 useFavicon(!isEmpty(companyUrl) ? companyUrl : './favicon.ico');
 onMounted(() => initData());
 
-const textDefault = computed(() => store.getKeyThemeData('color_default') || '#4B6166');
+const textDefault = computed(() => store.getKeyThemeData('text_default') || '#4B6166');
 const bgWarning = computed(() => store.getKeyThemeData('color_warring') || '#F38020');
 const colorError = computed(() => store.getKeyThemeData('color_error') || '#B61212');
 const colorSuccess = computed(() => store.getKeyThemeData('color_success') || '#00994D');
