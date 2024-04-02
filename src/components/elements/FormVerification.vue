@@ -46,7 +46,6 @@ const stampHasWarranty = hasWarranty.value || !serial;
 const ruleValidates: any = {
   verification_code: [
     requiredRule($t('common.verify_code')),
-    maxLengthRule($t('common.verify_code'), 20),
   ],
 
   phone: [...phoneNumberRules('blur', stampHasWarranty)]
