@@ -126,7 +126,7 @@ const resultLogo = [
         <h2 class="text-[28px] font-bold leading-6 text-[#233438] mb-[2px]">
           {{ message.title }}
         </h2>
-        <p class="!leading-6 my-5 text-justify">
+        <p class="!leading-6 my-5 text-center">
           {{ message.content }}
         </p>
       </div>
