@@ -18,7 +18,7 @@ const { company } = store;
         {{ $t('common.contact') }}
       </div>
       <div class="p-4">
-        <h1 class="text-[18px]">{{ $t('common.introduce') }}</h1>
+        <!-- <h1 class="text-[18px]">{{ $t('common.introduce') }}</h1>
         <div class="w-[50px] h-[2px] qrx-bg--success"/>
         <div class="mt-4 rounded-[8px] shadow-xl p-3 flex flex-col gap-2">
           <h1 class="text-[18px]">{{ company?.name }}</h1>
@@ -27,7 +27,7 @@ const { company } = store;
           <a :href="'tel:' + company?.phone" class="no-underline text-black">
             <p>{{ $t('common.hotline', { phone: company?.phone }) }}</p>
           </a>
-        </div>
+        </div> -->
         
         <h1 class="text-[18px] mt-[40px]">{{ $t('common.contact') }}</h1>
         <div class="w-[50px] h-[2px] qrx-bg--success"/>
