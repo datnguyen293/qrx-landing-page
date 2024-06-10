@@ -26,6 +26,8 @@ const product = computed(() => store.product);
 const { message } = store;
 
 const stampStatus = computed(() => store.stamp_code?.status || '');
+console.log('stampStatus', stampStatus);
+
 const browser_id = window.localStorage.getItem('browser_id');
 
 const scanType =
@@ -65,6 +67,7 @@ const handleEventSubmit = async (event: any) => {
 };
 
 const resultCommonSliders = [
+  STAMP_STATUS.ACTIVATED,
   STAMP_STATUS.PRODUCT_ASSIGNED,
   STAMP_STATUS.PROCESSING,
   STATUS_VERIFY.OVER_LIMITED,
@@ -75,10 +78,7 @@ const resultStatusVerification = [
   STAMP_STATUS.ACTIVATED,
   STATUS_VERIFY.SUCCESS,
 ];
-const resultLogo = [
-  ...resultCommonSliders,
-  STATUS_VERIFY.FAIL,
-];
+const resultLogo = [...resultCommonSliders, STATUS_VERIFY.FAIL];
 </script>
 <template>
   <div class="m-auto min-h-screen">
@@ -91,26 +91,24 @@ const resultLogo = [
     >
       <template v-if="!isEmpty(serial) || !isEmpty(product)">
         <CommonSlider v-if="resultCommonSliders.includes(stampCodeStatus)" />
-          <img
-            v-if="!isEmpty(message.logo) && stampCodeStatus !== STAMP_STATUS.SOLD"
-            :src="message.logo"
-            alt="Logo stamp success"
-            class="!w-[250px]"
-            :class="resultLogo.includes(stampCodeStatus) ? 'hidden' : ''"
-          />
+        <img
+          v-if="!isEmpty(message.logo) && stampCodeStatus !== STAMP_STATUS.SOLD"
+          :src="message.logo"
+          alt="Logo stamp success"
+          class="!w-[250px]"
+          :class="resultLogo.includes(stampCodeStatus) ? 'hidden' : ''"
+        />
 
-          <img
-            v-else
-            src="@/assets/images/icon-hero.png"
-            alt="Logo stamp success"
-            class="!w-[250px]"
-            :class="resultLogo.includes(stampCodeStatus) ? 'hidden' : ''"
-          />
+        <img
+          v-else
+          src="@/assets/images/icon-hero.png"
+          alt="Logo stamp success"
+          class="!w-[250px]"
+          :class="resultLogo.includes(stampCodeStatus) ? 'hidden' : ''"
+        />
       </template>
 
-      <StampStatusVerification
-        :class="resultStatusVerification.includes(stampCodeStatus) ? 'hidden' : 'block'"
-      />
+      <StampStatusVerification />
 
       <div class="p-5" v-if="!stampStatus || stampStatus === STAMP_STATUS.SOLD">
         <h2 class="text-[28px] font-bold leading-6 text-[#233438] mb-[2px]">
@@ -122,18 +120,18 @@ const resultLogo = [
         <FormVerify @form-submit="handleEventSubmit" />
       </div>
 
-      <div class="p-5" v-else-if="!stampStatus || stampStatus === STATUS_VERIFY.SUCCESS">
+      <!-- <div class="p-5" v-if="!stampStatus || stampStatus === STATUS_VERIFY.SUCCESS">
         <h2 class="text-[28px] font-bold leading-6 text-[#233438] mb-[2px]">
           {{ message.title }}
         </h2>
         <p class="!leading-6 my-5 text-center">
           {{ message.content }}
         </p>
-      </div>
+      </div> -->
 
-      <div
+      <!-- <div
         class="p-5"
-        v-else-if="!stampStatus || [STAMP_STATUS.WARRANTY_REPLACED].includes(stampStatus)"
+        v-if="!stampStatus || [STAMP_STATUS.WARRANTY_REPLACED].includes(stampStatus)"
       >
         <h2>
           {{ message.content }}
@@ -141,14 +139,15 @@ const resultLogo = [
         <p class="!leading-6 my-5">
           {{ product?.name }}
         </p>
-      </div>
-      <div
+      </div> -->
+
+      <!-- <div
         class="p-5 px-3 py-5 qrx-bg--warning"
-        v-else-if="stampCodeStatus === STAMP_STATUS.ACTIVATED"
+        v-if="stampCodeStatus === STAMP_STATUS.ACTIVATED"
       >
         <p class="text-center text-white">{{ product?.name }}</p>
         <div class="text-center text-white mt-[16px]" v-html="message.content"></div>
-      </div>
+      </div> -->
     </el-card>
 
     <CustomerProfile class="mb-3" />

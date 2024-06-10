@@ -66,5 +66,3 @@ export enum VERIFICATION_TYPE {
     ZALO_APP = 'zalo_app',
     LANDING_PAGE = 'landing_page'
 }
-
-
