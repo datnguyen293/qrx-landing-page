@@ -31,4 +31,5 @@ export default defineConfig({
       build: {
         sourcemap: true,
       },
+    base: process.env.BASE_BUILD || '/',
 });
