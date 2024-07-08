@@ -21,11 +21,11 @@ const isProduct = ref(false);
 const isLoading = ref(true);
 
 onMounted(async () => {
-  const { xid, serial, type, user_uuid, preview, utm } = query;
-
+  const { xid, serial, ser, type, user_uuid, preview, utm } = query;
+  const serialx = serial || ser;
   const browser_id = window.localStorage.getItem('browser_id');
   const scanType = type || VERIFICATION_TYPE.LANDING_PAGE;
-  if (!serial) {
+  if (!serialx) {
     if (!user_uuid || scanType != 'zalo_app') {
       isLoading.value = false;
       return;
@@ -60,7 +60,7 @@ onMounted(async () => {
     background: '#f8f8ff',
   });
   try {
-    const response = await apiScanQRCode({ xid, serial, type: scanType, browser_id, preview, user_uuid, utm });
+    const response = await apiScanQRCode({ xid, serial: serialx, type: scanType, browser_id, preview, user_uuid, utm });
     const { data: dataResponse } = response.data;
     if (!isEmpty(dataResponse?.product)) {
       isProduct.value = true;

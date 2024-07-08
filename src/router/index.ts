@@ -17,6 +17,11 @@ const router = createRouter({
       component: HomeView,
     },
     {
+      path: '/',
+      name: 'verify',
+      component: HomeView,
+    },
+    {
       path: '/series/qrcode',
       name: 'scan-qrcode-pisen',
       component: OldPisenView,

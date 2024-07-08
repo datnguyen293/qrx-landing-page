@@ -19,7 +19,8 @@ import { isEmpty } from '@/utitls';
 
 const { t: $t } = useI18n();
 const { query } = useRoute();
-const { xid, serial, user_uuid, lat, lon, utm, type, preview } = query;
+const { xid, serial, ser, user_uuid, lat, lon, utm, type, preview } = query;
+const serialx = serial || ser;
 
 const store = useScanQrcodeStore();
 const { company } = store;
@@ -45,7 +46,7 @@ const handleEventSubmit = async (event: any) => {
     const data = {
       type: scanType,
       xid,
-      serial,
+      serial: serialx,
       ...event,
       browser_id,
       user_uuid,
@@ -66,14 +67,14 @@ const handleEventSubmit = async (event: any) => {
 </script>
 <template>
   <div class="m-auto min-h-screen">
-    <el-card class="qrx-card-bank mb-3" :class="!serial || isEmpty(product) ? 'mt-10' : ''">
+    <el-card class="qrx-card-bank mb-3" :class="!serialx || isEmpty(product) ? 'mt-10' : ''">
       <div
         class="qrx-bg--success text-[16px] text-center leading-5 p-4 text-white font-medium"
         v-if="stampStatus || stampStatus === STAMP_STATUS.SOLD"
       >
         {{ $t('common.verification_product') }}
       </div>
-      <template v-if="!isEmpty(serial) || !isEmpty(product)">
+      <template v-if="!isEmpty(serialx) || !isEmpty(product)">
         <CommonSlider />
       </template>
 
@@ -96,7 +97,7 @@ const handleEventSubmit = async (event: any) => {
 
     <CustomerProfile class="mb-3" v-if="!isEmpty(customer) || !isEmpty(customer?.phone)" />
 
-    <template v-if="!isEmpty(serial)">
+    <template v-if="!isEmpty(serialx)">
       <ProductDetail class="mb-3" v-if="!isEmpty(product)" />
       <CommonContact />
     </template>

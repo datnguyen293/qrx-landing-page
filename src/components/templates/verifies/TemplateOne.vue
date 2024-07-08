@@ -20,7 +20,8 @@ import CustomerProfile from "@/components/common/CustomerProfile.vue";
 const {t: $t} = useI18n();
 const {query} = useRoute();
 const router = useRouter();
-const {xid, serial, user_uuid, lat, lon, utm, type, preview} = query;
+const {xid, serial, ser, user_uuid, lat, lon, utm, type, preview} = query;
+const serialx = serial || ser;
 
 const store = useScanQrcodeStore();
 const product = computed(() => store.product);
@@ -29,7 +30,7 @@ const browser_id = window.localStorage.getItem('browser_id');
 const isSerial = ref(false);
 
 onMounted(() => {
-  isSerial.value = !!serial;
+  isSerial.value = !!serialx;
 });
 
 const scanType = type === VERIFICATION_TYPE.ZALO_APP ? VERIFICATION_TYPE.ZALO_APP : VERIFICATION_TYPE.LANDING_PAGE;
@@ -47,7 +48,7 @@ const handleEventSubmit = async (event: any) => {
     const data = {
       type: scanType,
       xid,
-      serial,
+      serial: serialx,
       ...event,
       browser_id,
       user_uuid,
@@ -62,7 +63,7 @@ const handleEventSubmit = async (event: any) => {
     store.setDataScanQrcode(dataResponse);
   } catch (e) {
     console.log('[QRX] error handle event submit', e);
-    if (!serial) {
+    if (!serialx) {
       await router.push({name: 'error'});
       return;
     }
