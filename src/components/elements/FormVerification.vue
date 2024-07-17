@@ -86,10 +86,10 @@ const submitForm = async (formEl: any) => {
         :disabled="isDisableVerifyCode"
       />
     </el-form-item>
-    <el-form-item v-if="showCustomerStampAntiCounterfeit" prop="name" :label="$t('common.customer_name')">
+    <el-form-item v-if="showCustomerStampAntiCounterfeit || stampHasWarranty" prop="name" :label="$t('common.customer_name')">
       <el-input v-model="ruleForm.name" :placeholder="$t('placeholders.customer_name')" />
     </el-form-item>
-    <el-form-item v-if="showCustomerStampAntiCounterfeit" prop="phone" :label="$t('common.phone_number')">
+    <el-form-item v-if="showCustomerStampAntiCounterfeit || stampHasWarranty" prop="phone" :label="$t('common.phone_number')">
       <el-input v-model="ruleForm.phone" :placeholder="$t('placeholders.phone_number')" />
     </el-form-item>
 
