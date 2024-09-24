@@ -24,7 +24,7 @@ const serialx = serial || ser;
 const store = useScanQrcodeStore();
 const product = computed(() => store.product);
 
-const { message } = store;
+const message = computed(() => store.message);
 
 const stampStatus = computed(() => store.stamp_code?.status || '');
 console.log('stampStatus', stampStatus);
