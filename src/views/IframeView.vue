@@ -159,7 +159,7 @@ const handleRedirectURL = () => {
       <span style="max-width: 96%;">{{url}}</span>
     </div>
 
-    <div v-if="url" class="text-center mt-10">
+    <!-- <div v-if="url" class="text-center mt-10">
       <el-button
         type="warning"
         class="mt-2 text-white hover:text-white !bg-[#ED7F22]"
@@ -167,7 +167,7 @@ const handleRedirectURL = () => {
       >
         Đi đến trang đích
       </el-button>
-    </div>
+    </div> -->
   </div>
 
 </template>
