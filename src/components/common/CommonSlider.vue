@@ -28,7 +28,7 @@ const colorSuccess = computed(() => {
     </template>
 
     <template v-else>
-        <div class="h-[240px] flex justify-center items-center">
+        <div class="min-h-[240px] flex justify-center items-center">
           <template v-if="!isEmpty(product.images)">
             <img :src="product.images[0]" :alt="product?.name || ''" class="!w-full !h-full object-contain"/>
           </template>
