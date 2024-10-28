@@ -18,7 +18,8 @@ onMounted(() => {
 const isDisableVerifyCode = ref(false);
 const isProcessing = ref<boolean>(false);
 const { query } = useRoute();
-const { preview, serial } = query;
+const { preview, serial, ser } = query;
+const serialx = serial || ser;
 
 const ruleForm = reactive<any>({
   verification_code: '',
@@ -41,7 +42,7 @@ if (!isEmpty(customerData)) {
   ruleForm.phone = customerData.value?.phone || '';
 }
 
-const stampHasWarranty = hasWarranty.value || !serial;
+const stampHasWarranty = hasWarranty.value || !serialx;
 
 const ruleValidates: any = {
   verification_code: [
