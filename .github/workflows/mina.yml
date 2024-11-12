@@ -1,4 +1,4 @@
-name: Deploy QRX
+name: Deploy Mina
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 18
@@ -18,9 +18,8 @@ jobs:
       - name: Build Js
         env:
           NODE_OPTIONS: "--max_old_space_size=8192"
-          BASE_BUILD: "/landing"
-          BASE_URL: "https://dev.qrs.vn/"
-          VITE_API_ENDPOINT: "https://dev.qrs.vn/"
+          BASE_URL: "https://qradmin.minavietnam.vn/"
+          VITE_API_ENDPOINT: "https://qradmin.minavietnam.vn/"
         run: |
           npm i
           npm run build
@@ -32,6 +31,6 @@ jobs:
           SOURCE: "dist/"
           REMOTE_PORT: ${{ secrets.PORT }}
           REMOTE_HOST: ${{ secrets.HOST }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ vars.REMOTE_DIRECTORY_QRS }}
+          REMOTE_USER: ${{ vars.PRD_USERNAME }}
+          TARGET: ${{ vars.REMOTE_DIRECTORY_MINA }}
           EXCLUDE: "/dist/, /node_modules/"
