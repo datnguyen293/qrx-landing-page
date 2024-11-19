@@ -28,6 +28,8 @@ const handleRedirectURL = () => {
 
   window.location.href = url;
 };
+
+const companyName = import.meta.env.VITE_COMPANY_NAME;
 </script>
 
 <template>
@@ -150,7 +152,7 @@ const handleRedirectURL = () => {
     </div>
 
     <div class="mb-3 px-3 text-[20px] text-center font-semibold">
-      Mã QR này không phải do QRX phát hành
+      Mã QR này không phải do {{companyName}} phát hành
     </div>
 
     <div class="text-center text-[#574E4E] text-[12px] px-12 font-medium">Vui lòng kiểm tra và đảm bảo đường dẫn an toàn trước khi truy cập</div>
