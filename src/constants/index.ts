@@ -17,7 +17,8 @@ export enum STAMP_STATUS {
     WARRANTY_PROCESSING= 'warranty_processing',
     WARRANTY_REPLACED='warranty_replaced',
     ACTIVATED='activated',
-    BLOCKED='blocked'
+    BLOCKED='blocked',
+    SUCCESS='success',
 }
 
 export const STAMP_CODE_UNSOLD: Array<string> = [STAMP_STATUS.PRODUCT_ASSIGNED]
