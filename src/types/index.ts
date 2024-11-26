@@ -121,3 +121,33 @@ export type IZaloCustomer = {
     name: string,
     phone: string
 }
+
+export type IStampStatus =
+  | 'checking'
+  | 'new'
+  | 'product_assigned'
+  | 'processing'
+  | 'sold'
+  | 'warranty_processing'
+  | 'warranty_replaced'
+  | 'activated'
+  | 'blocked'
+  | 'not_enough_stamp'
+  | 'out_of_stamp';
+
+export type ITagType =
+  | 'processing'
+  | 'success'
+  | 'error'
+  | 'warning'
+  | 'magenta'
+  | 'red'
+  | 'volcano'
+  | 'orange'
+  | 'gold'
+  | 'lime'
+  | 'green'
+  | 'cyan'
+  | 'blue'
+  | 'geekblue'
+  | 'purple';

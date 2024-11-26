@@ -12,6 +12,7 @@ declare module 'vue' {
     CommonSlider: typeof import('./src/components/common/CommonSlider.vue')['default']
     ContactStack: typeof import('./src/components/templates/verifies/TemplateThree/ContactStack.vue')['default']
     CustomerProfile: typeof import('./src/components/common/CustomerProfile.vue')['default']
+    DistributionInfo: typeof import('./src/components/templates/internal-check/components/DistributionInfo.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElCarousel: typeof import('element-plus/es')['ElCarousel']
@@ -26,6 +27,7 @@ declare module 'vue' {
     NewStampCode: typeof import('./src/components/common/NewStampCode.vue')['default']
     OldQrcodeTemplate: typeof import('./src/components/templates/verifies/OldQrcodeTemplate.vue')['default']
     ProductDetail: typeof import('./src/components/common/ProductDetail.vue')['default']
+    ProductDetail2: typeof import('./src/components/templates/internal-check/components/ProductDetail2.vue')['default']
     ProductItem: typeof import('./src/components/common/ProductItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
@@ -34,9 +36,11 @@ declare module 'vue' {
     StampStatusVerification: typeof import('./src/components/elements/StampStatusVerification.vue')['default']
     StampUnauthorized: typeof import('./src/components/elements/StampUnauthorized.vue')['default']
     SuggestionStack: typeof import('./src/components/templates/verifies/TemplateThree/SuggestionStack.vue')['default']
-    TemplateOne: typeof import('./src/components/templates/verifies/TemplateOne.vue')['default']
+    Tag: typeof import('./src/components/templates/internal-check/components/Tag.vue')['default']
+    TemplateOne: typeof import('./src/components/templates/internal-check/TemplateOne.vue')['default']
     TemplateThree: typeof import('./src/components/templates/verifies/TemplateThree.vue')['default']
     TemplateTwo: typeof import('./src/components/templates/verifies/TemplateTwo.vue')['default']
+    VerifyInfo: typeof import('./src/components/templates/internal-check/components/VerifyInfo.vue')['default']
     VerifyStack: typeof import('./src/components/templates/verifies/TemplateThree/VerifyStack.vue')['default']
   }
 }

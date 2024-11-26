@@ -33,6 +33,7 @@ export default {
     vetify_message:
       'Vui lòng nhập mã xác thực vào bên dưới. Sau đó ấn nút Xác Nhận để xác thực hàng hóa.',
     verification_product: 'Xác thực sản phẩm',
+    check_product_info: 'Kiểm tra thông tin sản phẩm',
     note_verification: `<span class="text-[#B61212]">Lưu ý:</span> Nhập chính xác thông tin họ tên, SĐT để đảm bảo các quyền lợi về tích điểm, đổi quà và các vấn đề xác thực, khiếu nại liên quan.`,
     not_found_content:
       'Không có trên dữ liệu trên hệ thống. Vui lòng kiểm tra lại mã xác thực hoặc liên hệ hotline để được tư vấn. Xin cảm ơn!',
@@ -92,4 +93,19 @@ export default {
     phone: 'Số điện thoại không đúng định dạng',
     minPhoneNumber: 'Số điện thoại không được phép ít hơn {number} kí tự',
   },
+  
+  stamp_status: {
+    checking: 'Đang kiểm tra',
+    new: 'Tem mới',
+    product_assigned: 'Đã gán sản phẩm',
+    processing: 'Đang xử lý',
+    sold: 'Đã bán',
+    warranty_processing: 'Đang xử lý bảo hành',
+    warranty_replaced: 'Đã thay bảo hành',
+    activated: 'Đã kích hoạt',
+    blocked: 'Đã bị chặn',
+    not_enough_stamp: 'Không đủ tem',
+    out_of_stamp: 'Hết tem',
+    over_limited: 'Đã kích hoạt',
+  }
 };

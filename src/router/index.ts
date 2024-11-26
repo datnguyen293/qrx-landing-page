@@ -5,6 +5,7 @@ import ErrorView from '@/views/ErrorView.vue';
 import HomeView from '@/views/HomeView.vue';
 import OldPisenView from '@/views/OldPisenView.vue';
 import OldMirascanView from '@/views/OldMirascanView.vue';
+import BusinessView from '@/views/BusiessView.vue';
 import IframeView from '@/views/IframeView.vue';
 import StampScanErrorView from '@/views/StampScanErrorView.vue';
 
@@ -35,6 +36,11 @@ const router = createRouter({
       path: '/p/#/v/p',
       name: 'mirascan-v2',
       component: OldMirascanView,
+    },
+    {
+      path: '/noi-bo',
+      name: 'doanh-nghiep',
+      component: BusinessView,
     },
     {
       path: '/not-found',
