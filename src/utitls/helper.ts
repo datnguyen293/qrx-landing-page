@@ -137,3 +137,16 @@ export function parseStorageValue(value: string | null): any {
         return null;
     }
 }
+
+/**
+ * Convert ISO time to DD/MM/YYYY format
+ * @param isoString - ISO time string
+ * @returns formatted date string in DD/MM/YYYY format
+ */
+export function convertIsoToDate(isoString: string): string {
+  const date = new Date(isoString);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+}

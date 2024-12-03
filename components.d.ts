@@ -27,7 +27,6 @@ declare module 'vue' {
     NewStampCode: typeof import('./src/components/common/NewStampCode.vue')['default']
     OldQrcodeTemplate: typeof import('./src/components/templates/verifies/OldQrcodeTemplate.vue')['default']
     ProductDetail: typeof import('./src/components/common/ProductDetail.vue')['default']
-    ProductDetail2: typeof import('./src/components/templates/internal-check/components/ProductDetail2.vue')['default']
     ProductItem: typeof import('./src/components/common/ProductItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

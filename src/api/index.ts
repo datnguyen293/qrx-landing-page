@@ -28,3 +28,13 @@ export const apiGetCustomerInfo = (data: any) => {
         }
     });
 }
+
+export const apiCheckInternalQrcode = (data: any) => {
+  return axiosInstance.post<APIResponse<any>>('/api/v1/check-internal-qrcode', {serial: data}, {
+      headers: {
+          x_scan: 'qrx.com.vn',
+          x_scan_internal: 'qrx.com.vn',
+          // bypass: 'qrx.com.vn'
+      }
+  });
+}

@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { useScanQrcodeStore } from "@/store";
+import { useScanQrcodeStore } from "@/store/internalCheck";
 import type { IStampStatus, ITagType } from "@/types";
 import Tag from "./Tag.vue";
 import { useI18n } from 'vue-i18n';
+import { convertIsoToDate } from "@/utitls";
 
-const {t} = useI18n();
+const { t } = useI18n();
 const store = useScanQrcodeStore();
-const stammCode = computed(() => store.stamp_code);
+const stamp_code = computed(() => store.stamp_code);
+const { serial, status, order, purchase_order, agency, sale_order } = stamp_code.value;
 
 const renderColorStatus = (status: IStampStatus): ITagType => {
-  switch(status){
+  switch (status) {
     case 'new':
       return 'cyan';
     case 'product_assigned':
@@ -45,39 +47,45 @@ const renderColorStatus = (status: IStampStatus): ITagType => {
       <dl>
         <div class="grid grid-cols-12 gap-4 mb-3">
           <div class="col-span-5">Serial</div>
-          <div class="col-span-7 text-right qrx-text--default font-semibold">{{ stammCode?.serial || 'N/A' }}</div>
+          <div class="col-span-7 text-right text-[#463E37] font-semibold">{{ serial ? serial : 'N/A' }}</div>
         </div>
 
         <div class="grid grid-cols-12 gap-4 mb-3">
           <div class="col-span-5">Trạng thái tem</div>
-          <div class="col-span-7 text-right qrx-text--default font-semibold">
-            <Tag :tite="stammCode?.status ? t(`stamp_status.${stammCode?.status}`) : 'N/A'" :type="renderColorStatus(stammCode?.status)"/>
+          <div class="col-span-7 text-right text-[#463E37] font-semibold">
+            <Tag :tite="status ? t(`stamp_status.${status}`) : 'N/A'" :type="renderColorStatus(status as IStampStatus)" />
           </div>
         </div>
 
         <div class="grid grid-cols-12 gap-4 mb-3">
           <div class="col-span-5">Lô hàng</div>
-          <div class="col-span-7 text-right qrx-text--default font-semibold">{{ stammCode?.shipment || 'N/A' }}</div>
+          <div class="col-span-7 text-right text-[#463E37] font-semibold">{{ order?.name || 'N/A' }}</div>
         </div>
 
         <div class="grid grid-cols-12 gap-4 mb-3">
           <div class="col-span-5">Kho nhập</div>
-          <div class="col-span-7 text-right qrx-text--default font-semibold">{{ stammCode?.stock_in_warehouse || 'N/A' }}</div>
+          <div class="col-span-7 text-right text-[#463E37] font-semibold">
+            {{ purchase_order?.warehouse?.name || 'N/A' }}
+          </div>
         </div>
-        
+
         <div class="grid grid-cols-12 gap-4 mb-3">
           <div class="col-span-5">Ngày nhập kho</div>
-          <div class="col-span-7 text-right qrx-text--default font-semibold">{{ stammCode?.stock_in_time || 'N/A' }}</div>
+          <div class="col-span-7 text-right text-[#463E37] font-semibold">
+            {{ purchase_order?.order_date ? convertIsoToDate(purchase_order?.order_date) : 'N/A' }}
+          </div>
         </div>
-        
+
         <div class="grid grid-cols-12 gap-4 mb-3">
           <div class="col-span-5">Đại lý phân phối</div>
-          <div class="col-span-7 text-right qrx-text--default font-semibold">{{ stammCode?.agency || 'N/A' }}</div>
+          <div class="col-span-7 text-right text-[#463E37] font-semibold">{{ agency?.name || 'N/A' }}</div>
         </div>
-                
+
         <div class="grid grid-cols-12 gap-4 mb-3">
           <div class="col-span-5">Ngày xuất kho</div>
-          <div class="col-span-7 text-right qrx-text--default font-semibold">{{ stammCode?.stock_out_time || 'N/A' }}</div>
+          <div class="col-span-7 text-right text-[#463E37] font-semibold">
+            {{ sale_order?.order_date ? convertIsoToDate(sale_order?.order_date) : 'N/A' }}
+          </div>
         </div>
       </dl>
     </div>

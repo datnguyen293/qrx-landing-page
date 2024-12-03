@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { useScanQrcodeStore } from "@/store";
-import { useI18n } from 'vue-i18n';
+import { useScanQrcodeStore } from "@/store/internalCheck";
 
-const { t } = useI18n();
 const store = useScanQrcodeStore();
-const company = computed(() => store.company);
-const product = computed(() => store.product);
+const stamp_code = computed(() => store.stamp_code);
+const { product, company } = stamp_code.value;
 </script>
 
 <template>
@@ -21,24 +19,24 @@ const product = computed(() => store.product);
       <dl>
         <div class="grid grid-cols-12 gap-4 mb-3">
           <div class="col-span-5">Tên sản phẩm</div>
-          <div class="col-span-7 text-right qrx-text--default font-semibold">{{ product?.name || 'N/A' }}</div>
+          <div class="col-span-7 text-right text-[#463E37] font-semibold">{{ product?.name || 'N/A' }}</div>
         </div>
         
         <div class="grid grid-cols-12 gap-4 mb-3">
           <div class="col-span-5">Thương hiệu</div>
-          <div class="col-span-7 text-right qrx-text--default font-semibold">{{ company?.name || 'N/A' }}</div>
+          <div class="col-span-7 text-right text-[#463E37] font-semibold">{{ company?.name || 'N/A' }}</div>
         </div>
 
         <div class="grid grid-cols-12 gap-4 mb-3">
           <div class="col-span-5">Giá bán</div>
-          <div class="col-span-7 text-right qrx-text--default font-semibold">
-            {{ `${product?.price || 0} VNĐ / ${product?.unit || 'chiếc'}` }}
+          <div class="col-span-7 text-right text-[#463E37] font-semibold">
+            {{ `${product?.purchase_price || 0} VNĐ / ${product?.unit?.name || 'chiếc'}` }}
           </div>
         </div>
 
         <div class="grid grid-cols-12 gap-4 mb-3">
           <div class="col-span-12">Mô tả</div>
-          <div class="col-span-12 qrx-text--default" v-html="product?.description"></div>
+          <div class="col-span-12" v-html="product?.description || '<span>N/A</span>'"></div>
         </div>
       </dl>
     </div>
