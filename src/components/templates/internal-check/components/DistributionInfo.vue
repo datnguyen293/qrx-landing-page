@@ -47,44 +47,44 @@ const renderColorStatus = (status: IStampStatus): ITagType => {
       <dl>
         <div class="grid grid-cols-12 gap-4 mb-3">
           <div class="col-span-5">Serial</div>
-          <div class="col-span-7 text-right text-[#463E37] font-semibold">{{ serial ? serial : 'N/A' }}</div>
+          <div class="col-span-7 text-right text-[#463E37] font-semibold">{{ serial ? serial : '' }}</div>
         </div>
 
         <div class="grid grid-cols-12 gap-4 mb-3">
           <div class="col-span-5">Trạng thái tem</div>
           <div class="col-span-7 text-right text-[#463E37] font-semibold">
-            <Tag :tite="status ? t(`stamp_status.${status}`) : 'N/A'" :type="renderColorStatus(status as IStampStatus)" />
+            <Tag :tite="status ? t(`stamp_status.${status}`) : ''" :type="renderColorStatus(status as IStampStatus)" />
           </div>
         </div>
 
         <div class="grid grid-cols-12 gap-4 mb-3">
           <div class="col-span-5">Lô hàng</div>
-          <div class="col-span-7 text-right text-[#463E37] font-semibold">{{ order?.name || 'N/A' }}</div>
+          <div class="col-span-7 text-right text-[#463E37] font-semibold">{{ order?.name || '' }}</div>
         </div>
 
         <div class="grid grid-cols-12 gap-4 mb-3">
           <div class="col-span-5">Kho nhập</div>
           <div class="col-span-7 text-right text-[#463E37] font-semibold">
-            {{ purchase_order?.warehouse?.name || 'N/A' }}
+            {{ purchase_order?.warehouse?.name || '' }}
           </div>
         </div>
 
         <div class="grid grid-cols-12 gap-4 mb-3">
           <div class="col-span-5">Ngày nhập kho</div>
           <div class="col-span-7 text-right text-[#463E37] font-semibold">
-            {{ purchase_order?.order_date ? convertIsoToDate(purchase_order?.order_date) : 'N/A' }}
+            {{ purchase_order?.order_date ? convertIsoToDate(purchase_order?.order_date) : '' }}
           </div>
         </div>
 
         <div class="grid grid-cols-12 gap-4 mb-3">
           <div class="col-span-5">Đại lý phân phối</div>
-          <div class="col-span-7 text-right text-[#463E37] font-semibold">{{ agency?.name || 'N/A' }}</div>
+          <div class="col-span-7 text-right text-[#463E37] font-semibold">{{ agency?.name || '' }}</div>
         </div>
 
         <div class="grid grid-cols-12 gap-4 mb-3">
           <div class="col-span-5">Ngày xuất kho</div>
           <div class="col-span-7 text-right text-[#463E37] font-semibold">
-            {{ sale_order?.order_date ? convertIsoToDate(sale_order?.order_date) : 'N/A' }}
+            {{ sale_order?.order_date ? convertIsoToDate(sale_order?.order_date) : '' }}
           </div>
         </div>
       </dl>
