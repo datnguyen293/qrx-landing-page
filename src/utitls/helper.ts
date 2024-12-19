@@ -144,10 +144,24 @@ export function parseStorageValue(value: string | null): any {
  * @returns formatted date string in DD/MM/YYYY format
  */
 export function convertIsoToDate(isoString: string): string {
-  // Chuẩn hóa chuỗi ISO
+  // Chuẩn hóa chuỗi ISO để đảm bảo tương thích với Safari
   const fixedIsoString = isoString.replace(/-/g, '/').replace(/T/, ' ').replace(/Z/, '');
   const date = new Date(fixedIsoString);
 
+  // Kiểm tra nếu trình duyệt không xử lý được định dạng
+  if (isNaN(date.getTime())) {
+    // Thử chuyển chuỗi gốc thành Date bằng cách sử dụng định dạng chuẩn
+    const fallbackDate = new Date(isoString);
+    if (!isNaN(fallbackDate.getTime())) {
+      return formatDate(fallbackDate);
+    }
+    throw new Error('Invalid ISO date string');
+  }
+
+  return formatDate(date);
+}
+
+function formatDate(date: Date): string {
   const day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
   const year = date.getFullYear();
