@@ -18,21 +18,21 @@ const { product, company } = stamp_code.value;
 
     <div class="border-b border-[#D9E6E9] py-3">
       <dl>
-        <div class="grid grid-cols-12 gap-4 mb-3">
+        <div class="grid grid-cols-12 gap-4 mb-3 max-md:text-sm">
           <div class="col-span-5">Tên sản phẩm</div>
           <div class="col-span-7 text-right text-[#463E37] font-semibold">
             {{ product?.name || '' }}
           </div>
         </div>
 
-        <div class="grid grid-cols-12 gap-4 mb-3">
+        <div class="grid grid-cols-12 gap-4 mb-3 max-md:text-sm">
           <div class="col-span-5">Thương hiệu</div>
           <div class="col-span-7 text-right text-[#463E37] font-semibold">
             {{ product?.brand?.name || '' }}
           </div>
         </div>
 
-        <div class="grid grid-cols-12 gap-4 mb-3">
+        <div class="grid grid-cols-12 gap-4 mb-3 max-md:text-sm">
           <div class="col-span-5">Giá bán</div>
           <div class="col-span-7 text-right text-[#463E37] font-semibold">
             {{
@@ -44,7 +44,7 @@ const { product, company } = stamp_code.value;
           </div>
         </div>
 
-        <div class="grid grid-cols-12 gap-4 mb-3">
+        <div class="grid grid-cols-12 gap-4 mb-3 max-md:text-sm">
           <div class="col-span-12">Mô tả</div>
           <div class="col-span-12" v-html="product?.description || '<span>N/A</span>'"></div>
         </div>
