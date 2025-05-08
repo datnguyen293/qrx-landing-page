@@ -16,6 +16,7 @@ import ProductDetail from "@/components/common/ProductDetail.vue";
 import StampStatusVerification from "@/components/elements/StampStatusVerification.vue";
 import CommonContact from "@/components/common/CommonContact.vue";
 import CustomerProfile from "@/components/common/CustomerProfile.vue";
+import ProductSwiperVue from "@/components/common/ProductSwiper.vue";
 
 const {t: $t} = useI18n();
 const {query} = useRoute();
@@ -96,6 +97,7 @@ const handleEventSubmit = async (event: any) => {
 
       <template v-if="isSerial">
         <ProductDetail class="mb-3" v-if="!isEmpty(product)"/>
+        <ProductSwiperVue class="mb-3" v-if="product.related_products.length"/>
         <CommonContact/>
         <CommonFooter/>
       </template>

@@ -130,6 +130,7 @@ export type IProduct = {
     category?: string;
     brand: string,
     is_show_product_price: boolean,
+    related_products: Array<IProduct>;
 } & ICommonField;
 
 export type ICompany =  {
