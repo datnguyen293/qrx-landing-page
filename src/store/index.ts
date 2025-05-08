@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import type {IScanQRCodeData} from "@/types";
+import type {IProduct, IScanQRCodeData} from "@/types";
 import {DEFAULT_TEMPLATE_ONE, KEY_LOCAL_STORAGE, TEMPLATE_TYPES} from "@/constants";
 // Define a store
 const defaultTemplate = {
@@ -25,7 +25,7 @@ const defaultStampCode: any = {
     is_show_customer_stamp_anti_counterfeit: false,
 }
 
-const defaultProduct: any = {
+const defaultProduct: IProduct = {
     code: '',
     price: 0,
     slug: '',
@@ -36,7 +36,9 @@ const defaultProduct: any = {
     category: '',
     brand:  '',
     id: '',
-    name: ''
+    name: '',
+    is_show_product_price: false,
+    related_products: [],
 }
 
 const defaultCompany: any = {
