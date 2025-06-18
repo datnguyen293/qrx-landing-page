@@ -76,7 +76,7 @@ onMounted(async () => {
     }
 
     store.setDataScanQrcode(dataResponse);
-    const hasStampError = [STAMP_STATUS.NEW, STAMP_STATUS.BLOCKED, STATUS_VERIFY.CANNOT_ACCESS].includes(stampCodeStatus.value);
+    const hasStampError = [STAMP_STATUS.NEW, STAMP_STATUS.LOCKED,STAMP_STATUS.BLOCKED, STATUS_VERIFY.CANNOT_ACCESS].includes(stampCodeStatus.value);
     if (hasStampError) {
       setTimeout(() => {
         bgLoading.close();

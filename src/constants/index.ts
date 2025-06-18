@@ -5,6 +5,7 @@ export const STATUS_VERIFY = {
     OVER_LIMITED: 'over_limited',
     UNSOLD: 'unsold',
     BLOCKED: 'blocked',
+    LOCKED: 'locked',
     CANNOT_ACCESS: 'cannot_access',
 }
 
@@ -18,6 +19,7 @@ export enum STAMP_STATUS {
     WARRANTY_REPLACED='warranty_replaced',
     ACTIVATED='activated',
     BLOCKED='blocked',
+    LOCKED='locked',
     SUCCESS='success',
 }
 
