@@ -97,7 +97,7 @@ const handleEventSubmit = async (event: any) => {
 
       <template v-if="isSerial">
         <ProductDetail class="mb-3" v-if="!isEmpty(product)"/>
-        <ProductSwiperVue class="mb-3" v-if="product.related_products.length"/>
+        <ProductSwiperVue class="mb-3" v-if="product?.related_products?.length"/>
         <CommonContact/>
         <CommonFooter/>
       </template>
