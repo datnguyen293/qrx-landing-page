@@ -10,7 +10,7 @@ import IframeView from '@/views/IframeView.vue';
 import StampScanErrorView from '@/views/StampScanErrorView.vue';
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.VITE_BASE_URL),
   routes: [
     {
       path: '/xac-thuc',
